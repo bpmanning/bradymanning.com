@@ -1,0 +1,1827 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="dark">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Brady Manning — Product Leader & Energy Innovator</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Lato:wght@900&family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;0,9..40,500;1,9..40,300&display=swap" rel="stylesheet">
+<script src="https://unpkg.com/lucide@latest/dist/umd/lucide.js"></script>
+<style>
+/* ============================================================
+   CONTENT_CONFIG — Edit your site content here
+   ============================================================ */
+
+/* ============================================================
+   CSS VARIABLES & THEME
+   ============================================================ */
+:root {
+  --bg-primary: #07090f;
+  --bg-secondary: #0d1120;
+  --bg-card: #0f1525;
+  --bg-card-hover: #141a2e;
+  --text-primary: #e8eaf6;
+  --text-secondary: #8892b0;
+  --text-muted: #4a5578;
+  --accent-cyan: #00ff88;
+  --accent-violet: #8b5cf6;
+  --accent-cyan-dim: rgba(0, 255, 136, 0.12);
+  --accent-violet-dim: rgba(139, 92, 246, 0.12);
+  --border: rgba(255,255,255,0.06);
+  --border-accent: rgba(0, 255, 136, 0.3);
+  --glow-cyan: 0 0 30px rgba(0, 255, 136, 0.25), 0 0 60px rgba(0, 255, 136, 0.1);
+  --glow-violet: 0 0 30px rgba(139, 92, 246, 0.25), 0 0 60px rgba(139, 92, 246, 0.1);
+  --nav-bg: rgba(7, 9, 15, 0.85);
+  --transition: 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+[data-theme="light"] {
+  --bg-primary: #f0f2fa;
+  --bg-secondary: #e8eaf5;
+  --bg-card: #ffffff;
+  --bg-card-hover: #f5f7ff;
+  --text-primary: #0a0f2e;
+  --text-secondary: #3d4466;
+  --text-muted: #8892b0;
+  --accent-cyan: #00cc6a;
+  --accent-violet: #6d28d9;
+  --accent-cyan-dim: rgba(0, 204, 106, 0.1);
+  --accent-violet-dim: rgba(109, 40, 217, 0.1);
+  --border: rgba(0,0,0,0.08);
+  --border-accent: rgba(#00cc6a, 0.35);
+  --glow-cyan: 0 4px 20px rgba(0, 204, 106, 0.2);
+  --glow-violet: 0 4px 20px rgba(109, 40, 217, 0.2);
+  --nav-bg: rgba(240, 242, 250, 0.9);
+}
+
+/* ============================================================
+   RESET & BASE
+   ============================================================ */
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+html { scroll-behavior: smooth; font-size: 16px; }
+
+body {
+  font-family: 'DM Sans', sans-serif;
+  background: var(--bg-primary);
+  color: var(--text-primary);
+  line-height: 1.6;
+  overflow-x: hidden;
+  transition: background var(--transition), color var(--transition);
+}
+
+h1, h2, h3, h4 { font-family: 'Lato', sans-serif; font-weight: 800; line-height: 1.1; }
+
+a { color: inherit; text-decoration: none; }
+
+img { max-width: 100%; display: block; }
+
+section { padding: 120px 0; }
+
+.container {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 32px;
+}
+
+/* ============================================================
+   BACKGROUND CANVAS
+   ============================================================ */
+#bg-canvas {
+  position: fixed;
+  top: 0; left: 0;
+  width: 100%; height: 100%;
+  z-index: 0;
+  pointer-events: none;
+  opacity: 0.4;
+}
+
+/* ============================================================
+   NAVIGATION
+   ============================================================ */
+nav {
+  position: fixed;
+  top: 0; left: 0; right: 0;
+  z-index: 1000;
+  background: var(--nav-bg);
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+  border-bottom: 1px solid var(--border);
+  transition: background var(--transition), border-color var(--transition);
+}
+
+.nav-inner {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  height: 68px;
+  padding: 0 32px;
+  max-width: 1300px;
+  margin: 0 auto;
+}
+
+.nav-logo {
+  font-family: 'Lato', sans-serif;
+  font-weight: 800;
+  font-size: 1.4rem;
+  letter-spacing: -0.02em;
+  background: linear-gradient(135deg, var(--accent-cyan), var(--accent-violet));
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  transition: opacity var(--transition);
+}
+
+.nav-logo:hover { opacity: 0.8; }
+
+.nav-links {
+  display: flex;
+  align-items: center;
+  gap: 36px;
+  list-style: none;
+}
+
+.nav-links a {
+  font-size: 0.875rem;
+  font-weight: 500;
+  color: var(--text-secondary);
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+  transition: color var(--transition);
+  position: relative;
+}
+
+.nav-links a::after {
+  content: '';
+  position: absolute;
+  bottom: -4px; left: 0;
+  width: 0; height: 1px;
+  background: var(--accent-cyan);
+  transition: width var(--transition);
+}
+
+.nav-links a:hover,
+.nav-links a.active { color: var(--accent-cyan); }
+
+.nav-links a:hover::after,
+.nav-links a.active::after { width: 100%; }
+
+.nav-controls { display: flex; align-items: center; gap: 16px; }
+
+.theme-toggle {
+  background: none;
+  border: 1px solid var(--border);
+  color: var(--text-secondary);
+  cursor: pointer;
+  width: 38px; height: 38px;
+  border-radius: 50%;
+  display: flex; align-items: center; justify-content: center;
+  transition: all var(--transition);
+}
+
+.theme-toggle:hover {
+  border-color: var(--accent-cyan);
+  color: var(--accent-cyan);
+  box-shadow: var(--glow-cyan);
+}
+
+.hamburger {
+  display: none;
+  background: none;
+  border: 1px solid var(--border);
+  color: var(--text-primary);
+  cursor: pointer;
+  width: 38px; height: 38px;
+  border-radius: 8px;
+  align-items: center; justify-content: center;
+  transition: all var(--transition);
+}
+
+.hamburger:hover { border-color: var(--accent-cyan); color: var(--accent-cyan); }
+
+.mobile-menu {
+  display: none;
+  position: fixed;
+  top: 68px; left: 0; right: 0; bottom: 0;
+  background: var(--bg-primary);
+  z-index: 999;
+  padding: 40px 32px;
+  flex-direction: column;
+  gap: 32px;
+}
+
+.mobile-menu.open { display: flex; }
+
+.mobile-menu a {
+  font-family: 'Lato', sans-serif;
+  font-size: 2rem;
+  font-weight: 800;
+  color: var(--text-secondary);
+  transition: color var(--transition);
+}
+
+.mobile-menu a:hover { color: var(--accent-cyan); }
+
+/* ============================================================
+   HERO SECTION
+   ============================================================ */
+#hero {
+  position: relative;
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+  padding: 80px 0 60px;
+  overflow: hidden;
+  z-index: 1;
+}
+
+.hero-inner {
+  position: relative;
+  z-index: 2;
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 32px;
+}
+
+.hero-eyebrow {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  font-size: 0.8rem;
+  font-weight: 500;
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+  color: var(--accent-cyan);
+  margin-bottom: 28px;
+  padding: 8px 16px;
+  border: 1px solid var(--border-accent);
+  border-radius: 100px;
+  background: var(--accent-cyan-dim);
+}
+
+.hero-eyebrow span.dot {
+  width: 6px; height: 6px;
+  border-radius: 50%;
+  background: var(--accent-cyan);
+  animation: pulse 2s ease-in-out infinite;
+}
+
+@keyframes pulse {
+  0%, 100% { opacity: 1; transform: scale(1); }
+  50% { opacity: 0.4; transform: scale(0.8); }
+}
+
+.hero-name {
+  font-size: clamp(2.8rem, 6vw, 6.5rem);
+  font-weight: 800;
+  letter-spacing: -0.04em;
+  line-height: 1.08;
+  margin-bottom: 24px;
+  padding-bottom: 0.15em;
+  background: linear-gradient(160deg, var(--text-primary) 0%, var(--text-secondary) 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+.hero-typewriter-wrap {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  margin-bottom: 20px;
+  min-height: 52px;
+}
+
+.hero-typewriter-prefix {
+  font-size: clamp(1.1rem, 2.5vw, 1.5rem);
+  color: var(--text-muted);
+  font-weight: 300;
+  font-style: italic;
+}
+
+.hero-typewriter {
+  font-family: 'Lato', sans-serif;
+  font-size: clamp(1.1rem, 2.5vw, 1.5rem);
+  font-weight: 700;
+  color: var(--accent-cyan);
+}
+
+.cursor {
+  display: inline-block;
+  width: 2px;
+  height: 1.2em;
+  background: var(--accent-cyan);
+  margin-left: 2px;
+  vertical-align: middle;
+  animation: blink 1s step-end infinite;
+}
+
+@keyframes blink { 0%, 100% { opacity: 1; } 50% { opacity: 0; } }
+
+.hero-bio {
+  font-size: clamp(1rem, 1.8vw, 1.2rem);
+  color: var(--text-secondary);
+  max-width: 560px;
+  margin-bottom: 32px;
+  font-weight: 300;
+  line-height: 1.7;
+}
+
+.hero-cta {
+  display: flex;
+  gap: 16px;
+  flex-wrap: wrap;
+}
+
+.btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 14px 28px;
+  border-radius: 8px;
+  font-family: 'Lato', sans-serif;
+  font-weight: 700;
+  font-size: 0.9rem;
+  letter-spacing: 0.04em;
+  cursor: pointer;
+  transition: all var(--transition);
+  border: none;
+  text-decoration: none;
+}
+
+.btn-primary {
+  background: linear-gradient(135deg, var(--accent-cyan), var(--accent-violet));
+  color: #fff;
+  box-shadow: var(--glow-cyan);
+}
+
+.btn-primary:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 0 40px rgba(0, 255, 136, 0.4), 0 0 80px rgba(139, 92, 246, 0.2);
+}
+
+.btn-outline {
+  background: transparent;
+  color: var(--text-primary);
+  border: 1px solid var(--border);
+}
+
+.btn-outline:hover {
+  border-color: var(--accent-cyan);
+  color: var(--accent-cyan);
+  box-shadow: var(--glow-cyan);
+  transform: translateY(-2px);
+}
+
+.hero-scroll-hint {
+  position: absolute;
+  bottom: 40px;
+  left: 50%;
+  transform: translateX(-50%);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 8px;
+  color: var(--text-muted);
+  font-size: 0.75rem;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  animation: float 3s ease-in-out infinite;
+}
+
+@keyframes float {
+  0%, 100% { transform: translateX(-50%) translateY(0); }
+  50% { transform: translateX(-50%) translateY(-8px); }
+}
+
+/* ============================================================
+   SECTION HEADERS
+   ============================================================ */
+.section-label {
+  font-size: 0.75rem;
+  font-weight: 600;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: var(--accent-cyan);
+  margin-bottom: 12px;
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.section-label::before {
+  content: '';
+  width: 32px; height: 1px;
+  background: var(--accent-cyan);
+}
+
+.section-title {
+  font-size: clamp(2.5rem, 5vw, 4.5rem);
+  font-weight: 800;
+  letter-spacing: -0.03em;
+  margin-bottom: 20px;
+  line-height: 1.08;
+}
+
+.section-subtitle {
+  font-size: 1.1rem;
+  color: var(--text-secondary);
+  max-width: 600px;
+  line-height: 1.7;
+  font-weight: 300;
+}
+
+/* ============================================================
+   FADE-IN ANIMATION
+   ============================================================ */
+.fade-in {
+  opacity: 0;
+  transform: translateY(40px);
+  transition: opacity 0.7s cubic-bezier(0.4,0,0.2,1), transform 0.7s cubic-bezier(0.4,0,0.2,1);
+}
+
+.fade-in.visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+/* ============================================================
+   ABOUT SECTION
+   ============================================================ */
+#about { position: relative; z-index: 1; }
+
+.about-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 80px;
+  align-items: start;
+}
+
+.about-text p {
+  color: var(--text-secondary);
+  font-size: 1.05rem;
+  line-height: 1.8;
+  font-weight: 300;
+  margin-bottom: 20px;
+}
+
+.about-text li {
+  color: var(--text-secondary);
+  font-size: 1.05rem;
+  line-height: 1.8;
+  font-weight: 300;
+  margin-bottom: 4px;
+}
+
+.about-text p strong {
+  color: var(--text-primary);
+  font-weight: 500;
+}
+
+.stats-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 16px;
+  margin-bottom: 20px;
+}
+
+.stat-card {
+  padding: 24px;
+  background: var(--bg-card);
+  border: 1px solid var(--border);
+  border-radius: 12px;
+  transition: all var(--transition);
+  position: relative;
+  overflow: hidden;
+}
+
+.stat-card::before {
+  content: '';
+  position: absolute;
+  top: 0; left: 0;
+  width: 100%; height: 2px;
+  background: linear-gradient(90deg, var(--accent-cyan), var(--accent-violet));
+}
+
+.stat-card:hover {
+  border-color: var(--border-accent);
+  box-shadow: var(--glow-cyan);
+  transform: translateY(-4px);
+}
+
+.stat-number {
+  font-family: 'Lato', sans-serif;
+  font-size: 2.2rem;
+  font-weight: 800;
+  background: linear-gradient(135deg, var(--accent-cyan), var(--accent-violet));
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  line-height: 1;
+  margin-bottom: 6px;
+}
+
+.stat-label {
+  font-size: 0.8rem;
+  color: var(--text-muted);
+  letter-spacing: 0.05em;
+  line-height: 1.4;
+}
+
+.skills-section { }
+
+.skills-title {
+  font-family: 'Lato', sans-serif;
+  font-size: 0.75rem;
+  font-weight: 600;
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+  color: var(--text-muted);
+  margin-bottom: 16px;
+}
+
+.skills-tags {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+}
+
+.skill-tag {
+  padding: 7px 16px;
+  border: 1px solid var(--border);
+  border-radius: 100px;
+  font-size: 0.8rem;
+  font-weight: 500;
+  color: var(--text-secondary);
+  background: var(--bg-card);
+  transition: all var(--transition);
+  cursor: default;
+}
+
+.skill-tag:hover {
+  border-color: var(--accent-cyan);
+  color: var(--accent-cyan);
+  background: var(--accent-cyan-dim);
+  box-shadow: 0 0 16px rgba(0, 255, 136, 0.15);
+}
+
+/* ============================================================
+   EXPERIENCE SECTION
+   ============================================================ */
+#experience {
+  background: var(--bg-secondary);
+  position: relative;
+  z-index: 1;
+}
+
+.timeline {
+  position: relative;
+  margin-top: 72px;
+}
+
+.timeline::before {
+  content: '';
+  position: absolute;
+  left: 50%;
+  top: 0; bottom: 0;
+  width: 1px;
+  background: linear-gradient(to bottom, transparent, var(--accent-cyan), var(--accent-violet), transparent);
+  transform: translateX(-50%);
+}
+
+.timeline-item {
+  display: grid;
+  grid-template-columns: 1fr auto 1fr;
+  gap: 40px;
+  align-items: start;
+  margin-bottom: 64px;
+  position: relative;
+}
+
+.timeline-item:nth-child(odd) .timeline-card { grid-column: 1; text-align: right; }
+.timeline-item:nth-child(odd) .timeline-dot { grid-column: 2; }
+.timeline-item:nth-child(odd) .timeline-spacer { grid-column: 3; }
+
+.timeline-item:nth-child(even) .timeline-spacer { grid-column: 1; }
+.timeline-item:nth-child(even) .timeline-dot { grid-column: 2; }
+.timeline-item:nth-child(even) .timeline-card { grid-column: 3; text-align: left; }
+
+.timeline-dot {
+  width: 16px; height: 16px;
+  border-radius: 50%;
+  background: linear-gradient(135deg, var(--accent-cyan), var(--accent-violet));
+  border: 3px solid var(--bg-secondary);
+  margin-top: 24px;
+  box-shadow: var(--glow-cyan);
+  flex-shrink: 0;
+  align-self: start;
+}
+
+.timeline-spacer { /* empty */ }
+
+.timeline-card {
+  background: var(--bg-card);
+  border: 1px solid var(--border);
+  border-radius: 16px;
+  padding: 28px 32px;
+  transition: all var(--transition);
+}
+
+.timeline-card:hover {
+  border-color: var(--border-accent);
+  box-shadow: var(--glow-cyan);
+  transform: translateY(-4px);
+}
+
+.timeline-company {
+  font-family: 'Lato', sans-serif;
+  font-size: 1.15rem;
+  font-weight: 800;
+  color: var(--accent-cyan);
+  margin-bottom: 4px;
+}
+
+.timeline-role {
+  font-size: 0.95rem;
+  font-weight: 500;
+  color: var(--text-primary);
+  margin-bottom: 4px;
+}
+
+.timeline-date {
+  font-size: 0.78rem;
+  color: var(--text-muted);
+  letter-spacing: 0.08em;
+  margin-bottom: 16px;
+  font-weight: 500;
+}
+
+.timeline-bullets {
+  list-style: none;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.timeline-bullets li {
+  font-size: 0.88rem;
+  color: var(--text-secondary);
+  line-height: 1.6;
+  font-weight: 300;
+  position: relative;
+  padding-left: 14px;
+}
+
+.timeline-item:nth-child(odd) .timeline-bullets li {
+  padding-left: 0;
+  padding-right: 14px;
+}
+
+.timeline-bullets li::before {
+  content: '→';
+  position: absolute;
+  left: 0;
+  color: var(--accent-cyan);
+  font-size: 0.78rem;
+}
+
+.timeline-item:nth-child(odd) .timeline-bullets li::before {
+  left: auto;
+  right: 0;
+  content: '←';
+}
+
+.resume-cta {
+  text-align: center;
+  margin-top: 72px;
+}
+
+/* ============================================================
+   PROJECTS SECTION
+   ============================================================ */
+#projects { position: relative; z-index: 1; }
+
+.projects-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 24px;
+  margin-top: 72px;
+}
+
+.project-card {
+  background: var(--bg-card);
+  border: 1px solid var(--border);
+  border-radius: 20px;
+  overflow: hidden;
+  transition: all var(--transition);
+  display: flex;
+  flex-direction: column;
+}
+
+.project-card:hover {
+  border-color: var(--border-accent);
+  box-shadow: var(--glow-cyan);
+  transform: translateY(-6px);
+}
+
+.project-demo-zone {
+  height: 220px;
+  background: linear-gradient(135deg, var(--bg-secondary), var(--bg-card));
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-bottom: 1px solid var(--border);
+  position: relative;
+  overflow: hidden;
+}
+
+.project-demo-zone::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: repeating-linear-gradient(
+    45deg,
+    transparent,
+    transparent 20px,
+    var(--border) 20px,
+    var(--border) 21px
+  );
+  opacity: 0.3;
+}
+
+.demo-placeholder {
+  text-align: center;
+  position: relative;
+  z-index: 1;
+}
+
+.demo-icon {
+  width: 48px; height: 48px;
+  border-radius: 12px;
+  background: linear-gradient(135deg, var(--accent-cyan-dim), var(--accent-violet-dim));
+  border: 1px solid var(--border-accent);
+  display: flex; align-items: center; justify-content: center;
+  margin: 0 auto 12px;
+  color: var(--accent-cyan);
+}
+
+.demo-label {
+  font-size: 0.72rem;
+  color: var(--text-muted);
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  font-weight: 600;
+}
+
+.project-body { padding: 28px; flex: 1; display: flex; flex-direction: column; }
+
+.project-tags {
+  display: flex;
+  gap: 8px;
+  flex-wrap: wrap;
+  margin-bottom: 16px;
+}
+
+.project-tag {
+  font-size: 0.7rem;
+  font-weight: 600;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  padding: 4px 10px;
+  border-radius: 100px;
+  background: var(--accent-violet-dim);
+  color: var(--accent-violet);
+  border: 1px solid rgba(139, 92, 246, 0.2);
+}
+
+.project-name {
+  font-family: 'Lato', sans-serif;
+  font-size: 1.4rem;
+  font-weight: 800;
+  letter-spacing: -0.02em;
+  margin-bottom: 10px;
+}
+
+.project-desc {
+  font-size: 0.9rem;
+  color: var(--text-secondary);
+  line-height: 1.6;
+  font-weight: 300;
+  flex: 1;
+  margin-bottom: 24px;
+}
+
+.project-link {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  font-family: 'Lato', sans-serif;
+  font-size: 0.85rem;
+  font-weight: 700;
+  color: var(--accent-cyan);
+  letter-spacing: 0.04em;
+  transition: gap var(--transition);
+}
+
+.project-link:hover { gap: 10px; }
+
+/* ============================================================
+   WRITING SECTION
+   ============================================================ */
+#writing {
+  background: var(--bg-secondary);
+  position: relative;
+  z-index: 1;
+}
+
+.filter-tabs {
+  display: flex;
+  gap: 8px;
+  flex-wrap: wrap;
+  margin: 48px 0 48px;
+}
+
+.filter-tab {
+  padding: 8px 20px;
+  border-radius: 100px;
+  border: 1px solid var(--border);
+  background: transparent;
+  color: var(--text-muted);
+  font-size: 0.82rem;
+  font-weight: 500;
+  cursor: pointer;
+  transition: all var(--transition);
+  font-family: 'DM Sans', sans-serif;
+}
+
+.filter-tab:hover {
+  border-color: var(--accent-cyan);
+  color: var(--accent-cyan);
+}
+
+.filter-tab.active {
+  background: linear-gradient(135deg, var(--accent-cyan), var(--accent-violet));
+  color: #fff;
+  border-color: transparent;
+}
+
+.posts-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 24px;
+}
+
+.post-card {
+  background: var(--bg-card);
+  border: 1px solid var(--border);
+  border-radius: 16px;
+  padding: 28px;
+  transition: all var(--transition);
+  display: flex;
+  flex-direction: column;
+  cursor: pointer;
+}
+
+.post-card:hover {
+  border-color: var(--border-accent);
+  box-shadow: var(--glow-cyan);
+  transform: translateY(-4px);
+}
+
+.post-card[data-hidden="true"] { display: none; }
+
+.post-tag {
+  display: inline-block;
+  font-size: 0.7rem;
+  font-weight: 600;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--accent-cyan);
+  margin-bottom: 16px;
+}
+
+.post-title {
+  font-family: 'Lato', sans-serif;
+  font-size: 1.15rem;
+  font-weight: 800;
+  letter-spacing: -0.01em;
+  margin-bottom: 12px;
+  line-height: 1.3;
+  flex: 1;
+}
+
+.post-summary {
+  font-size: 0.88rem;
+  color: var(--text-secondary);
+  line-height: 1.65;
+  font-weight: 300;
+  margin-bottom: 20px;
+}
+
+.post-footer {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding-top: 20px;
+  border-top: 1px solid var(--border);
+  margin-top: auto;
+}
+
+.post-date {
+  font-size: 0.78rem;
+  color: var(--text-muted);
+  font-weight: 500;
+}
+
+.post-read {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  font-family: 'Lato', sans-serif;
+  font-size: 0.8rem;
+  font-weight: 700;
+  color: var(--accent-cyan);
+  transition: gap var(--transition);
+}
+
+.post-read:hover { gap: 8px; }
+
+/* ============================================================
+   CONTACT SECTION
+   ============================================================ */
+#contact {
+  position: relative;
+  z-index: 1;
+  text-align: center;
+  overflow: hidden;
+}
+
+.contact-glow {
+  position: absolute;
+  top: 50%; left: 50%;
+  transform: translate(-50%, -50%);
+  width: 600px; height: 600px;
+  background: radial-gradient(circle, rgba(0,229,255,0.06) 0%, transparent 70%);
+  pointer-events: none;
+}
+
+.contact-inner { position: relative; z-index: 1; }
+
+.contact-title {
+  font-size: clamp(3rem, 7vw, 7rem);
+  font-weight: 800;
+  letter-spacing: -0.04em;
+  margin-bottom: 24px;
+  line-height: 1;
+}
+
+.contact-title span {
+  background: linear-gradient(135deg, var(--accent-cyan), var(--accent-violet));
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+.contact-sub {
+  font-size: 1.1rem;
+  color: var(--text-secondary);
+  margin-bottom: 32px;
+  font-weight: 300;
+  max-width: 500px;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.contact-ring {
+  position: absolute;
+  top: 50%; left: 50%;
+  transform: translate(-50%, -50%);
+  width: 500px; height: 500px;
+  border-radius: 50%;
+  border: 1px solid rgba(0, 255, 136, 0.08);
+  animation: ring-expand 4s ease-out infinite;
+  pointer-events: none;
+}
+
+.contact-ring:nth-child(2) { animation-delay: 1.3s; }
+.contact-ring:nth-child(3) { animation-delay: 2.6s; }
+
+@keyframes ring-expand {
+  0% { transform: translate(-50%, -50%) scale(0.5); opacity: 0.4; }
+  100% { transform: translate(-50%, -50%) scale(1.5); opacity: 0; }
+}
+
+/* ============================================================
+   FOOTER
+   ============================================================ */
+footer {
+  position: relative;
+  z-index: 1;
+  border-top: 1px solid var(--border);
+  padding: 32px 0;
+}
+
+.footer-inner {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 32px;
+}
+
+.footer-copy {
+  font-size: 0.82rem;
+  color: var(--text-muted);
+}
+
+.footer-link {
+  color: var(--text-muted);
+  transition: color var(--transition);
+  display: flex;
+  align-items: center;
+}
+
+.footer-link:hover { color: var(--accent-cyan); }
+
+/* ============================================================
+   RESPONSIVE
+   ============================================================ */
+@media (max-width: 900px) {
+  section { padding: 80px 0; }
+
+  .nav-links { display: none; }
+  .hamburger { display: flex; }
+
+  .about-grid { grid-template-columns: 1fr; gap: 48px; }
+
+  .timeline::before { left: 20px; }
+
+  .timeline-item {
+    display: block;
+    padding-left: 56px;
+    position: relative;
+    margin-bottom: 40px;
+  }
+
+  .timeline-dot {
+    position: absolute;
+    left: 12px;
+    top: 24px;
+    grid-column: unset;
+  }
+
+  .timeline-card {
+    text-align: left !important;
+    grid-column: unset;
+  }
+
+  .timeline-spacer { display: none; }
+
+  .timeline-item:nth-child(odd) .timeline-bullets li,
+  .timeline-item:nth-child(even) .timeline-bullets li {
+    padding-left: 14px;
+    padding-right: 0;
+  }
+
+  .timeline-item:nth-child(odd) .timeline-bullets li::before {
+    left: 0; right: auto;
+    content: '→';
+  }
+
+  .projects-grid { grid-template-columns: 1fr; }
+
+  .posts-grid { grid-template-columns: 1fr; }
+
+  .stats-grid { grid-template-columns: 1fr 1fr; }
+}
+
+@media (max-width: 600px) {
+  .container { padding: 0 20px; }
+  .nav-inner { padding: 0 20px; }
+  .hero-inner { padding: 0 20px; }
+  .stats-grid { grid-template-columns: 1fr; }
+  .hero-cta { flex-direction: column; }
+  .btn { justify-content: center; }
+}
+</style>
+</head>
+<body>
+
+<!-- Background canvas -->
+<canvas id="bg-canvas"></canvas>
+
+<!-- ============================================================
+     NAVIGATION
+     ============================================================ -->
+<nav role="navigation" aria-label="Main navigation">
+  <div class="nav-inner">
+    <a href="#hero" class="nav-logo" aria-label="Brady Manning home">BM</a>
+
+    <ul class="nav-links" role="list">
+      <li><a href="#about">About</a></li>
+      <li><a href="#experience">Experience</a></li>
+      <li><a href="#projects">Projects</a></li>
+      <li><a href="#writing">Writing</a></li>
+      <li><a href="#contact">Contact</a></li>
+    </ul>
+
+    <div class="nav-controls">
+      <button class="theme-toggle" id="themeToggle" aria-label="Toggle light/dark mode">
+        <i data-lucide="sun" width="16" height="16"></i>
+      </button>
+      <button class="hamburger" id="hamburger" aria-label="Open menu" aria-expanded="false">
+        <i data-lucide="menu" width="18" height="18"></i>
+      </button>
+    </div>
+  </div>
+</nav>
+
+<!-- Mobile menu -->
+<div class="mobile-menu" id="mobileMenu" role="dialog" aria-label="Mobile navigation">
+  <a href="#about" class="mobile-link">About</a>
+  <a href="#experience" class="mobile-link">Experience</a>
+  <a href="#projects" class="mobile-link">Projects</a>
+  <a href="#writing" class="mobile-link">Writing</a>
+  <a href="#contact" class="mobile-link">Contact</a>
+</div>
+
+<!-- ============================================================
+     HERO
+     ============================================================ -->
+<section id="hero" aria-label="Hero">
+  <div class="hero-inner">
+
+    <h1 class="hero-name" id="heroName"></h1>
+
+    <div class="hero-typewriter-wrap">
+      <span class="hero-typewriter-prefix">I'm a</span>
+      <span class="hero-typewriter" id="typewriter" aria-live="polite"></span><span class="cursor"></span>
+    </div>
+
+    <p class="hero-bio" id="heroBio"></p>
+
+    <div class="hero-cta">
+      <a id="ctaPrimary" href="#projects" class="btn btn-primary">
+        <i data-lucide="zap" width="16" height="16"></i>
+        <span id="ctaPrimaryLabel">See My Work</span>
+      </a>
+      <a id="ctaSecondary" href="#writing" class="btn btn-outline">
+        <i data-lucide="book-open" width="16" height="16"></i>
+        <span id="ctaSecondaryLabel">Read My Writing</span>
+      </a>
+    </div>
+  </div>
+
+  <div class="hero-scroll-hint">
+    <span>Scroll</span>
+    <i data-lucide="chevron-down" width="16" height="16"></i>
+  </div>
+</section>
+
+<!-- ============================================================
+     ABOUT
+     ============================================================ -->
+<section id="about" aria-label="About Brady Manning">
+  <div class="container">
+    <div class="about-grid">
+      <div>
+        <p class="section-label">About</p>
+        <h2 class="section-title fade-in">Builder.<br>Leader.<br>Learner.</h2>
+        <div class="about-text fade-in">
+          <p>I'm a <strong>Staff Product Manager</strong> at GoodLeap, where I lead the product strategy for a 100+ MW Virtual Power Plant (VPP) aggregating 15,000+ home batteries across the United States. My work sits at the intersection of energy markets, grid technology, and consumer software.</p>
+          <p>My career spans across <strong>NRG Energy, GM Energy/General Motors, Fluence Energy, and Entergy</strong> — from incubating new businesses to scaling distributed energy platforms to enabling and extracting recurring revenue from $10B+ in projects financed</p>
+            <p><ul>I have worked on VPPs since 2018, across device types from:
+              <li><strong>500 kW Natural Gas Generators</strong> for commercial facilities at Entergy</li>
+              <li>Optimizing <strong>Smart Thermostat</strong> demand response at NRG</li>
+              <li>Building out and leading <strong>Electric Vehicle managed charging</strong> at GM</li>
+              <li>Global deployments of <strong>Utility-Scale BESS</strong> at Fluence Energy</li>
+              <li>Today at GoodLeap, I am the product lead for a rapidly growing virtual power plant focused on <strong>residential batteries</strong> and expanding into other distributed energy resource types.</li>
+            </ul></p>
+            <p>I hold an MSc in Innovation & Entrepreneurhsip from <strong>HEC Paris</strong>, a BS in Economics from <strong>Texas A&M University</strong>, and am a proud Clean Energy Leadership Institute <strong>(CELI) Fellow</strong>.</p>
+          <p>Outside the office: Marathoner, Eagle Scout, Book Collector & Reader of 50+ books a year for the last decade, and a tinkerer across AI tools and side projects.</p>
+        </div>
+      </div>
+
+      <div>
+        <div class="stats-grid fade-in">
+          <div class="stat-card">
+            <div class="stat-number">100+ MW</div>
+            <div class="stat-label">Virtual Power Plant capacity under management</div>
+          </div>
+          <div class="stat-card">
+            <div class="stat-number">15K+</div>
+            <div class="stat-label">Home batteries aggregated on the grid</div>
+          </div>
+          <div class="stat-card">
+            <div class="stat-number">$10B+</div>
+            <div class="stat-label">Projects enabled across energy platforms</div>
+          </div>
+          <div class="stat-card">
+            <div class="stat-number">10+ Yrs</div>
+            <div class="stat-label">In energy markets &amp; product leadership</div>
+          </div>
+        </div>
+
+        <div class="skills-section fade-in">
+          <p class="skills-title">Core Skills</p>
+          <div class="skills-tags" role="list">
+            <span class="skill-tag" role="listitem">Virtual Power Plants</span>
+            <span class="skill-tag" role="listitem">Product Strategy</span>
+            <span class="skill-tag" role="listitem">Energy Markets</span>
+            <span class="skill-tag" role="listitem">DERMS</span>
+            <span class="skill-tag" role="listitem">Design Thinking</span>
+            <span class="skill-tag" role="listitem">AI Tools</span>
+            <span class="skill-tag" role="listitem">Consumer Marketing</span>
+            <span class="skill-tag" role="listitem">P&L Ownership</span>
+            <span class="skill-tag" role="listitem">B2B SaaS</span>
+            <span class="skill-tag" role="listitem">Data Analytics</span>
+            <span class="skill-tag" role="listitem">Agile</span>
+            <span class="skill-tag" role="listitem">Distributed Energy</span>
+            <span class="skill-tag" role="listitem">Go-to-Market</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============================================================
+     EXPERIENCE
+     ============================================================ -->
+<section id="experience" aria-label="Work experience">
+  <div class="container">
+    <p class="section-label">Career</p>
+    <h2 class="section-title fade-in">Where I've<br>Made My Mark</h2>
+
+    <div class="timeline" role="list">
+
+      <div class="timeline-item fade-in" role="listitem">
+        <div class="timeline-card">
+          <div class="timeline-company">GoodLeap</div>
+          <div class="timeline-role">Staff Product Manager, VPPs</div>
+          <div class="timeline-date">2025 – Present</div>
+          <ul class="timeline-bullets">
+            <li>Leading product strategy for a 100+ MW VPP aggregating 15,000+ home battery systems across the United States</li>
+            <li>Building a Distributed Energy Management System (DERMS), homeowner-facing energy management tools, and OEM/utility market integrations</li>
+            <li>Driving expansion of GoodLeap's GoodGrid VPP nationwide and retail energy provider in Texas</li>
+          </ul>
+        </div>
+        <div class="timeline-dot" aria-hidden="true"></div>
+        <div class="timeline-spacer"></div>
+      </div>
+
+      <div class="timeline-item fade-in" role="listitem">
+        <div class="timeline-spacer"></div>
+        <div class="timeline-dot" aria-hidden="true"></div>
+        <div class="timeline-card">
+          <div class="timeline-company">Fluence Energy</div>
+          <div class="timeline-role">Senior Technical Product Manager, Platform</div>
+          <div class="timeline-date">2024</div>
+          <ul class="timeline-bullets">
+            <li>Managed Fluence OS — the core BESS software platform for utility-scale battery storage projects worldwide</li>
+            <li>Launched global rollout of Fluence’s OS7 control and dispatch software estimated to enable $5 billion in new projects in FY 2025.</li>
+            <li>Planned strategy and led coalition of 80 stakeholders to sunset previous operating system software versions and upgrade procedures to OS7 for 225 energy storage projects around the world making up 11.1 Gigawatts.</li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="timeline-item fade-in" role="listitem">
+        <div class="timeline-card">
+          <div class="timeline-company">GM Energy / General Motors</div>
+          <div class="timeline-role">Senior Product Manager</div>
+          <div class="timeline-date">2023 – 2024</div>
+          <ul class="timeline-bullets">
+            <li>Built GM Energy's Virtual Power Plant and end-to-end customer experience, including notifications,charging schedules, desktop & mobile interfaces, APIs, customer success analytics, and product operations.</li>
+            <li>Partnered with automaker divisions and third-party energy providers to launch bidirectional charging solutions</li>
+            <li>Launched emissions analytics and energy management system (EMS) platform for B2B customers</li>
+          </ul>
+        </div>
+        <div class="timeline-dot" aria-hidden="true"></div>
+        <div class="timeline-spacer"></div>
+      </div>
+
+      <div class="timeline-item fade-in" role="listitem">
+        <div class="timeline-spacer"></div>
+        <div class="timeline-dot" aria-hidden="true"></div>
+        <div class="timeline-card">
+          <div class="timeline-company">NRG Energy</div>
+          <div class="timeline-role">Manager, New Business Incubation ← Product Manager ← Sr. Data Analyst</div>
+          <div class="timeline-date">2019 – 2023</div>
+          <ul class="timeline-bullets">
+            <li>Incubated new retail energy products and business models, growing from analyst to business unit manager</li>
+            <li>Built B2B and B2C sustainability products including renewable energy certificates, community solar, energy brokerage, and retail rate arbitrage.</li>
+            <li>Led product development for consumer-facing energy shopping and smart home integrations</li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="timeline-item fade-in" role="listitem">
+        <div class="timeline-card">
+          <div class="timeline-company">Entergy</div>
+          <div class="timeline-role">Product Manager ← Analyst III ← Analyst II</div>
+          <div class="timeline-date">2015 – 2018</div>
+          <ul class="timeline-bullets">
+            <li>Managed financial modeling, sprints, backlog, product roadmap, and customer research on two products: <strong>Power Through</strong> which uses generators as a distributed energy resource with demand response capabilities and a B2C <strong>Home Energy Management</strong> product.</li>
+            <li>Launched a flexible distributed energy resource within MISO to serve as a backup power product for large grocery stores like HEB resulting in savings of hundreds of thousands of dollars in product waste per store when outages occur.</li>
+          </ul>
+        </div>
+        <div class="timeline-dot" aria-hidden="true"></div>
+        <div class="timeline-spacer"></div>
+      </div>
+
+    </div>
+
+    <div class="resume-cta fade-in">
+      <a href="#" class="btn btn-primary" aria-label="Download full resume PDF">
+        <i data-lucide="download" width="16" height="16"></i>
+        Download Full Resume (PDF)
+      </a>
+    </div>
+  </div>
+</section>
+
+<!-- ============================================================
+     PROJECTS
+     ============================================================ -->
+<section id="projects" aria-label="Projects">
+  <div class="container">
+    <p class="section-label">Building</p>
+    <h2 class="section-title fade-in">Things I'm<br>Building</h2>
+    <p class="section-subtitle fade-in">Side projects and products at the edge of energy, AI, and product craft.</p>
+
+    <div class="projects-grid">
+
+      <div class="project-card fade-in">
+        <div class="project-demo-zone" aria-label="Project demo area — embed coming soon">
+          <div class="demo-placeholder">
+            <div class="demo-icon"><i data-lucide="zap" width="22" height="22"></i></div>
+            <div class="demo-label">[ Embed Demo Here ]</div>
+          </div>
+        </div>
+        <div class="project-body">
+          <div class="project-tags">
+            <span class="project-tag">Energy</span>
+            <span class="project-tag">Product</span>
+          </div>
+          <h3 class="project-name">GoodGrid</h3>
+          <p class="project-desc">GoodLeap's retail electricity provider in Texas — connecting home solar and battery customers to a smarter, cleaner grid with competitive ERCOT rates.</p>
+          <a href="#" class="project-link" aria-label="Explore GoodGrid project">Explore <i data-lucide="arrow-right" width="14" height="14"></i></a>
+        </div>
+      </div>
+
+      <div class="project-card fade-in">
+        <div class="project-demo-zone" aria-label="Project demo area — embed coming soon">
+          <div class="demo-placeholder">
+            <div class="demo-icon"><i data-lucide="bar-chart-2" width="22" height="22"></i></div>
+            <div class="demo-label">[ Embed Demo Here ]</div>
+          </div>
+        </div>
+        <div class="project-body">
+          <div class="project-tags">
+            <span class="project-tag">Energy</span>
+            <span class="project-tag">Side Project</span>
+          </div>
+          <h3 class="project-name">TX Energy Data Tool</h3>
+          <p class="project-desc">A residential energy insights dashboard for Texas homeowners — pulling live ERCOT data to help households understand usage, costs, and savings opportunities.</p>
+          <a href="#" class="project-link" aria-label="Explore TX Energy Data Tool">Explore <i data-lucide="arrow-right" width="14" height="14"></i></a>
+        </div>
+      </div>
+
+      <div class="project-card fade-in">
+        <div class="project-demo-zone" aria-label="Project demo area — embed coming soon">
+          <div class="demo-placeholder">
+            <div class="demo-icon"><i data-lucide="shopping-cart" width="22" height="22"></i></div>
+            <div class="demo-label">[ Embed Demo Here ]</div>
+          </div>
+        </div>
+        <div class="project-body">
+          <div class="project-tags">
+            <span class="project-tag">Energy</span>
+            <span class="project-tag">Web App</span>
+          </div>
+          <h3 class="project-name">Energy Rate Shopper</h3>
+          <p class="project-desc">A consumer-facing retail energy rate comparison tool for the Texas deregulated market — making it easy to find the best plan for your home or business.</p>
+          <a href="#" class="project-link" aria-label="Explore Energy Rate Shopper">Explore <i data-lucide="arrow-right" width="14" height="14"></i></a>
+        </div>
+      </div>
+
+      <div class="project-card fade-in">
+        <div class="project-demo-zone" aria-label="Project demo area — embed coming soon">
+          <div class="demo-placeholder">
+            <div class="demo-icon"><i data-lucide="image" width="22" height="22"></i></div>
+            <div class="demo-label">[ Embed Demo Here ]</div>
+          </div>
+        </div>
+        <div class="project-body">
+          <div class="project-tags">
+            <span class="project-tag">Creative</span>
+            <span class="project-tag">Business</span>
+          </div>
+          <h3 class="project-name">Book Cover Studio</h3>
+          <p class="project-desc">A boutique book cover design business — helping indie authors and small publishers create professional, eye-catching covers that stand out on digital shelves.</p>
+          <a href="#" class="project-link" aria-label="Explore Book Cover Studio">Explore <i data-lucide="arrow-right" width="14" height="14"></i></a>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- ============================================================
+     WRITING
+     ============================================================ -->
+<section id="writing" aria-label="Writing and blog">
+  <div class="container">
+    <p class="section-label">Writing</p>
+    <h2 class="section-title fade-in">From the<br>Field</h2>
+    <p class="section-subtitle fade-in">Dispatches on virtual power plants, energy markets, leadership, and building things that matter.</p>
+
+    <div class="filter-tabs" role="tablist" aria-label="Filter posts by category">
+      <button class="filter-tab active" data-filter="all" role="tab" aria-selected="true">All</button>
+      <button class="filter-tab" data-filter="Virtual Power Plants" role="tab" aria-selected="false">Virtual Power Plants</button>
+      <button class="filter-tab" data-filter="Energy Markets" role="tab" aria-selected="false">Energy Markets</button>
+      <button class="filter-tab" data-filter="Leadership" role="tab" aria-selected="false">Leadership</button>
+      <button class="filter-tab" data-filter="Product Management" role="tab" aria-selected="false">Product Management</button>
+      <button class="filter-tab" data-filter="Entrepreneurship" role="tab" aria-selected="false">Entrepreneurship</button>
+    </div>
+
+    <div class="posts-grid" id="postsGrid">
+      <!-- Posts injected by JS -->
+    </div>
+  </div>
+</section>
+
+<!-- ============================================================
+     CONTACT
+     ============================================================ -->
+<section id="contact" aria-label="Contact">
+  <div class="contact-glow" aria-hidden="true"></div>
+  <div class="contact-ring" aria-hidden="true"></div>
+  <div class="contact-ring" aria-hidden="true"></div>
+  <div class="contact-ring" aria-hidden="true"></div>
+
+  <div class="container contact-inner">
+    <h2 class="contact-title fade-in">Let's<br><span>Connect</span></h2>
+    <p class="contact-sub fade-in">I'm always open to conversations about energy, product, and building things that matter.</p>
+    <a href="https://www.linkedin.com/in/brady-manning" target="_blank" rel="noopener noreferrer" class="btn btn-primary fade-in" aria-label="Message Brady on LinkedIn">
+      <i data-lucide="linkedin" width="18" height="18"></i>
+      Message on LinkedIn
+    </a>
+  </div>
+</section>
+
+<!-- ============================================================
+     FOOTER
+     ============================================================ -->
+<footer role="contentinfo">
+  <div class="footer-inner">
+    <p class="footer-copy">© 2026 Brady Manning</p>
+    <a href="https://www.linkedin.com/in/brady-manning" target="_blank" rel="noopener noreferrer" class="footer-link" aria-label="LinkedIn profile">
+      <i data-lucide="linkedin" width="18" height="18"></i>
+    </a>
+  </div>
+</footer>
+
+<script>
+const CONTENT_CONFIG = {
+
+  // ============================================================
+  // HERO SECTION
+  // Edit your name, bio, and button labels here.
+  // ============================================================
+  hero: {
+    name: "Howdy! I'm Brady.",
+
+    // The line that appears below your name with the typewriter effect.
+    // Add or remove strings to change what cycles through.
+    typewriterPrefix: "I'm a",
+    typewriterPhrases: [
+      "Product Leader",
+      "Energy Innovator",
+      "VPP Builder",
+      "Marathoner",
+      "Bibliophile"
+    ],
+
+    // The short bio paragraph under the typewriter.
+    bio: "Product leader and energy nerd building the future of distributed energy. I work on virtual power plants by day and enjoy tinkering, reading, and writing by night.",
+
+    // The two call-to-action buttons. Change label or href as needed.
+    ctaPrimary:  { label: "See My Work",     href: "#projects" },
+    ctaSecondary:{ label: "Read My Writing", href: "#writing"  },
+  },
+
+  // ============================================================
+  // ABOUT SECTION
+  // Edit your stat cards here. Add/remove objects as needed.
+  // Each stat: { number: "...", label: "..." }
+  // ============================================================
+  stats: [
+    { number: "100+ MW", label: "Virtual Power Plant capacity under management" },
+    { number: "15K+",    label: "Home batteries aggregated on the grid" },
+    { number: "$5B+",    label: "Projects enabled across energy platforms" },
+    { number: "10+ Yrs", label: "In energy markets & product leadership" }
+  ],
+
+  // ============================================================
+  // BLOG POSTS
+  // Add a new post by copying one of the blocks below and filling
+  // in your details. Set link: "#" if the post isn't live yet.
+  //
+  // tag must match one of the filter buttons:
+  //   "Virtual Power Plants" | "Energy Markets" | "Leadership"
+  //   "Product Management"   | "Entrepreneurship"
+  // ============================================================
+  posts: [
+    {
+      title:   "How Virtual Power Plants Are Reshaping the Grid",
+      date:    "March 2026",
+      tag:     "Virtual Power Plants",
+      summary: "15,000 home batteries don't just store energy — they become a power plant. Here's how VPPs are quietly becoming one of the most important tools in the clean energy transition.",
+      link:    "#"
+    },
+    {
+      title:   "What Running Ultras Taught Me About Product Management",
+      date:    "February 2026",
+      tag:     "Leadership",
+      summary: "Finishing a 50-mile race and shipping a great product have more in common than you'd think. Both require knowing when to push, when to conserve, and when to trust the process.",
+      link:    "#"
+    },
+    {
+      title:   "The Business Case for Home Battery Aggregation",
+      date:    "January 2026",
+      tag:     "Energy Markets",
+      summary: "The math on residential battery storage has finally clicked. When you aggregate enough assets, the economics of grid services start to rival — and often beat — traditional generation.",
+      link:    "#"
+    },
+    {
+      title:   "Why Texas Is the World's Best Laboratory for Energy Innovation",
+      date:    "December 2025",
+      tag:     "Energy Markets",
+      summary: "ERCOT's unique structure makes Texas both the most volatile and the most innovative electricity market on earth. That tension is exactly why I love working here.",
+      link:    "#"
+    },
+    {
+      title:   "The PM Skills That Actually Matter at the Frontier",
+      date:    "November 2025",
+      tag:     "Product Management",
+      summary: "After a decade in energy tech, I've found that the rarest and most valuable PM skill isn't roadmapping or stakeholder management. It's intellectual honesty about what you don't know.",
+      link:    "#"
+    },
+    {
+      title:   "Side Businesses Are a Product Manager's Secret Weapon",
+      date:    "October 2025",
+      tag:     "Entrepreneurship",
+      summary: "Running a side business forces you to make product decisions with real stakes and zero committee. It's made me a sharper, more decisive PM at every company I've worked for.",
+      link:    "#"
+    }
+  ],
+
+};
+
+
+/* ============================================================
+   TYPEWRITER EFFECT
+   ============================================================ */
+const phrases = CONTENT_CONFIG.hero.typewriterPhrases;
+
+let phraseIdx = 0, charIdx = 0, deleting = false;
+const typeEl = document.getElementById('typewriter');
+
+function type() {
+  const current = phrases[phraseIdx];
+  if (!deleting) {
+    typeEl.textContent = current.slice(0, ++charIdx);
+    if (charIdx === current.length) {
+      deleting = true;
+      setTimeout(type, 2000);
+      return;
+    }
+  } else {
+    typeEl.textContent = current.slice(0, --charIdx);
+    if (charIdx === 0) {
+      deleting = false;
+      phraseIdx = (phraseIdx + 1) % phrases.length;
+    }
+  }
+  setTimeout(type, deleting ? 50 : 90);
+}
+
+
+/* ============================================================
+   INIT FROM CONTENT_CONFIG
+   ============================================================ */
+// Hero
+document.getElementById('heroName').textContent = CONTENT_CONFIG.hero.name;
+document.getElementById('heroBio').textContent  = CONTENT_CONFIG.hero.bio;
+document.getElementById('ctaPrimaryLabel').textContent  = CONTENT_CONFIG.hero.ctaPrimary.label;
+document.getElementById('ctaSecondaryLabel').textContent = CONTENT_CONFIG.hero.ctaSecondary.label;
+document.getElementById('ctaPrimary').href  = CONTENT_CONFIG.hero.ctaPrimary.href;
+document.getElementById('ctaSecondary').href = CONTENT_CONFIG.hero.ctaSecondary.href;
+
+type();
+
+/* ============================================================
+   THEME TOGGLE
+   ============================================================ */
+const html = document.documentElement;
+const themeBtn = document.getElementById('themeToggle');
+
+function setTheme(theme) {
+  html.dataset.theme = theme;
+  localStorage.setItem('bm-theme', theme);
+  const icon = theme === 'dark' ? 'sun' : 'moon';
+  themeBtn.innerHTML = `<i data-lucide="${icon}" width="16" height="16"></i>`;
+  lucide.createIcons();
+}
+
+const savedTheme = localStorage.getItem('bm-theme') || 'dark';
+setTheme(savedTheme);
+themeBtn.addEventListener('click', () => {
+  setTheme(html.dataset.theme === 'dark' ? 'light' : 'dark');
+});
+
+/* ============================================================
+   HAMBURGER MENU
+   ============================================================ */
+const hamburger = document.getElementById('hamburger');
+const mobileMenu = document.getElementById('mobileMenu');
+
+hamburger.addEventListener('click', () => {
+  const open = mobileMenu.classList.toggle('open');
+  hamburger.setAttribute('aria-expanded', open);
+  hamburger.innerHTML = open
+    ? `<i data-lucide="x" width="18" height="18"></i>`
+    : `<i data-lucide="menu" width="18" height="18"></i>`;
+  lucide.createIcons();
+});
+
+document.querySelectorAll('.mobile-link').forEach(link => {
+  link.addEventListener('click', () => {
+    mobileMenu.classList.remove('open');
+    hamburger.setAttribute('aria-expanded', false);
+    hamburger.innerHTML = `<i data-lucide="menu" width="18" height="18"></i>`;
+    lucide.createIcons();
+  });
+});
+
+/* ============================================================
+   ACTIVE NAV ON SCROLL
+   ============================================================ */
+const sections = document.querySelectorAll('section[id]');
+const navLinks = document.querySelectorAll('.nav-links a');
+
+const navObserver = new IntersectionObserver((entries) => {
+  entries.forEach(entry => {
+    if (entry.isIntersecting) {
+      navLinks.forEach(l => l.classList.remove('active'));
+      const active = document.querySelector(`.nav-links a[href="#${entry.target.id}"]`);
+      if (active) active.classList.add('active');
+    }
+  });
+}, { rootMargin: '-40% 0px -55% 0px' });
+
+sections.forEach(s => navObserver.observe(s));
+
+/* ============================================================
+   FADE-IN ON SCROLL
+   ============================================================ */
+const fadeObserver = new IntersectionObserver((entries) => {
+  entries.forEach((entry, i) => {
+    if (entry.isIntersecting) {
+      entry.target.style.transitionDelay = `${i * 0.08}s`;
+      entry.target.classList.add('visible');
+      fadeObserver.unobserve(entry.target);
+    }
+  });
+}, { threshold: 0.12 });
+
+document.querySelectorAll('.fade-in').forEach(el => fadeObserver.observe(el));
+
+/* ============================================================
+   RENDER BLOG POSTS
+   ============================================================ */
+const postsGrid = document.getElementById('postsGrid');
+
+function renderPosts(filter = 'all') {
+  postsGrid.innerHTML = '';
+  CONTENT_CONFIG.posts.forEach(post => {
+    const hidden = filter !== 'all' && post.tag !== filter;
+    const card = document.createElement('article');
+    card.className = 'post-card fade-in';
+    if (hidden) card.dataset.hidden = 'true';
+    card.innerHTML = `
+      <span class="post-tag">${post.tag}</span>
+      <h3 class="post-title">${post.title}</h3>
+      <p class="post-summary">${post.summary}</p>
+      <div class="post-footer">
+        <span class="post-date">${post.date}</span>
+        <a href="${post.link}" class="post-read" aria-label="Read ${post.title}">
+          Read <i data-lucide="arrow-right" width="13" height="13"></i>
+        </a>
+      </div>
+    `;
+    postsGrid.appendChild(card);
+  });
+  lucide.createIcons();
+  postsGrid.querySelectorAll('.fade-in').forEach(el => fadeObserver.observe(el));
+}
+
+renderPosts();
+
+/* ============================================================
+   FILTER TABS
+   ============================================================ */
+document.querySelectorAll('.filter-tab').forEach(tab => {
+  tab.addEventListener('click', () => {
+    document.querySelectorAll('.filter-tab').forEach(t => {
+      t.classList.remove('active');
+      t.setAttribute('aria-selected', 'false');
+    });
+    tab.classList.add('active');
+    tab.setAttribute('aria-selected', 'true');
+    renderPosts(tab.dataset.filter);
+  });
+});
+
+/* ============================================================
+   BACKGROUND CANVAS — ANIMATED CONSTELLATION
+   ============================================================ */
+const canvas = document.getElementById('bg-canvas');
+const ctx = canvas.getContext('2d');
+let particles = [];
+const PARTICLE_COUNT = 80;
+
+function resize() {
+  canvas.width = window.innerWidth;
+  canvas.height = window.innerHeight;
+}
+
+resize();
+window.addEventListener('resize', resize);
+
+function createParticle() {
+  return {
+    x: Math.random() * canvas.width,
+    y: Math.random() * canvas.height,
+    vx: (Math.random() - 0.5) * 0.3,
+    vy: (Math.random() - 0.5) * 0.3,
+    r: Math.random() * 1.5 + 0.5,
+    alpha: Math.random() * 0.5 + 0.2
+  };
+}
+
+for (let i = 0; i < PARTICLE_COUNT; i++) particles.push(createParticle());
+
+function drawCanvas() {
+  ctx.clearRect(0, 0, canvas.width, canvas.height);
+
+  const isDark = html.dataset.theme === 'dark';
+  const dotColor = isDark ? '0, 255, 136' : '#00cc6a';
+  const lineColor = isDark ? '0, 255, 136' : '#00cc6a';
+
+  particles.forEach(p => {
+    p.x += p.vx;
+    p.y += p.vy;
+    if (p.x < 0) p.x = canvas.width;
+    if (p.x > canvas.width) p.x = 0;
+    if (p.y < 0) p.y = canvas.height;
+    if (p.y > canvas.height) p.y = 0;
+
+    ctx.beginPath();
+    ctx.arc(p.x, p.y, p.r, 0, Math.PI * 2);
+    ctx.fillStyle = `rgba(${dotColor}, ${p.alpha})`;
+    ctx.fill();
+  });
+
+  // Draw connections
+  for (let i = 0; i < particles.length; i++) {
+    for (let j = i + 1; j < particles.length; j++) {
+      const dx = particles[i].x - particles[j].x;
+      const dy = particles[i].y - particles[j].y;
+      const dist = Math.sqrt(dx * dx + dy * dy);
+      if (dist < 120) {
+        ctx.beginPath();
+        ctx.moveTo(particles[i].x, particles[i].y);
+        ctx.lineTo(particles[j].x, particles[j].y);
+        ctx.strokeStyle = `rgba(${lineColor}, ${(1 - dist / 120) * 0.15})`;
+        ctx.lineWidth = 0.6;
+        ctx.stroke();
+      }
+    }
+  }
+
+  requestAnimationFrame(drawCanvas);
+}
+
+drawCanvas();
+
+/* ============================================================
+   INIT LUCIDE ICONS
+   ============================================================ */
+lucide.createIcons();
+</script>
+</body>
+</html>
