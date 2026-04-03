@@ -1725,8 +1725,12 @@ function renderPosts(filter = 'all') {
       <p class="post-summary">${post.summary}</p>
       <div class="post-footer">
         <span class="post-date">${post.date}</span>
-        <a href="${post.link}" class="post-read" aria-label="Read ${post.title}">
-          Read <i data-lucide="arrow-right" width="13" height="13"></i>
+        <a href="${post.link}" 
+         target="${post.target || '_self'}" 
+         rel="${post.rel || ''}" 
+         class="post-read" 
+         aria-label="Read ${post.title}">
+         <i data-lucide="arrow-right" width="13" height="13"></i>
         </a>
       </div>
     `;
