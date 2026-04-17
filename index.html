@@ -278,7 +278,8 @@ nav {
   letter-spacing: -0.04em;
   line-height: 1.08;
   margin-bottom: 24px;
-  padding-bottom: 0.15em;
+  padding-bottom: 0.3em;
+  padding-right: 0.1em;
   background: linear-gradient(160deg, var(--text-primary) 0%, var(--text-secondary) 100%);
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
@@ -1352,9 +1353,8 @@ footer {
     </div>
 
     <div class="resume-cta fade-in">
-      <a href="--" download="Brady_Manning_Resume.pdf" class="btn btn-primary" aria-label="Download full resume PDF">
-        <i data-lucide="download" width="16" height="16"></i>
-        Download Full Resume (PDF)
+      <a href="https://www.linkedin.com/in/brady-manning/" target="_blank" rel="noopener noreferrer" class="btn btn-primary" aria-label="Request full resume on LinkedIn">
+        Request Full Resume <i data-lucide="linkedin" width="16" height="16"></i>
       </a>
     </div>
   </div>
@@ -1803,8 +1803,8 @@ function drawCanvas() {
   ctx.clearRect(0, 0, canvas.width, canvas.height);
 
   const isDark = html.dataset.theme === 'dark';
-  const dotColor = isDark ? '0, 255, 136' : '#00cc6a';
-  const lineColor = isDark ? '0, 255, 136' : '#00cc6a';
+  const dotColor = isDark ? '0, 255, 136' : '0, 204, 106';
+  const lineColor = isDark ? '0, 255, 136' : '0, 204, 106';
 
   particles.forEach(p => {
     p.x += p.vx;
