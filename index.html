@@ -1197,23 +1197,8 @@ footer {
       </div>
 
       <div>
-        <div class="stats-grid fade-in">
-          <div class="stat-card">
-            <div class="stat-number">100+ MW</div>
-            <div class="stat-label">Virtual Power Plant capacity under management</div>
-          </div>
-          <div class="stat-card">
-            <div class="stat-number">15K+</div>
-            <div class="stat-label">Home batteries aggregated on the grid</div>
-          </div>
-          <div class="stat-card">
-            <div class="stat-number">$10B+</div>
-            <div class="stat-label">Projects enabled across energy platforms</div>
-          </div>
-          <div class="stat-card">
-            <div class="stat-number">10+ Yrs</div>
-            <div class="stat-label">In energy markets &amp; product leadership</div>
-          </div>
+        <div class="stats-grid fade-in" id="statsGrid">
+          <!-- Stats injected by JS -->
         </div>
 
         <div class="skills-section fade-in">
@@ -1247,82 +1232,8 @@ footer {
     <p class="section-label">Career</p>
     <h2 class="section-title fade-in">Where I've<br>Made My Mark</h2>
 
-    <div class="timeline" role="list">
-
-      <div class="timeline-item fade-in" role="listitem">
-        <div class="timeline-card">
-          <div class="timeline-company">GoodLeap</div>
-          <div class="timeline-role">Staff Product Manager, VPPs</div>
-          <div class="timeline-date">2025 – Present</div>
-          <ul class="timeline-bullets">
-            <li>Leading product strategy for a 100+ MW VPP aggregating 15,000+ home battery systems across the United States</li>
-            <li>Building a Distributed Energy Management System (DERMS), homeowner-facing energy management tools, and OEM/utility market integrations</li>
-            <li>Driving expansion of GoodLeap's GoodGrid VPP nationwide and retail energy provider in Texas</li>
-          </ul>
-        </div>
-        <div class="timeline-dot" aria-hidden="true"></div>
-        <div class="timeline-spacer"></div>
-      </div>
-
-      <div class="timeline-item fade-in" role="listitem">
-        <div class="timeline-spacer"></div>
-        <div class="timeline-dot" aria-hidden="true"></div>
-        <div class="timeline-card">
-          <div class="timeline-company">Fluence Energy</div>
-          <div class="timeline-role">Senior Technical Product Manager, Platform</div>
-          <div class="timeline-date">2024</div>
-          <ul class="timeline-bullets">
-            <li>Managed Fluence OS — the core BESS software platform for utility-scale battery storage projects worldwide</li>
-            <li>Launched global rollout of Fluence’s OS7 control and dispatch software estimated to enable $5 billion in new projects in FY 2025.</li>
-            <li>Planned strategy and led coalition of 80 stakeholders to sunset previous operating system software versions and upgrade procedures to OS7 for 225 energy storage projects around the world making up 11.1 Gigawatts.</li>
-          </ul>
-        </div>
-      </div>
-
-      <div class="timeline-item fade-in" role="listitem">
-        <div class="timeline-card">
-          <div class="timeline-company">GM Energy / General Motors</div>
-          <div class="timeline-role">Senior Product Manager</div>
-          <div class="timeline-date">2023 – 2024</div>
-          <ul class="timeline-bullets">
-            <li>Built GM Energy's Virtual Power Plant and end-to-end customer experience, including notifications,charging schedules, desktop & mobile interfaces, APIs, customer success analytics, and product operations.</li>
-            <li>Partnered with automaker divisions and third-party energy providers to launch bidirectional charging solutions</li>
-            <li>Launched emissions analytics and energy management system (EMS) platform for B2B customers</li>
-          </ul>
-        </div>
-        <div class="timeline-dot" aria-hidden="true"></div>
-        <div class="timeline-spacer"></div>
-      </div>
-
-      <div class="timeline-item fade-in" role="listitem">
-        <div class="timeline-spacer"></div>
-        <div class="timeline-dot" aria-hidden="true"></div>
-        <div class="timeline-card">
-          <div class="timeline-company">NRG Energy</div>
-          <div class="timeline-role">Manager, New Business Incubation ← Product Manager ← Sr. Data Analyst</div>
-          <div class="timeline-date">2019 – 2023</div>
-          <ul class="timeline-bullets">
-            <li>Incubated new retail energy products and business models, growing from analyst to business unit manager</li>
-            <li>Built B2B and B2C sustainability products including renewable energy certificates, community solar, energy brokerage, and retail rate arbitrage.</li>
-            <li>Led product development for consumer-facing energy shopping and smart home integrations</li>
-          </ul>
-        </div>
-      </div>
-
-      <div class="timeline-item fade-in" role="listitem">
-        <div class="timeline-card">
-          <div class="timeline-company">Entergy</div>
-          <div class="timeline-role">Product Manager ← Analyst III ← Analyst II</div>
-          <div class="timeline-date">2015 – 2018</div>
-          <ul class="timeline-bullets">
-            <li>Learning product management and working on two new products: <br><strong>Power Through</strong> which uses generators as a distributed energy resource with demand response capabilities and a B2C <strong>Home Energy Management</strong> product.</li>
-            <li>Launched a flexible DERs within MISO to serve as a backup power product for large grocery stores like HEB resulting in savings of hundreds of thousands of dollars in product waste per store when outages occur.</li>
-          </ul>
-        </div>
-        <div class="timeline-dot" aria-hidden="true"></div>
-        <div class="timeline-spacer"></div>
-      </div>
-
+    <div class="timeline" role="list" id="timeline">
+      <!-- Experience injected by JS -->
     </div>
 
     <div class="resume-cta fade-in">
@@ -1342,80 +1253,8 @@ footer {
     <h2 class="section-title fade-in">Things I'm<br>Building</h2>
     <p class="section-subtitle fade-in">Side projects and products at the edge of energy, AI, and product craft.</p>
 
-    <div class="projects-grid">
-
-      <div class="project-card fade-in">
-        <div class="project-demo-zone" aria-label="Project demo area — embed coming soon">
-          <div class="demo-placeholder">
-            <div class="demo-icon"><i data-lucide="zap" width="22" height="22"></i></div>
-            <div class="demo-label">[ Embed Demo Here ]</div>
-          </div>
-        </div>
-        <div class="project-body">
-          <div class="project-tags">
-            <span class="project-tag">Energy</span>
-            <span class="project-tag">Product</span>
-          </div>
-          <h3 class="project-name">GoodGrid</h3>
-          <p class="project-desc">GoodLeap's retail electricity provider in Texas — connecting home solar and battery customers to a smarter, cleaner grid with competitive ERCOT rates.</p>
-          <a href="https://bit-real-33441570.figma.site" target="_blank" rel="noopener noreferrer" class="project-link" aria-label="Explore GoodGrid project">Explore <i data-lucide="arrow-right" width="14" height="14"></i></a>
-        </div>
-      </div>
-
-      <div class="project-card fade-in">
-        <div class="project-demo-zone" aria-label="Project demo area — embed coming soon">
-          <div class="demo-placeholder">
-            <div class="demo-icon"><i data-lucide="bar-chart-2" width="22" height="22"></i></div>
-            <div class="demo-label">[ Embed Demo Here ]</div>
-          </div>
-        </div>
-        <div class="project-body">
-          <div class="project-tags">
-            <span class="project-tag">Energy</span>
-            <span class="project-tag">Side Project</span>
-          </div>
-          <h3 class="project-name">TX Energy Data Tool</h3>
-          <p class="project-desc">A residential energy insights dashboard for Texas homeowners — pulling live ERCOT data to help households understand usage, costs, and savings opportunities.</p>
-          <span class="project-coming-soon"><i data-lucide="clock" width="13" height="13"></i> Coming soon</span>
-        </div>
-      </div>
-
-      <div class="project-card fade-in">
-        <div class="project-demo-zone" aria-label="Project demo area — embed coming soon">
-          <div class="demo-placeholder">
-            <div class="demo-icon"><i data-lucide="shopping-cart" width="22" height="22"></i></div>
-            <div class="demo-label">[ Embed Demo Here ]</div>
-          </div>
-        </div>
-        <div class="project-body">
-          <div class="project-tags">
-            <span class="project-tag">Energy</span>
-            <span class="project-tag">Web App</span>
-          </div>
-          <h3 class="project-name">Energy Rate Shopper</h3>
-          <p class="project-desc">A consumer-facing retail energy rate comparison tool for the Texas deregulated market — making it easy to find the best plan for your home or business.</p>
-          <span class="project-coming-soon"><i data-lucide="clock" width="13" height="13"></i> Coming soon</span>
-        </div>
-      </div>
-
-      <div class="project-card fade-in">
-        <div class="project-demo-zone" aria-label="Project demo area — embed coming soon">
-          <div class="demo-placeholder">
-            <div class="demo-icon"><i data-lucide="image" width="22" height="22"></i></div>
-            <div class="demo-label">[ Embed Demo Here ]</div>
-          </div>
-        </div>
-        <div class="project-body">
-          <div class="project-tags">
-            <span class="project-tag">Creative</span>
-            <span class="project-tag">Business</span>
-          </div>
-          <h3 class="project-name">Book Analytics</h3>
-          <p class="project-desc">Every book you've ever read is a data point in a story only you could tell. We turn your reading history into a living knowledge graph — beautiful, curated, and deeply personal — so your library finally reflects not just what you've read, but who you've become.</p>
-          <span class="project-coming-soon"><i data-lucide="clock" width="13" height="13"></i> Coming soon</span>
-        </div>
-      </div>
-
+    <div class="projects-grid" id="projectsGrid">
+      <!-- Projects injected by JS -->
     </div>
   </div>
 </section>
@@ -1514,6 +1353,100 @@ const CONTENT_CONFIG = {
     { number: "15K+",    label: "Home batteries aggregated on the grid" },
     { number: "$10B+",   label: "Projects enabled across energy platforms" },
     { number: "10+ Yrs", label: "In energy markets & product leadership" }
+  ],
+
+  // ============================================================
+  // EXPERIENCE
+  // Add/remove jobs or edit bullets here.
+  // ============================================================
+  experience: [
+    {
+      company: "GoodLeap",
+      role: "Staff Product Manager, VPPs",
+      date: "2025 – Present",
+      bullets: [
+        "Leading product strategy for a 100+ MW VPP aggregating 15,000+ home battery systems across the United States",
+        "Building a Distributed Energy Management System (DERMS), homeowner-facing energy management tools, and OEM/utility market integrations",
+        "Driving expansion of GoodLeap's GoodGrid VPP nationwide and retail energy provider in Texas"
+      ]
+    },
+    {
+      company: "Fluence Energy",
+      role: "Senior Technical Product Manager, Platform",
+      date: "2024",
+      bullets: [
+        "Managed Fluence OS — the core BESS software platform for utility-scale battery storage projects worldwide",
+        "Launched global rollout of Fluence's OS7 control and dispatch software estimated to enable $5 billion in new projects in FY 2025",
+        "Planned strategy and led coalition of 80 stakeholders to sunset legacy OS versions and upgrade 225 energy storage projects around the world totaling 11.1 GW"
+      ]
+    },
+    {
+      company: "GM Energy / General Motors",
+      role: "Senior Product Manager",
+      date: "2023 – 2024",
+      bullets: [
+        "Built GM Energy's Virtual Power Plant and end-to-end customer experience, including notifications, charging schedules, desktop & mobile interfaces, APIs, customer success analytics, and product operations",
+        "Partnered with automaker divisions and third-party energy providers to launch bidirectional charging solutions",
+        "Launched emissions analytics and energy management system (EMS) platform for B2B customers"
+      ]
+    },
+    {
+      company: "NRG Energy",
+      role: "Manager, New Business Incubation ← Product Manager ← Sr. Data Analyst",
+      date: "2019 – 2023",
+      bullets: [
+        "Incubated new retail energy products and business models, growing from analyst to business unit manager",
+        "Built B2B and B2C sustainability products including renewable energy certificates, community solar, energy brokerage, and retail rate arbitrage",
+        "Led product development for consumer-facing energy shopping and smart home integrations"
+      ]
+    },
+    {
+      company: "Entergy",
+      role: "Product Manager ← Analyst III ← Analyst II",
+      date: "2015 – 2018",
+      bullets: [
+        "Worked on two new products: <strong>Power Through</strong> — using generators as a distributed energy resource with demand response capabilities — and a B2C <strong>Home Energy Management</strong> product",
+        "Launched flexible DERs within MISO as a backup power product for large grocery stores, saving hundreds of thousands of dollars per store in product waste during outages"
+      ]
+    }
+  ],
+
+  // ============================================================
+  // PROJECTS
+  // Set link: null for projects that aren't live yet.
+  // icon: any Lucide icon name (https://lucide.dev/icons)
+  // ============================================================
+  projects: [
+    {
+      name: "GoodGrid",
+      icon: "zap",
+      tags: ["Energy", "Product"],
+      desc: "GoodLeap's retail electricity provider in Texas — connecting home solar and battery customers to a smarter, cleaner grid with competitive ERCOT rates.",
+      link: "https://bit-real-33441570.figma.site",
+      target: "_blank",
+      rel: "noopener noreferrer"
+    },
+    {
+      name: "TX Energy Data Tool",
+      icon: "bar-chart-2",
+      tags: ["Energy", "Side Project"],
+      desc: "A residential energy insights dashboard for Texas homeowners — pulling live ERCOT data to help households understand usage, costs, and savings opportunities.",
+      link: null
+    },
+    {
+      name: "Energy Rate Shopper",
+      icon: "shopping-cart",
+      tags: ["Energy", "Web App"],
+      desc: "A consumer-facing retail energy rate comparison tool for the Texas deregulated market — making it easy to find the best plan for your home or business.",
+      link: null
+    },
+    {
+      name: "Book Analytics",
+      icon: "book-open",
+      tags: ["Creative", "Business"],
+      desc: "Every book you've ever read is a data point in a story only you could tell. We turn your reading history into a living knowledge graph — beautiful, curated, and deeply personal — so your library finally reflects not just what you've read, but who you've become.",
+      link: null
+    }
   ],
 
   // ============================================================
@@ -1727,6 +1660,86 @@ function renderPosts(filter = 'all') {
 }
 
 renderPosts();
+
+/* ============================================================
+   RENDER STATS
+   ============================================================ */
+function renderStats() {
+  const grid = document.getElementById('statsGrid');
+  grid.innerHTML = CONTENT_CONFIG.stats.map(s => `
+    <div class="stat-card">
+      <div class="stat-number">${s.number}</div>
+      <div class="stat-label">${s.label}</div>
+    </div>
+  `).join('');
+}
+
+renderStats();
+
+/* ============================================================
+   RENDER EXPERIENCE
+   ============================================================ */
+function renderExperience() {
+  const timeline = document.getElementById('timeline');
+  timeline.innerHTML = '';
+  CONTENT_CONFIG.experience.forEach(job => {
+    const item = document.createElement('div');
+    item.className = 'timeline-item fade-in';
+    item.setAttribute('role', 'listitem');
+    item.innerHTML = `
+      <div class="timeline-card">
+        <div class="timeline-company">${job.company}</div>
+        <div class="timeline-role">${job.role}</div>
+        <div class="timeline-date">${job.date}</div>
+        <ul class="timeline-bullets">
+          ${job.bullets.map(b => `<li>${b}</li>`).join('')}
+        </ul>
+      </div>
+      <div class="timeline-dot" aria-hidden="true"></div>
+      <div class="timeline-spacer"></div>
+    `;
+    timeline.appendChild(item);
+  });
+  timeline.querySelectorAll('.fade-in').forEach(el => fadeObserver.observe(el));
+}
+
+renderExperience();
+
+/* ============================================================
+   RENDER PROJECTS
+   ============================================================ */
+function renderProjects() {
+  const grid = document.getElementById('projectsGrid');
+  grid.innerHTML = '';
+  CONTENT_CONFIG.projects.forEach(project => {
+    const card = document.createElement('div');
+    card.className = 'project-card fade-in';
+    const linkHtml = project.link
+      ? `<a href="${project.link}" target="${project.target || '_self'}" rel="${project.rel || ''}" class="project-link" aria-label="Explore ${project.name}">Explore <i data-lucide="arrow-right" width="14" height="14"></i></a>`
+      : `<span class="project-coming-soon"><i data-lucide="clock" width="13" height="13"></i> Coming soon</span>`;
+    card.innerHTML = `
+      <div class="project-demo-zone" aria-label="Project demo area">
+        <div class="demo-placeholder">
+          <div class="demo-icon"><i data-lucide="${project.icon}" width="22" height="22"></i></div>
+          <div class="demo-label">[ Embed Demo Here ]</div>
+        </div>
+      </div>
+      <div class="project-body">
+        <div class="project-tags">
+          ${project.tags.map(t => `<span class="project-tag">${t}</span>`).join('')}
+        </div>
+        <h3 class="project-name">${project.name}</h3>
+        <p class="project-desc">${project.desc}</p>
+        ${linkHtml}
+      </div>
+    `;
+    grid.appendChild(card);
+  });
+  lucide.createIcons();
+  grid.querySelectorAll('.fade-in').forEach(el => fadeObserver.observe(el));
+}
+
+renderProjects();
 
 /* ============================================================
    FILTER TABS
