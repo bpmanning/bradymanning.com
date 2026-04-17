@@ -831,6 +831,18 @@ nav {
 
 .project-link:hover { gap: 10px; }
 
+.project-coming-soon {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  font-family: 'Lato', sans-serif;
+  font-size: 0.85rem;
+  font-weight: 700;
+  color: var(--text-muted);
+  letter-spacing: 0.04em;
+  cursor: default;
+}
+
 /* ============================================================
    WRITING SECTION
    ============================================================ */
@@ -1196,14 +1208,15 @@ footer {
         <h2 class="section-title fade-in">Builder.<br>Leader.<br>Learner.</h2>
         <div class="about-text fade-in">
           <p>I'm a <strong>Staff Product Manager</strong> at GoodLeap, where I lead the product strategy for a 100+ MW Virtual Power Plant (VPP) aggregating 15,000+ home batteries across the United States. My work sits at the intersection of energy markets, grid technology, and consumer software.</p>
-          <p>I've built energy products across <strong>NRG, GM Energy/General Motors, Fluence Energy, and Entergy</strong> — from incubating new businesses to scaling distributed energy platforms to enabling and extracting recurring revenue from $10B+ in projects financed</p>
-            <p><ul>I have worked on VPPs since 2018, across device types from:
-              <li><strong>500 kW Natural Gas Generators</strong> at Entergy</li>
-              <li>Optimizing <strong>Smart Thermostat</strong> demand response at NRG</li>
-              <li>Building out <strong>Electric Vehicle managed charging</strong> at GM</li>
-              <li>Global deployments of <strong>Utility-Scale BESS</strong> at Fluence Energy</li>
-              <li>Today at GoodLeap, I am the product lead for a rapidly growing virtual power plant focused on <strong>residential batteries</strong> and expanding into other distributed energy resource types.</li>
-            </ul></p>
+          <p>I've built energy products across <strong>NRG, GM Energy/General Motors, Fluence Energy, and Entergy</strong> — from incubating new businesses to scaling distributed energy platforms to enabling recurring revenue from $10B+ in projects financed.</p>
+          <p>I've worked on VPPs since 2018, across device types including:</p>
+          <ul>
+            <li><strong>500 kW Natural Gas Generators</strong> at Entergy</li>
+            <li><strong>Smart Thermostat</strong> demand response at NRG</li>
+            <li><strong>Electric Vehicle managed charging</strong> at GM Energy</li>
+            <li><strong>Utility-Scale BESS</strong> global deployments at Fluence Energy</li>
+            <li><strong>Residential batteries</strong> and expanding DER types at GoodLeap</li>
+          </ul>
             <p>I hold an MSc in Innovation & Entrepreneurship from <strong>HEC Paris</strong>, a BS in Economics from <strong>Texas A&M University</strong>, and am a proud Clean Energy Leadership Institute <strong>(CELI) Fellow</strong>.</p>
           <p>Outside the office: Marathoner, Father, Book Collector & Reader of 50+ books a year for the last decade, and a tinkerer across AI tools and side projects.</p>
         </div>
@@ -1372,7 +1385,7 @@ footer {
           </div>
           <h3 class="project-name">GoodGrid</h3>
           <p class="project-desc">GoodLeap's retail electricity provider in Texas — connecting home solar and battery customers to a smarter, cleaner grid with competitive ERCOT rates.</p>
-          <a href="#" class="project-link" aria-label="Explore GoodGrid project">Explore <i data-lucide="arrow-right" width="14" height="14"></i></a>
+          <a href="https://bit-real-33441570.figma.site" target="_blank" rel="noopener noreferrer" class="project-link" aria-label="Explore GoodGrid project">Explore <i data-lucide="arrow-right" width="14" height="14"></i></a>
         </div>
       </div>
 
@@ -1390,7 +1403,7 @@ footer {
           </div>
           <h3 class="project-name">TX Energy Data Tool</h3>
           <p class="project-desc">A residential energy insights dashboard for Texas homeowners — pulling live ERCOT data to help households understand usage, costs, and savings opportunities.</p>
-          <a href="#" class="project-link" aria-label="Explore TX Energy Data Tool">Explore <i data-lucide="arrow-right" width="14" height="14"></i></a>
+          <span class="project-coming-soon"><i data-lucide="clock" width="13" height="13"></i> Coming soon</span>
         </div>
       </div>
 
@@ -1408,7 +1421,7 @@ footer {
           </div>
           <h3 class="project-name">Energy Rate Shopper</h3>
           <p class="project-desc">A consumer-facing retail energy rate comparison tool for the Texas deregulated market — making it easy to find the best plan for your home or business.</p>
-          <a href="#" class="project-link" aria-label="Explore Energy Rate Shopper">Explore <i data-lucide="arrow-right" width="14" height="14"></i></a>
+          <span class="project-coming-soon"><i data-lucide="clock" width="13" height="13"></i> Coming soon</span>
         </div>
       </div>
 
@@ -1426,7 +1439,7 @@ footer {
           </div>
           <h3 class="project-name">Book Analytics</h3>
           <p class="project-desc">Every book you've ever read is a data point in a story only you could tell. We turn your reading history into a living knowledge graph — beautiful, curated, and deeply personal — so your library finally reflects not just what you've read, but who you've become.</p>
-          <a href="#" class="project-link" aria-label="Explore Book Cover Studio">Explore <i data-lucide="arrow-right" width="14" height="14"></i></a>
+          <span class="project-coming-soon"><i data-lucide="clock" width="13" height="13"></i> Coming soon</span>
         </div>
       </div>
 
@@ -1526,7 +1539,7 @@ const CONTENT_CONFIG = {
   stats: [
     { number: "100+ MW", label: "Virtual Power Plant capacity under management" },
     { number: "15K+",    label: "Home batteries aggregated on the grid" },
-    { number: "$5B+",    label: "Projects enabled across energy platforms" },
+    { number: "$10B+",   label: "Projects enabled across energy platforms" },
     { number: "10+ Yrs", label: "In energy markets & product leadership" }
   ],
 
