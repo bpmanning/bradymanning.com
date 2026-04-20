@@ -753,6 +753,16 @@ nav {
   font-weight: 600;
 }
 
+.project-image-preview {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: top center;
+  display: block;
+}
+
 .project-iframe-wrap {
   position: absolute;
   inset: 0;
@@ -1440,7 +1450,7 @@ const CONTENT_CONFIG = {
     {
       name: "GoodGrid",
       icon: "zap",
-      tags: ["Energy", "Product"],
+      tags: ["GoodLeap", "Energy", "Product"],
       desc: "GoodLeap's retail electricity provider in Texas — connecting home solar and battery customers to a smarter, cleaner grid with competitive ERCOT rates.",
       previewUrl: "https://bit-real-33441570.figma.site/",
       link: "https://bit-real-33441570.figma.site",
@@ -1448,11 +1458,14 @@ const CONTENT_CONFIG = {
       rel: "noopener noreferrer"
     },
     {
-      name: "TX Energy Data Tool",
+      name: "GM Energy Smart Charging Portal",
       icon: "bar-chart-2",
-      tags: ["Energy", "Side Project"],
-      desc: "A residential energy insights dashboard for Texas homeowners — pulling live ERCOT data to help households understand usage, costs, and savings opportunities.",
-      link: null
+      tags: ["General Motors", "Energy", "Product"],
+      desc: "The GM Energy Smart Charging Portal lets EV and home battery owners enroll in utility programs that optimize when and how their energy assets charge and discharge — shifting load to off-peak hours and supporting grid reliability. Participants can earn incentives up to $1,500 or more per year by allowing GM, in partnership with local utilities, to intelligently manage their vehicle charging schedules and PowerBank energy storage during periods of high grid demand.",
+      imageUrl: "assets/gm-energy-portal.png",
+      link: "https://gmenergy.gm.com/energy/systems/portal/",
+      target: "_blank",
+      rel: "noopener noreferrer"
     },
     {
       name: "Energy Rate Shopper",
@@ -1738,7 +1751,11 @@ function renderProjects() {
     const linkHtml = project.link
       ? `<a href="${project.link}" target="${project.target || '_self'}" rel="${project.rel || ''}" class="project-link" aria-label="Explore ${project.name}">Explore <i data-lucide="arrow-right" width="14" height="14"></i></a>`
       : `<span class="project-coming-soon"><i data-lucide="clock" width="13" height="13"></i> Coming soon</span>`;
-    const demoZoneHtml = project.previewUrl
+    const demoZoneHtml = project.imageUrl
+      ? `<div class="project-demo-zone" aria-label="${project.name} preview">
+          <img class="project-image-preview" src="${project.imageUrl}" alt="${project.name} hero screenshot" loading="lazy">
+        </div>`
+      : project.previewUrl
       ? `<div class="project-demo-zone" aria-label="${project.name} live preview">
           <div class="project-iframe-wrap">
             <iframe class="project-iframe" src="${project.previewUrl}" title="${project.name} preview" loading="lazy" sandbox="allow-scripts allow-same-origin"></iframe>
@@ -1764,48 +1781,16 @@ function renderProjects() {
     grid.appendChild(card);
 
     if (project.previewUrl) {
-      const wrap = card.querySelector('.project-iframe-wrap');
-      wrap.innerHTML = '';
+      const wrap   = card.querySelector('.project-iframe-wrap');
+      const iframe = wrap.querySelector('.project-iframe');
 
-      const makeIframe = (src) => {
-        const f = document.createElement('iframe');
-        f.src = src;
-        f.title = project.name + ' preview';
-        f.setAttribute('sandbox', 'allow-scripts allow-same-origin');
-        f.className = 'project-iframe';
-        f.style.transition = 'opacity 0.7s ease';
-        return f;
-      };
-
-      let front = makeIframe(project.previewUrl);
-      let back  = makeIframe(project.previewUrl);
-      front.style.opacity = '1';
-      front.style.zIndex  = '2';
-      back.style.opacity  = '0';
-      back.style.zIndex   = '1';
-      wrap.appendChild(back);
-      wrap.appendChild(front);
-
-      const scaleIframes = () => {
+      const scaleIframe = () => {
         const scale = wrap.offsetWidth / 1440;
-        [front, back].forEach(f => {
-          f.style.transform = `scale(${scale})`;
-          f.style.height    = Math.ceil(220 / scale) + 'px';
-        });
+        iframe.style.transform = `scale(${scale})`;
+        iframe.style.height    = Math.ceil(220 / scale) + 'px';
       };
-      scaleIframes();
-      window.addEventListener('resize', scaleIframes);
-
-      setInterval(() => {
-        back.src = project.previewUrl;
-        back.addEventListener('load', () => {
-          back.style.zIndex   = '2';
-          front.style.zIndex  = '1';
-          back.style.opacity  = '1';
-          front.style.opacity = '0';
-          setTimeout(() => { [front, back] = [back, front]; }, 750);
-        }, { once: true });
-      }, 10000);
+      scaleIframe();
+      window.addEventListener('resize', scaleIframe);
     }
   });
   lucide.createIcons();
