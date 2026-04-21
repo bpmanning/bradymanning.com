@@ -86,15 +86,47 @@ section { padding: 120px 0; }
 }
 
 /* ============================================================
-   BACKGROUND CANVAS
+   HERO GRID CANVAS
    ============================================================ */
-#bg-canvas {
+#hero-grid-canvas {
   position: fixed;
   top: 0; left: 0;
   width: 100%; height: 100%;
   z-index: 0;
   pointer-events: none;
-  opacity: 0.4;
+}
+
+.hero-grid-overlay {
+  position: fixed;
+  top: 0; left: 0;
+  width: 100vw; height: 100vh;
+  background: linear-gradient(105deg, rgba(7,9,15,0.95) 0%, rgba(7,9,15,0.75) 40%, rgba(7,9,15,0.58) 68%, rgba(7,9,15,0.38) 100%);
+  -webkit-mask-image: radial-gradient(circle 180px at var(--cx, -400px) var(--cy, -400px), transparent 0%, black 65%);
+  mask-image: radial-gradient(circle 180px at var(--cx, -400px) var(--cy, -400px), transparent 0%, black 65%);
+  z-index: 1;
+  pointer-events: none;
+}
+
+.hero-status-label {
+  position: absolute;
+  bottom: 80px;
+  right: 40px;
+  font-family: 'DM Mono', 'Courier New', monospace;
+  font-size: 11px;
+  color: rgba(0, 255, 136, 0.5);
+  opacity: 0;
+  transition: opacity 0.6s ease;
+  pointer-events: none;
+  z-index: 3;
+  letter-spacing: 0.04em;
+}
+
+.hero-status-label.visible { opacity: 1; }
+
+@media (max-width: 767px), (prefers-reduced-motion: reduce) {
+  #hero-grid-canvas { display: none; }
+  .hero-status-label { display: none; }
+  #hero { background: radial-gradient(ellipse at 50% 30%, rgba(0,255,136,0.04) 0%, transparent 60%); }
 }
 
 /* ============================================================
@@ -1130,8 +1162,9 @@ footer {
 </head>
 <body>
 
-<!-- Background canvas -->
-<canvas id="bg-canvas"></canvas>
+<!-- Hero grid canvas -->
+<canvas id="hero-grid-canvas" aria-hidden="true"></canvas>
+<div class="hero-grid-overlay" aria-hidden="true"></div>
 
 <!-- ============================================================
      NAVIGATION
@@ -1194,6 +1227,8 @@ footer {
       </a>
     </div>
   </div>
+
+  <div class="hero-status-label" id="heroStatusLabel" aria-hidden="true">100,000+ devices · one grid</div>
 
   <div class="hero-scroll-hint">
     <span>Scroll</span>
@@ -1815,76 +1850,179 @@ document.querySelectorAll('.filter-tab').forEach(tab => {
 });
 
 /* ============================================================
-   BACKGROUND CANVAS — ANIMATED CONSTELLATION
+   HERO GRID — ENERGY NETWORK VISUALIZATION
    ============================================================ */
-const canvas = document.getElementById('bg-canvas');
-const ctx = canvas.getContext('2d');
-let particles = [];
-const PARTICLE_COUNT = 80;
+function initHeroGrid() {
+  if (window.innerWidth < 768 || window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
 
-function resize() {
-  canvas.width = window.innerWidth;
-  canvas.height = window.innerHeight;
-}
+  const canvas = document.getElementById('hero-grid-canvas');
+  const ctx = canvas.getContext('2d');
 
-resize();
-window.addEventListener('resize', resize);
-
-function createParticle() {
-  return {
-    x: Math.random() * canvas.width,
-    y: Math.random() * canvas.height,
-    vx: (Math.random() - 0.5) * 0.3,
-    vy: (Math.random() - 0.5) * 0.3,
-    r: Math.random() * 1.5 + 0.5,
-    alpha: Math.random() * 0.5 + 0.2
+  const G = {
+    cellSize: 45,             // px between grid intersections
+    jitter: 0.25,             // positional randomness as fraction of cellSize
+    edgePrune: 0.07,          // fraction of edges removed for organic gaps
+    lineOpacity: 0.05,        // dim grid lines (always visible)
+    lineActiveOpacity: 0.19,  // lit when a pulse is on the segment
+    lineActiveMs: 180,        // ms a segment stays lit after pulse passes
+    pulseRadius: 1.6,
+    targetPulses: 650,        // how many pulses to keep alive at once
+    maxPulses: 850,
+    pulseSpeedRange: [1, 2.4],
+    mouseProximity: 85,
   };
-}
 
-for (let i = 0; i < PARTICLE_COUNT; i++) particles.push(createParticle());
+  let nodes = [], edges = [], pulses = [], resizeTimer;
+  const rand = (a, b) => a + Math.random() * (b - a);
 
-function drawCanvas() {
-  ctx.clearRect(0, 0, canvas.width, canvas.height);
+  function buildGrid() {
+    nodes = []; edges = []; pulses = [];
+    const w = canvas.width, h = canvas.height;
+    const cols = Math.round(w / G.cellSize);
+    const rows = Math.round(h / G.cellSize);
+    const cw = w / cols, ch = h / rows;
 
-  const isDark = html.dataset.theme === 'dark';
-  const dotColor = isDark ? '0, 255, 136' : '0, 204, 106';
-  const lineColor = isDark ? '0, 255, 136' : '0, 204, 106';
+    for (let r = 0; r <= rows; r++)
+      for (let c = 0; c <= cols; c++)
+        nodes.push({
+          x: c * cw + rand(-cw * G.jitter, cw * G.jitter),
+          y: r * ch + rand(-ch * G.jitter, ch * G.jitter),
+        });
 
-  particles.forEach(p => {
-    p.x += p.vx;
-    p.y += p.vy;
-    if (p.x < 0) p.x = canvas.width;
-    if (p.x > canvas.width) p.x = 0;
-    if (p.y < 0) p.y = canvas.height;
-    if (p.y > canvas.height) p.y = 0;
+    const idx = (r, c) => r * (cols + 1) + c;
 
-    ctx.beginPath();
-    ctx.arc(p.x, p.y, p.r, 0, Math.PI * 2);
-    ctx.fillStyle = `rgba(${dotColor}, ${p.alpha})`;
-    ctx.fill();
-  });
+    // Horizontal runs
+    for (let r = 0; r <= rows; r++)
+      for (let c = 0; c < cols; c++)
+        if (Math.random() > G.edgePrune)
+          edges.push({ a: idx(r, c), b: idx(r, c + 1), activeUntil: 0 });
 
-  // Draw connections
-  for (let i = 0; i < particles.length; i++) {
-    for (let j = i + 1; j < particles.length; j++) {
-      const dx = particles[i].x - particles[j].x;
-      const dy = particles[i].y - particles[j].y;
-      const dist = Math.sqrt(dx * dx + dy * dy);
-      if (dist < 120) {
-        ctx.beginPath();
-        ctx.moveTo(particles[i].x, particles[i].y);
-        ctx.lineTo(particles[j].x, particles[j].y);
-        ctx.strokeStyle = `rgba(${lineColor}, ${(1 - dist / 120) * 0.15})`;
-        ctx.lineWidth = 0.6;
-        ctx.stroke();
-      }
-    }
+    // Vertical runs
+    for (let r = 0; r < rows; r++)
+      for (let c = 0; c <= cols; c++)
+        if (Math.random() > G.edgePrune)
+          edges.push({ a: idx(r, c), b: idx(r + 1, c), activeUntil: 0 });
+
+    // Adjacency per node
+    nodes.forEach((n, i) => { n.adj = edges.filter(e => e.a === i || e.b === i); });
+
+    for (let i = 0; i < G.targetPulses; i++) spawnPulse();
   }
 
-  requestAnimationFrame(drawCanvas);
+  function spawnPulse(fromIdx) {
+    if (pulses.length >= G.maxPulses) return;
+    const ni = fromIdx !== undefined ? fromIdx : Math.floor(Math.random() * nodes.length);
+    const n = nodes[ni];
+    if (!n || !n.adj || !n.adj.length) return;
+    const edge = n.adj[Math.floor(Math.random() * n.adj.length)];
+    const ti = edge.a === ni ? edge.b : edge.a;
+    const tn = nodes[ti];
+    const dx = tn.x - n.x, dy = tn.y - n.y;
+    const dist = Math.sqrt(dx * dx + dy * dy);
+    if (dist < 1) return;
+    const speed = rand(G.pulseSpeedRange[0], G.pulseSpeedRange[1]);
+    pulses.push({ x: n.x, y: n.y, tx: tn.x, ty: tn.y, vx: dx/dist*speed, vy: dy/dist*speed, speed, edge, toIdx: ti, violet: Math.random() < 0.42 });
+  }
+
+  function updatePulses() {
+    const now = Date.now(), next = [];
+    for (const p of pulses) {
+      p.x += p.vx; p.y += p.vy;
+      p.edge.activeUntil = now + G.lineActiveMs;
+      const dx = p.tx - p.x, dy = p.ty - p.y;
+      if (dx * dx + dy * dy < (p.speed + 1) * (p.speed + 1)) {
+        spawnPulse(p.toIdx); // one-in one-out keeps count stable
+        continue;
+      }
+      next.push(p);
+    }
+    pulses = next;
+    const deficit = G.targetPulses - pulses.length;
+    for (let i = 0; i < deficit && pulses.length < G.maxPulses; i++) spawnPulse();
+  }
+
+  function draw() {
+    const now = Date.now();
+    ctx.clearRect(0, 0, canvas.width, canvas.height);
+
+    // Dim grid lines — batched single draw call
+    ctx.beginPath();
+    ctx.strokeStyle = `rgba(0,210,110,${G.lineOpacity})`;
+    ctx.lineWidth = 0.7;
+    for (const e of edges)
+      if (now >= e.activeUntil) {
+        ctx.moveTo(nodes[e.a].x, nodes[e.a].y);
+        ctx.lineTo(nodes[e.b].x, nodes[e.b].y);
+      }
+    ctx.stroke();
+
+    // Active (lit) grid lines — batched single draw call
+    ctx.beginPath();
+    ctx.strokeStyle = `rgba(0,255,136,${G.lineActiveOpacity})`;
+    ctx.lineWidth = 1.1;
+    for (const e of edges)
+      if (now < e.activeUntil) {
+        ctx.moveTo(nodes[e.a].x, nodes[e.a].y);
+        ctx.lineTo(nodes[e.b].x, nodes[e.b].y);
+      }
+    ctx.stroke();
+
+    // Cyan pulses (accent-cyan: #00ff88)
+    ctx.fillStyle = 'rgba(0,255,136,0.85)';
+    ctx.beginPath();
+    for (const p of pulses) if (!p.violet) { ctx.moveTo(p.x + G.pulseRadius, p.y); ctx.arc(p.x, p.y, G.pulseRadius, 0, Math.PI * 2); }
+    ctx.fill();
+
+    // Violet pulses (accent-violet: #8b5cf6)
+    ctx.fillStyle = 'rgba(139,92,246,0.85)';
+    ctx.beginPath();
+    for (const p of pulses) if (p.violet) { ctx.moveTo(p.x + G.pulseRadius, p.y); ctx.arc(p.x, p.y, G.pulseRadius, 0, Math.PI * 2); }
+    ctx.fill();
+  }
+
+  const overlay = document.querySelector('.hero-grid-overlay');
+
+  window.addEventListener('mousemove', (e) => {
+    overlay.style.setProperty('--cx', e.clientX + 'px');
+    overlay.style.setProperty('--cy', e.clientY + 'px');
+    const prox2 = G.mouseProximity * G.mouseProximity;
+    nodes.forEach((n, i) => {
+      const dx = n.x - e.clientX, dy = n.y - e.clientY;
+      if (dx * dx + dy * dy < prox2 && Math.random() < 0.15) spawnPulse(i);
+    });
+  });
+
+  window.addEventListener('mouseleave', () => {
+    overlay.style.setProperty('--cx', '-400px');
+    overlay.style.setProperty('--cy', '-400px');
+  });
+
+  window.addEventListener('scroll', () => {
+    const op = Math.max(0, 1 - window.scrollY / 300);
+    canvas.style.opacity = op;
+    overlay.style.opacity = op;
+  }, { passive: true });
+
+  window.addEventListener('resize', () => {
+    clearTimeout(resizeTimer);
+    resizeTimer = setTimeout(() => {
+      canvas.width = window.innerWidth; canvas.height = window.innerHeight;
+      buildGrid();
+    }, 200);
+  });
+
+  canvas.width = window.innerWidth;
+  canvas.height = window.innerHeight;
+  buildGrid();
+  (function loop() { updatePulses(); draw(); requestAnimationFrame(loop); })();
+
+  setTimeout(() => {
+    const label = document.getElementById('heroStatusLabel');
+    if (label) label.classList.add('visible');
+  }, 1200);
 }
 
-drawCanvas();
+initHeroGrid();
 
 /* ============================================================
    INIT LUCIDE ICONS
