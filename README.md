@@ -1,2 +1,2 @@
 # bradymanning.com
-my site
+my site.
