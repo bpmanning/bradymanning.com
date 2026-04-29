@@ -601,42 +601,6 @@ nav {
   line-height: 1.4;
 }
 
-.skills-section { }
-
-.skills-title {
-  font-family: 'Lato', sans-serif;
-  font-size: 0.75rem;
-  font-weight: 600;
-  letter-spacing: 0.15em;
-  text-transform: uppercase;
-  color: var(--text-muted);
-  margin-bottom: 16px;
-}
-
-.skills-tags {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 10px;
-}
-
-.skill-tag {
-  padding: 7px 16px;
-  border: 1px solid var(--border);
-  border-radius: 100px;
-  font-size: 0.8rem;
-  font-weight: 500;
-  color: var(--text-secondary);
-  background: var(--bg-card);
-  transition: all var(--transition);
-  cursor: default;
-}
-
-.skill-tag:hover {
-  border-color: var(--accent-cyan);
-  color: var(--accent-cyan);
-  background: var(--accent-cyan-dim);
-  box-shadow: 0 0 16px rgba(0, 255, 136, 0.15);
-}
 
 /* ============================================================
    EXPERIENCE SECTION
@@ -1214,7 +1178,9 @@ footer {
   .container { padding: 0 20px; }
   .nav-inner { padding: 0 20px; }
   .hero-inner { padding: 0 20px; }
-  .stats-grid { grid-template-columns: 1fr; }
+  .stat-card { padding: 16px; }
+  .stat-number { font-size: 1.7rem; }
+  .stat-label { font-size: 0.75rem; }
   .hero-cta { flex-direction: column; }
   .btn { justify-content: center; width: 100%; }
   .hero-typewriter-wrap { flex-wrap: wrap; gap: 8px; min-height: unset; }
@@ -1330,24 +1296,6 @@ footer {
           <!-- Stats injected by JS -->
         </div>
 
-        <div class="skills-section fade-in">
-          <p class="skills-title">Core Skills</p>
-          <div class="skills-tags" role="list">
-            <span class="skill-tag" role="listitem">Virtual Power Plants</span>
-            <span class="skill-tag" role="listitem">Product Strategy</span>
-            <span class="skill-tag" role="listitem">Energy Markets</span>
-            <span class="skill-tag" role="listitem">DERMS</span>
-            <span class="skill-tag" role="listitem">Design Thinking</span>
-            <span class="skill-tag" role="listitem">AI Tools</span>
-            <span class="skill-tag" role="listitem">Consumer Marketing</span>
-            <span class="skill-tag" role="listitem">P&L Ownership</span>
-            <span class="skill-tag" role="listitem">B2B SaaS</span>
-            <span class="skill-tag" role="listitem">Data Analytics</span>
-            <span class="skill-tag" role="listitem">Agile</span>
-            <span class="skill-tag" role="listitem">Distributed Energy</span>
-            <span class="skill-tag" role="listitem">Go-to-Market</span>
-          </div>
-        </div>
       </div>
     </div>
   </div>
