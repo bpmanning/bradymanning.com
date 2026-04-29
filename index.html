@@ -650,7 +650,42 @@ nav {
   border-radius: 50%;
   background: linear-gradient(135deg, var(--accent-cyan), var(--accent-violet));
   border: 3px solid var(--bg-secondary);
-  box-shadow: var(--glow-cyan);
+}
+
+.dot-intensity-1 {
+  box-shadow: 0 0 20px 6px rgba(0,255,136,0.55), 0 0 40px 12px rgba(0,255,136,0.25);
+  animation: dot-pulse 2s ease-out infinite;
+}
+.dot-intensity-2 { box-shadow: 0 0 14px 4px rgba(0,255,136,0.40), 0 0 28px 8px rgba(0,255,136,0.18); }
+.dot-intensity-3 { box-shadow: 0 0 10px 3px rgba(0,255,136,0.28), 0 0 20px 6px rgba(0,255,136,0.12); }
+.dot-intensity-4 { box-shadow: 0 0 6px 2px rgba(0,255,136,0.18), 0 0 12px 4px rgba(0,255,136,0.08); }
+.dot-intensity-5 { box-shadow: 0 0 4px 1px rgba(0,255,136,0.10); }
+
+@keyframes dot-pulse {
+  0%   { box-shadow: 0 0 0 0   rgba(0,255,136,0.45), 0 0 20px 6px rgba(0,255,136,0.55); }
+  70%  { box-shadow: 0 0 0 10px rgba(0,255,136,0),   0 0 20px 6px rgba(0,255,136,0.55); }
+  100% { box-shadow: 0 0 0 0   rgba(0,255,136,0),   0 0 20px 6px rgba(0,255,136,0.55); }
+}
+
+.timeline-pulse {
+  position: absolute;
+  left: 50%;
+  top: 0;
+  width: 8px; height: 8px;
+  border-radius: 50%;
+  transform: translateX(-50%);
+  pointer-events: none;
+  z-index: 2;
+  animation: timeline-pulse-travel 5s linear infinite;
+}
+
+@keyframes timeline-pulse-travel {
+  0%   { top: 0%;   opacity: 0; background: #00ff88; box-shadow: 0 0 10px 3px rgba(0,255,136,0.7); }
+  5%   {             opacity: 1; }
+  33%  {                         background: #00ccaa; box-shadow: 0 0 10px 3px rgba(0,204,170,0.7); }
+  66%  {                         background: #5b7cf6; box-shadow: 0 0 10px 3px rgba(91,124,246,0.7); }
+  95%  {             opacity: 1; }
+  100% { top: 100%; opacity: 0; background: #8b5cf6; box-shadow: 0 0 10px 3px rgba(139,92,246,0.7); }
 }
 
 .timeline-spacer { /* empty */ }
@@ -1148,6 +1183,8 @@ footer {
     top: 24px;
     transform: none;
   }
+
+  .timeline-pulse { left: 16px; transform: none; }
 
   .timeline-card {
     text-align: left !important;
@@ -1770,7 +1807,7 @@ renderStats();
 function renderExperience() {
   const timeline = document.getElementById('timeline');
   timeline.innerHTML = '';
-  CONTENT_CONFIG.experience.forEach(job => {
+  CONTENT_CONFIG.experience.forEach((job, index) => {
     const item = document.createElement('div');
     item.className = 'timeline-item fade-in';
     item.setAttribute('role', 'listitem');
@@ -1783,7 +1820,7 @@ function renderExperience() {
           ${job.bullets.map(b => `<li>${b}</li>`).join('')}
         </ul>
       </div>
-      <div class="timeline-dot" aria-hidden="true"></div>
+      <div class="timeline-dot dot-intensity-${index + 1}" aria-hidden="true"></div>
       <div class="timeline-spacer"></div>
     `;
     timeline.appendChild(item);
@@ -1792,6 +1829,11 @@ function renderExperience() {
 }
 
 renderExperience();
+
+const tlPulse = document.createElement('div');
+tlPulse.className = 'timeline-pulse';
+tlPulse.setAttribute('aria-hidden', 'true');
+document.getElementById('timeline').appendChild(tlPulse);
 
 /* ============================================================
    RENDER PROJECTS
