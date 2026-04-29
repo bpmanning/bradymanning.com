@@ -126,17 +126,37 @@ section { padding: 120px 0; }
 .hero-status-label.visible { opacity: 1; }
 
 [data-theme="light"] .hero-grid-overlay {
-  background: var(--bg-primary);
+  background: linear-gradient(105deg,
+    rgba(240,242,250,0.90) 0%,
+    rgba(240,242,250,0.70) 40%,
+    rgba(240,242,250,0.45) 68%,
+    rgba(240,242,250,0.25) 100%);
   -webkit-mask-image: none;
   mask-image: none;
 }
 
 [data-theme="light"] .hero-status-label { display: none; }
 
-@media (max-width: 767px), (prefers-reduced-motion: reduce) {
+@media (prefers-reduced-motion: reduce) {
   #hero-grid-canvas { display: none; }
+}
+
+@media (max-width: 767px) {
   .hero-status-label { display: none; }
-  #hero { background: radial-gradient(ellipse at 50% 30%, rgba(0,255,136,0.04) 0%, transparent 60%); }
+  .hero-grid-overlay {
+    -webkit-mask-image: none;
+    mask-image: none;
+    background: linear-gradient(180deg,
+      rgba(7,9,15,0.90) 0%,
+      rgba(7,9,15,0.75) 50%,
+      rgba(7,9,15,0.40) 100%);
+  }
+  [data-theme="light"] .hero-grid-overlay {
+    background: linear-gradient(180deg,
+      rgba(240,242,250,0.90) 0%,
+      rgba(240,242,250,0.75) 50%,
+      rgba(240,242,250,0.40) 100%);
+  }
 }
 
 /* ============================================================
@@ -1196,7 +1216,9 @@ footer {
   .hero-inner { padding: 0 20px; }
   .stats-grid { grid-template-columns: 1fr; }
   .hero-cta { flex-direction: column; }
-  .btn { justify-content: center; }
+  .btn { justify-content: center; width: 100%; }
+  .hero-typewriter-wrap { flex-wrap: wrap; gap: 8px; min-height: unset; }
+  .hero-scroll-hint { bottom: 20px; }
 }
 </style>
 </head>
@@ -1925,21 +1947,22 @@ document.querySelectorAll('.filter-tab').forEach(tab => {
    HERO GRID — ENERGY NETWORK VISUALIZATION
    ============================================================ */
 function initHeroGrid() {
-  if (window.innerWidth < 768 || window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
+  if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
 
   const canvas = document.getElementById('hero-grid-canvas');
   const ctx = canvas.getContext('2d');
+  const isMobile = window.innerWidth < 768;
 
   const G = {
-    cellSize: 45,             // px between grid intersections
-    jitter: 0.25,             // positional randomness as fraction of cellSize
-    edgePrune: 0.07,          // fraction of edges removed for organic gaps
-    lineOpacity: 0.05,        // dim grid lines (always visible)
-    lineActiveOpacity: 0.19,  // lit when a pulse is on the segment
-    lineActiveMs: 180,        // ms a segment stays lit after pulse passes
-    pulseRadius: 1.6,
-    targetPulses: 650,        // how many pulses to keep alive at once
-    maxPulses: 850,
+    cellSize: isMobile ? 62 : 45,
+    jitter: 0.25,
+    edgePrune: 0.07,
+    lineOpacity: isMobile ? 0.06 : 0.05,
+    lineActiveOpacity: isMobile ? 0.22 : 0.19,
+    lineActiveMs: 180,
+    pulseRadius: isMobile ? 1.8 : 1.6,
+    targetPulses: isMobile ? 180 : 650,
+    maxPulses: isMobile ? 280 : 850,
     pulseSpeedRange: [0.2, 0.7],
     mouseProximity: 85,
   };
@@ -2054,20 +2077,22 @@ function initHeroGrid() {
 
   const overlay = document.querySelector('.hero-grid-overlay');
 
-  window.addEventListener('mousemove', (e) => {
-    overlay.style.setProperty('--cx', e.clientX + 'px');
-    overlay.style.setProperty('--cy', e.clientY + 'px');
-    const prox2 = G.mouseProximity * G.mouseProximity;
-    nodes.forEach((n, i) => {
-      const dx = n.x - e.clientX, dy = n.y - e.clientY;
-      if (dx * dx + dy * dy < prox2 && Math.random() < 0.15) spawnPulse(i);
+  if (!isMobile) {
+    window.addEventListener('mousemove', (e) => {
+      overlay.style.setProperty('--cx', e.clientX + 'px');
+      overlay.style.setProperty('--cy', e.clientY + 'px');
+      const prox2 = G.mouseProximity * G.mouseProximity;
+      nodes.forEach((n, i) => {
+        const dx = n.x - e.clientX, dy = n.y - e.clientY;
+        if (dx * dx + dy * dy < prox2 && Math.random() < 0.15) spawnPulse(i);
+      });
     });
-  });
 
-  window.addEventListener('mouseleave', () => {
-    overlay.style.setProperty('--cx', '-400px');
-    overlay.style.setProperty('--cy', '-400px');
-  });
+    window.addEventListener('mouseleave', () => {
+      overlay.style.setProperty('--cx', '-400px');
+      overlay.style.setProperty('--cy', '-400px');
+    });
+  }
 
   window.addEventListener('scroll', () => {
     const op = Math.max(0, 1 - window.scrollY / 300);
