@@ -861,6 +861,74 @@ nav {
   font-weight: 600;
 }
 
+.project-demo-zone.demo-sparkline {
+  background: #07090f;
+  display: block;
+  padding: 0;
+}
+.project-demo-zone.demo-sparkline::before { display: none; }
+
+.sparkline-canvas {
+  position: absolute;
+  bottom: 0; left: 0;
+  width: 100%; height: 65%;
+  display: block;
+}
+
+.sparkline-overlay {
+  position: absolute;
+  top: 0; left: 0; right: 0;
+  padding: 16px 18px 0;
+  z-index: 1;
+  pointer-events: none;
+}
+
+.sparkline-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 6px;
+}
+
+.sparkline-title {
+  font-size: 0.65rem;
+  font-weight: 600;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--text-muted);
+}
+
+.sparkline-badge {
+  font-size: 0.62rem;
+  font-weight: 700;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--accent-cyan);
+}
+
+.sparkline-price-wrap {
+  display: flex;
+  align-items: baseline;
+  gap: 4px;
+}
+
+.sparkline-value {
+  font-family: 'Lato', sans-serif;
+  font-size: 2rem;
+  font-weight: 800;
+  background: linear-gradient(135deg, var(--accent-cyan), var(--accent-violet));
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  line-height: 1;
+}
+
+.sparkline-unit {
+  font-size: 0.78rem;
+  color: var(--text-muted);
+  font-weight: 500;
+}
+
 .project-image-preview {
   position: absolute;
   inset: 0;
@@ -1579,6 +1647,7 @@ const CONTENT_CONFIG = {
       name: "Texas Energy Rate Shopper",
       icon: "shopping-cart",
       tags: ["Energy", "Web App"],
+      demoType: 'sparkline',
       desc: "A consumer-facing retail energy rate comparison tool for the Texas deregulated market — making it easy to find the best plan for your home.",
       link: null
     },
@@ -1874,6 +1943,20 @@ function renderProjects() {
             <iframe class="project-iframe" src="${project.previewUrl}" title="${project.name} preview" loading="lazy" sandbox="allow-scripts allow-same-origin"></iframe>
           </div>
         </div>`
+      : project.demoType === 'sparkline'
+      ? `<div class="project-demo-zone demo-sparkline" aria-label="Simulated TX electricity rate chart">
+          <div class="sparkline-overlay">
+            <div class="sparkline-header">
+              <span class="sparkline-title">TX Retail Electricity</span>
+              <span class="sparkline-badge">● Simulated</span>
+            </div>
+            <div class="sparkline-price-wrap">
+              <span class="sparkline-value" id="sparklineValue">—</span>
+              <span class="sparkline-unit">$/MWh</span>
+            </div>
+          </div>
+          <canvas class="sparkline-canvas" aria-hidden="true"></canvas>
+        </div>`
       : `<div class="project-demo-zone" aria-label="Project demo area">
           <div class="demo-placeholder">
             <div class="demo-icon"><i data-lucide="${project.icon}" width="22" height="22"></i></div>
@@ -1911,6 +1994,81 @@ function renderProjects() {
 }
 
 renderProjects();
+
+function initSparkline() {
+  const canvas = document.querySelector('.sparkline-canvas');
+  if (!canvas) return;
+  const ctx = canvas.getContext('2d');
+  const valueEl = document.getElementById('sparklineValue');
+  const POINTS = 28, MIN = 40, MAX = 99;
+
+  let v = 65;
+  let data = [];
+  for (let i = 0; i < POINTS; i++) {
+    v = Math.min(MAX, Math.max(MIN, v + (Math.random() - 0.48) * 18));
+    data.push(v);
+  }
+
+  function resize() {
+    canvas.width  = canvas.offsetWidth;
+    canvas.height = canvas.offsetHeight;
+  }
+
+  function draw() {
+    const w = canvas.width, h = canvas.height;
+    ctx.clearRect(0, 0, w, h);
+    const pad = { l: 12, r: 12, t: 8, b: 12 };
+    const xs = i => pad.l + (i / (data.length - 1)) * (w - pad.l - pad.r);
+    const ys = v => pad.t + (1 - (v - MIN) / (MAX - MIN)) * (h - pad.t - pad.b);
+
+    const grad = ctx.createLinearGradient(0, pad.t, 0, h);
+    grad.addColorStop(0, 'rgba(0,255,136,0.28)');
+    grad.addColorStop(1, 'rgba(0,255,136,0)');
+    ctx.beginPath();
+    ctx.moveTo(xs(0), ys(data[0]));
+    for (let i = 1; i < data.length; i++) {
+      const cpx = (xs(i - 1) + xs(i)) / 2;
+      ctx.bezierCurveTo(cpx, ys(data[i-1]), cpx, ys(data[i]), xs(i), ys(data[i]));
+    }
+    ctx.lineTo(xs(data.length - 1), h);
+    ctx.lineTo(xs(0), h);
+    ctx.closePath();
+    ctx.fillStyle = grad;
+    ctx.fill();
+
+    ctx.beginPath();
+    ctx.moveTo(xs(0), ys(data[0]));
+    for (let i = 1; i < data.length; i++) {
+      const cpx = (xs(i - 1) + xs(i)) / 2;
+      ctx.bezierCurveTo(cpx, ys(data[i-1]), cpx, ys(data[i]), xs(i), ys(data[i]));
+    }
+    ctx.strokeStyle = '#00ff88';
+    ctx.lineWidth = 1.8;
+    ctx.stroke();
+
+    const lx = xs(data.length - 1), ly = ys(data[data.length - 1]);
+    ctx.beginPath();
+    ctx.arc(lx, ly, 3, 0, Math.PI * 2);
+    ctx.fillStyle = '#00ff88';
+    ctx.fill();
+  }
+
+  function tick() {
+    v = Math.min(MAX, Math.max(MIN, v + (Math.random() - 0.48) * 18));
+    data.push(v);
+    if (data.length > POINTS) data.shift();
+    if (valueEl) valueEl.textContent = v.toFixed(2);
+    draw();
+  }
+
+  resize();
+  draw();
+  if (valueEl) valueEl.textContent = data[data.length - 1].toFixed(2);
+  setInterval(tick, 1800);
+  window.addEventListener('resize', () => { resize(); draw(); });
+}
+
+initSparkline();
 
 /* ============================================================
    RENDER SOCIAL LINKS
