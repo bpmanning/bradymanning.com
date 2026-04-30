@@ -1035,9 +1035,14 @@ nav {
 .filter-tabs {
   display: flex;
   gap: 8px;
-  flex-wrap: wrap;
+  flex-wrap: nowrap;
+  overflow-x: auto;
+  -webkit-overflow-scrolling: touch;
+  scrollbar-width: none;
   margin: 48px 0 48px;
+  padding-bottom: 4px;
 }
+.filter-tabs::-webkit-scrollbar { display: none; }
 
 .filter-tab {
   padding: 8px 20px;
@@ -1050,6 +1055,8 @@ nav {
   cursor: pointer;
   transition: all var(--transition);
   font-family: 'DM Sans', sans-serif;
+  flex-shrink: 0;
+  white-space: nowrap;
 }
 
 .filter-tab:hover {
