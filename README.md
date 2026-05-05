@@ -8,7 +8,7 @@ Personal website for Brady Manning — Product Leader, energy industry veteran, 
 
 ## About the Project
 
-This site is a deliberate product decision, not just a portfolio. The goal was to build something that reflects how I think about product: clear user in mind (readers, recruiters, energy & technology peers, collaborators), vibrant and well structured.
+This site is a deliberate product decision, not just a portfolio. The goal was to build something that reflects how I think about product: clear users in mind (readers, recruiters, energy & technology peers, collaborators), vibrant and well structured.
 
 The design direction, premium editorial meets energy infrastructure, was intentional. The site should communicate what I work on (energy infrastructure) before a word is read, then reward the reader who goes deeper.
 
