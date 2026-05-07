@@ -41,13 +41,13 @@ bradymanning.com/
 ```
 
 Sections (in order):
-- **Hero** — name, typewriter animation cycling through roles, CTAs,
 - **Energy Canvas** — resembles a distribution energy grid with moving electrons
-- **About** — bio, career summary
-- **Experience** — career timeline: GoodLeap → Fluence → GM Energy → NRG → Entergy
-- **Projects** — GoodGrid (Texas REP), GM Energy VPP Portal, ERCOT Energy Data, Book Analytics
-- **Writing** — Substack essays on energy markets, VPPs, leadership, and product
-- **Contact** — LinkedIn CTA
+- **Hero** — Typewriter animation cycles through roles to establish identity immediately; two CTAs direct visitors toward work or writing depending on their intent.
+- **About** — Summary framed around the VPP narrative.
+- **Experience** — Career timeline from GoodLeap → Fluence → GM Energy → NRG → Entergy, with emphasis on the energy infrastructure thread that runs through every role.
+- **Projects** — Active products and side projects at different stages.
+- **Writing** — Essays across energy markets, VPPs, leadership, and product. Positioned as a practitioner's perspective, not thought leadership content.
+- **Contact** — A warm, personal note
 
 ---
 
