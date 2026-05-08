@@ -148,7 +148,7 @@ canvas{display:block;width:100%;height:auto;}
 .ov-btn:hover{transform:translateY(-1px);box-shadow:var(--glow-c);}
 
 /* MOBILE CONTROLS */
-.mctrl{display:none;padding:14px;gap:10px;justify-content:center;border-top:1px solid var(--border);}
+.mctrl{display:none;padding:14px;gap:10px;justify-content:center;align-items:center;border-top:1px solid var(--border);}
 .dpad{display:grid;grid-template-columns:repeat(3,50px);grid-template-rows:repeat(3,50px);gap:4px;}
 .dpad .cu{grid-column:2;grid-row:1;}
 .dpad .cl{grid-column:1;grid-row:2;}
@@ -166,10 +166,14 @@ canvas{display:block;width:100%;height:auto;}
   background:var(--cyan-dim);border-color:var(--cyan);color:var(--cyan);
   font-size:0.75rem;font-weight:700;letter-spacing:0.05em;
 }
+.cpause{
+  align-self:center;width:46px;height:46px;border-radius:50%;
+  font-size:1.1rem;margin-left:4px;flex-shrink:0;
+}
 .instr{font-size:0.75rem;color:var(--muted);margin-top:10px;letter-spacing:0.02em;}
 
 @media(max-width:600px){
-  .mctrl{display:flex!important;}
+  .mctrl.active{display:flex;}
   .instr{display:none;}
 }
 </style>
@@ -212,30 +216,33 @@ canvas{display:block;width:100%;height:auto;}
     </div>
 
     <!-- Defender controls -->
-    <div class="mctrl" id="defCtrl" style="display:none">
+    <div class="mctrl" id="defCtrl">
       <button class="cbtn" id="dL">◀</button>
       <button class="cbtn cfire" id="dF">MW</button>
       <button class="cbtn" id="dR">▶</button>
+      <button class="cbtn cpause" id="defPause">⏸</button>
     </div>
 
     <!-- Snake controls -->
-    <div class="mctrl" id="snkCtrl" style="display:none">
+    <div class="mctrl" id="snkCtrl">
       <div class="dpad">
         <button class="cbtn cu" id="sU">▲</button>
         <button class="cbtn cl" id="sL">◀</button>
         <button class="cbtn cr" id="sR">▶</button>
         <button class="cbtn cd" id="sD">▼</button>
       </div>
+      <button class="cbtn cpause" id="snkPause">⏸</button>
     </div>
 
     <!-- Pac-Man controls -->
-    <div class="mctrl" id="pacCtrl" style="display:none">
+    <div class="mctrl" id="pacCtrl">
       <div class="dpad">
         <button class="cbtn cu" id="pU">▲</button>
         <button class="cbtn cl" id="pL">◀</button>
         <button class="cbtn cr" id="pR">▶</button>
         <button class="cbtn cd" id="pD">▼</button>
       </div>
+      <button class="cbtn cpause" id="pacPause">⏸</button>
     </div>
 
     <p class="instr" id="instr">Arrow keys to move · Space to fire · P to pause</p>
@@ -259,6 +266,7 @@ const K = {
 
 let game = 'defender';
 let running = false;
+let paused  = false;
 let raf = null;
 
 const ov       = document.getElementById('ov');
@@ -285,9 +293,9 @@ document.querySelectorAll('.gbtn').forEach(b => {
 });
 
 function syncControls() {
-  document.getElementById('defCtrl').style.display = game==='defender' ? 'flex' : 'none';
-  document.getElementById('snkCtrl').style.display = game==='snake'    ? 'flex' : 'none';
-  document.getElementById('pacCtrl').style.display = game==='pacman'   ? 'flex' : 'none';
+  ['defCtrl','snkCtrl','pacCtrl'].forEach(id => document.getElementById(id).classList.remove('active'));
+  const activeCtrl = {defender:'defCtrl', snake:'snkCtrl', pacman:'pacCtrl'}[game];
+  document.getElementById(activeCtrl).classList.add('active');
   const map = {
     defender:'← → MOVE · SPACE FIRE · P PAUSE',
     snake:'Arrow keys to steer · Reach 100 MW',
@@ -328,10 +336,32 @@ function showOverlay(over, score=0) {
 
 function stop() {
   running = false;
+  paused  = false;
+  updatePauseButtons();
   if (raf) { cancelAnimationFrame(raf); raf = null; }
   if (Defender.state.goTimer) { clearTimeout(Defender.state.goTimer); Defender.state.goTimer = null; }
   if (Snake.state.goTimer)    { clearTimeout(Snake.state.goTimer);    Snake.state.goTimer    = null; }
   if (PacMan.state.goTimer)   { clearTimeout(PacMan.state.goTimer);   PacMan.state.goTimer   = null; }
+}
+
+function togglePause() {
+  if (!running) return;
+  paused = !paused;
+  updatePauseButtons();
+}
+
+function updatePauseButtons() {
+  const icon = paused ? '▶' : '⏸';
+  ['defPause','snkPause','pacPause'].forEach(id => {
+    const el = document.getElementById(id);
+    if (el) el.textContent = icon;
+  });
+}
+
+function drawPauseOverlay() {
+  cx.fillStyle = 'rgba(7,9,15,0.6)'; cx.fillRect(0,0,W,H);
+  cx.font = 'bold 32px Lato'; cx.fillStyle = K.cyan;
+  cx.textAlign = 'center'; cx.fillText('PAUSED', W/2, H/2); cx.textAlign = 'left';
 }
 
 function gameOver(score) {
@@ -394,7 +424,7 @@ const Defender = {
       player:{x:W/2,y:488,speed:5},
       dir:1, spd:0.45, score:0, lives:3, wave:1,
       lastBomb:performance.now(), bombRate:2000, lastShot:0, goTimer:null,
-      ufo:null, ufoTimer:0, tick:0, lt:0, paused:false, keys:{},
+      ufo:null, ufoTimer:0, tick:0, lt:0, keys:{},
     };
     hud(0,3,'← → MOVE · SPACE FIRE');
     requestAnimationFrame(ts => this.loop(ts));
@@ -404,7 +434,7 @@ const Defender = {
     if (!running||game!=='defender') return;
     const d=this.state;
     const dt=Math.min(ts-(d.lt||ts),50); d.lt=ts; d.tick++;
-    if (!d.paused) this.update(dt,ts);
+    if (!paused) this.update(dt,ts);
     this.draw();
     raf=requestAnimationFrame(ts => this.loop(ts));
   },
@@ -554,11 +584,7 @@ const Defender = {
     cx.font='11px Courier New';cx.fillStyle='rgba(139,92,246,0.55)';
     cx.textAlign='right';cx.fillText(`WAVE ${d.wave}`,W-8,18);cx.textAlign='left';
 
-    if (d.paused){
-      cx.fillStyle='rgba(7,9,15,0.6)';cx.fillRect(0,0,W,H);
-      cx.font='bold 32px Lato';cx.fillStyle=K.cyan;
-      cx.textAlign='center';cx.fillText('PAUSED',W/2,H/2);cx.textAlign='left';
-    }
+    if (paused) drawPauseOverlay();
   },
 
   drawInvader(x,y,type,tick) {
@@ -627,8 +653,12 @@ const Snake = {
     if (!running||game!=='snake') return;
     const s=this.state;
     s.tick++;
-    if (ts-s.lt>s.speed){s.lt=ts;this.step(ts);}
-    this.updateParticles();
+    if (paused) {
+      s.lt=ts; // keep timer current so snake doesn't lurch on unpause
+    } else {
+      if (ts-s.lt>s.speed){s.lt=ts;this.step(ts);}
+      this.updateParticles();
+    }
     this.draw(ts);
     raf=requestAnimationFrame(ts => this.loop(ts));
   },
@@ -736,6 +766,7 @@ const Snake = {
 
     cx.font='bold 10px Courier New';cx.fillStyle='rgba(0,255,136,0.45)';
     cx.textAlign='right';cx.fillText(`${s.mw}/100 MW`,W-8,20);cx.textAlign='left';
+    if (paused) drawPauseOverlay();
   },
 
   drawBattery(x,y,sz,pulse,isPower) {
@@ -812,7 +843,7 @@ const PacMan = {
     if (!running||game!=='pacman') return;
     const p=this.state;
     const dt=Math.min(ts-(p.lt||ts),40);p.lt=ts;p.tick++;
-    this.update(dt,ts);
+    if (!paused) this.update(dt,ts);
     this.draw(ts);
     raf=requestAnimationFrame(ts => this.loop(ts));
   },
@@ -967,6 +998,7 @@ const PacMan = {
 
     cx.font='10px Courier New';cx.fillStyle='rgba(0,255,136,0.4)';
     cx.textAlign='right';cx.fillText(`${p.dots} BATTERIES LEFT`,W-8,18);cx.textAlign='left';
+    if (paused) drawPauseOverlay();
   },
 
   drawGhost(g,ts) {
@@ -1002,9 +1034,9 @@ const PacMan = {
 const DMAP={ArrowUp:{x:0,y:-1},ArrowDown:{x:0,y:1},ArrowLeft:{x:-1,y:0},ArrowRight:{x:1,y:0}};
 
 document.addEventListener('keydown',e=>{
+  if(e.key==='p'||e.key==='P'){togglePause();return;}
   if(game==='defender'){
     if(Defender.state.keys) Defender.state.keys[e.key]=true;
-    if(e.key==='p'||e.key==='P') Defender.state.paused=!Defender.state.paused;
     if(e.key===' ') e.preventDefault();
   }
   if(game==='snake'&&DMAP[e.key]){
@@ -1028,6 +1060,13 @@ function bind(id,fn){
   ['touchstart','mousedown'].forEach(ev=>el.addEventListener(ev,e=>{fn(true);e.preventDefault();},{passive:false}));
   ['touchend','mouseup','touchcancel'].forEach(ev=>el.addEventListener(ev,e=>{fn(false);e.preventDefault();},{passive:false}));
 }
+// Pause buttons (tap-to-toggle, no hold needed)
+['defPause','snkPause','pacPause'].forEach(id=>{
+  const el=document.getElementById(id);if(!el)return;
+  el.addEventListener('touchstart',e=>{togglePause();e.preventDefault();},{passive:false});
+  el.addEventListener('mousedown', ()=>togglePause());
+});
+
 bind('dL',v=>{if(Defender.state.keys)Defender.state.keys['ArrowLeft']=v;});
 bind('dR',v=>{if(Defender.state.keys)Defender.state.keys['ArrowRight']=v;});
 bind('dF',v=>{if(Defender.state.keys)Defender.state.keys[' ']=v;});
