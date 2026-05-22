@@ -5,6 +5,15 @@ Entries are **newest-first**. Never overwrite — append new entries at the top 
 
 ---
 
+## 2026-05-22 — 404.html: update subtitle and add scroll anchor
+
+**Commit:** `6df26cc`
+
+- Updated `.sub` text: "While you're here, pick a game. Scroll down to the play screen or Click here."
+- Added `id="player"` to `.game-area` so `href="#player"` smooth-scrolls to the game player
+
+---
+
 ## 2026-05-22 — Rename ERCOT Defender → ERCOT Invaders
 
 **Commit:** `17165f5`
