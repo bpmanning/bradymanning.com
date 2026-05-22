@@ -5,6 +5,16 @@ Entries are **newest-first**. Never overwrite — append new entries at the top 
 
 ---
 
+## 2026-05-22 — Add favicon (negawatt wave) across all pages
+
+**Commit:** `3a04c45`
+
+Added full favicon package generated via RealFaviconGenerator using the monochromatic green negawatt wave logo. Seven files added to repo root: `favicon.svg`, `favicon.ico`, `favicon-96x96.png`, `apple-touch-icon.png` (180×180), `web-app-manifest-192x192.png`, `web-app-manifest-512x512.png`, `site.webmanifest`. All five `<link>` tags added to `<head>` of `index.html`, `404.html`, and `games.html`.
+
+**Design rationale:** The negawatt wave (monochromatic green, `#00ff88`) was chosen over a "BM" text mark — shape silhouettes outperform letter-based marks at 16×16px favicon size, and the green matches the site's `--cyan` accent exactly. The wave also carries existing brand equity from the Negawatt Substack with energy-industry audiences.
+
+---
+
 ## 2026-05-22 — Center d-pad on mobile controls (Snake + Pac-Man)
 
 **Commit:** `61bbe31`
