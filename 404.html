@@ -172,7 +172,8 @@ canvas{display:block;width:100%;height:auto;}
 .ov-btn:hover{transform:translateY(-1px);box-shadow:var(--glow-c);}
 
 /* MOBILE CONTROLS */
-.mctrl{display:none;padding:14px;gap:10px;justify-content:center;align-items:center;border-top:1px solid var(--border);}
+.mctrl{display:none;padding:14px;gap:10px;justify-content:center;align-items:center;border-top:1px solid var(--border);position:relative;}
+.mctrl:has(.dpad) .cpause{position:absolute;right:14px;top:50%;transform:translateY(-50%);margin-left:0;}
 .dpad{display:grid;grid-template-columns:repeat(3,50px);grid-template-rows:repeat(3,50px);gap:4px;}
 .dpad .cu{grid-column:2;grid-row:1;}
 .dpad .cl{grid-column:1;grid-row:2;}
