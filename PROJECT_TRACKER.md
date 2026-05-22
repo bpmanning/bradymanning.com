@@ -5,6 +5,14 @@ Entries are **newest-first**. Never overwrite — append new entries at the top 
 
 ---
 
+## 2026-05-22 — Rename ERCOT Defender → ERCOT Invaders
+
+**Commit:** `17165f5`
+
+Updated all occurrences in `games.html` and `404.html`: card title, overlay initial HTML, and `showOverlay()` cfg object. 5 strings changed across 2 files.
+
+---
+
 ## 2026-05-22 — games.html: "Click here" scroll anchor
 
 **Commit:** `57c45c1`
