@@ -126,17 +126,37 @@ section { padding: 120px 0; }
 .hero-status-label.visible { opacity: 1; }
 
 [data-theme="light"] .hero-grid-overlay {
-  background: var(--bg-primary);
+  background: linear-gradient(105deg,
+    rgba(240,242,250,0.90) 0%,
+    rgba(240,242,250,0.70) 40%,
+    rgba(240,242,250,0.45) 68%,
+    rgba(240,242,250,0.25) 100%);
   -webkit-mask-image: none;
   mask-image: none;
 }
 
 [data-theme="light"] .hero-status-label { display: none; }
 
-@media (max-width: 767px), (prefers-reduced-motion: reduce) {
+@media (prefers-reduced-motion: reduce) {
   #hero-grid-canvas { display: none; }
+}
+
+@media (max-width: 767px) {
   .hero-status-label { display: none; }
-  #hero { background: radial-gradient(ellipse at 50% 30%, rgba(0,255,136,0.04) 0%, transparent 60%); }
+  .hero-grid-overlay {
+    -webkit-mask-image: none;
+    mask-image: none;
+    background: linear-gradient(180deg,
+      rgba(7,9,15,0.90) 0%,
+      rgba(7,9,15,0.75) 50%,
+      rgba(7,9,15,0.40) 100%);
+  }
+  [data-theme="light"] .hero-grid-overlay {
+    background: linear-gradient(180deg,
+      rgba(240,242,250,0.90) 0%,
+      rgba(240,242,250,0.75) 50%,
+      rgba(240,242,250,0.40) 100%);
+  }
 }
 
 /* ============================================================
@@ -581,42 +601,6 @@ nav {
   line-height: 1.4;
 }
 
-.skills-section { }
-
-.skills-title {
-  font-family: 'Lato', sans-serif;
-  font-size: 0.75rem;
-  font-weight: 600;
-  letter-spacing: 0.15em;
-  text-transform: uppercase;
-  color: var(--text-muted);
-  margin-bottom: 16px;
-}
-
-.skills-tags {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 10px;
-}
-
-.skill-tag {
-  padding: 7px 16px;
-  border: 1px solid var(--border);
-  border-radius: 100px;
-  font-size: 0.8rem;
-  font-weight: 500;
-  color: var(--text-secondary);
-  background: var(--bg-card);
-  transition: all var(--transition);
-  cursor: default;
-}
-
-.skill-tag:hover {
-  border-color: var(--accent-cyan);
-  color: var(--accent-cyan);
-  background: var(--accent-cyan-dim);
-  box-shadow: 0 0 16px rgba(0, 255, 136, 0.15);
-}
 
 /* ============================================================
    EXPERIENCE SECTION
@@ -666,7 +650,59 @@ nav {
   border-radius: 50%;
   background: linear-gradient(135deg, var(--accent-cyan), var(--accent-violet));
   border: 3px solid var(--bg-secondary);
-  box-shadow: var(--glow-cyan);
+}
+
+.dot-intensity-1 { background: #00ff88; animation: dot-pulse-1 2s ease-out infinite; }
+.dot-intensity-2 { background: #00d4aa; animation: dot-pulse-2 2s ease-out infinite; }
+.dot-intensity-3 { background: #5b7cf6; animation: dot-pulse-3 2s ease-out infinite; }
+.dot-intensity-4 { background: #7464ee; animation: dot-pulse-4 2s ease-out infinite; }
+.dot-intensity-5 { background: #8b5cf6; animation: dot-pulse-5 2s ease-out infinite; }
+
+@keyframes dot-pulse-1 {
+  0%   { box-shadow: 0 0 0 0    rgba(0,255,136,0.45), 0 0 20px 6px rgba(0,255,136,0.55); }
+  70%  { box-shadow: 0 0 0 10px rgba(0,255,136,0),    0 0 20px 6px rgba(0,255,136,0.55); }
+  100% { box-shadow: 0 0 0 0    rgba(0,255,136,0),    0 0 20px 6px rgba(0,255,136,0.55); }
+}
+@keyframes dot-pulse-2 {
+  0%   { box-shadow: 0 0 0 0    rgba(0,212,170,0.45), 0 0 20px 6px rgba(0,212,170,0.55); }
+  70%  { box-shadow: 0 0 0 10px rgba(0,212,170,0),    0 0 20px 6px rgba(0,212,170,0.55); }
+  100% { box-shadow: 0 0 0 0    rgba(0,212,170,0),    0 0 20px 6px rgba(0,212,170,0.55); }
+}
+@keyframes dot-pulse-3 {
+  0%   { box-shadow: 0 0 0 0    rgba(91,124,246,0.45), 0 0 20px 6px rgba(91,124,246,0.55); }
+  70%  { box-shadow: 0 0 0 10px rgba(91,124,246,0),    0 0 20px 6px rgba(91,124,246,0.55); }
+  100% { box-shadow: 0 0 0 0    rgba(91,124,246,0),    0 0 20px 6px rgba(91,124,246,0.55); }
+}
+@keyframes dot-pulse-4 {
+  0%   { box-shadow: 0 0 0 0    rgba(116,100,238,0.45), 0 0 20px 6px rgba(116,100,238,0.55); }
+  70%  { box-shadow: 0 0 0 10px rgba(116,100,238,0),    0 0 20px 6px rgba(116,100,238,0.55); }
+  100% { box-shadow: 0 0 0 0    rgba(116,100,238,0),    0 0 20px 6px rgba(116,100,238,0.55); }
+}
+@keyframes dot-pulse-5 {
+  0%   { box-shadow: 0 0 0 0    rgba(139,92,246,0.45), 0 0 20px 6px rgba(139,92,246,0.55); }
+  70%  { box-shadow: 0 0 0 10px rgba(139,92,246,0),    0 0 20px 6px rgba(139,92,246,0.55); }
+  100% { box-shadow: 0 0 0 0    rgba(139,92,246,0),    0 0 20px 6px rgba(139,92,246,0.55); }
+}
+
+.timeline-pulse {
+  position: absolute;
+  left: 50%;
+  top: 0;
+  width: 8px; height: 8px;
+  border-radius: 50%;
+  transform: translateX(-50%);
+  pointer-events: none;
+  z-index: 2;
+  animation: timeline-pulse-travel 5s linear infinite;
+}
+
+@keyframes timeline-pulse-travel {
+  0%   { top: 0%;   opacity: 0; background: #00ff88; box-shadow: 0 0 10px 3px rgba(0,255,136,0.7); }
+  5%   {             opacity: 1; }
+  33%  {                         background: #00ccaa; box-shadow: 0 0 10px 3px rgba(0,204,170,0.7); }
+  66%  {                         background: #5b7cf6; box-shadow: 0 0 10px 3px rgba(91,124,246,0.7); }
+  95%  {             opacity: 1; }
+  100% { top: 100%; opacity: 0; background: #8b5cf6; box-shadow: 0 0 10px 3px rgba(139,92,246,0.7); }
 }
 
 .timeline-spacer { /* empty */ }
@@ -825,6 +861,74 @@ nav {
   font-weight: 600;
 }
 
+.project-demo-zone.demo-sparkline {
+  background: #07090f;
+  display: block;
+  padding: 0;
+}
+.project-demo-zone.demo-sparkline::before { display: none; }
+
+.sparkline-canvas {
+  position: absolute;
+  bottom: 0; left: 0;
+  width: 100%; height: 65%;
+  display: block;
+}
+
+.sparkline-overlay {
+  position: absolute;
+  top: 0; left: 0; right: 0;
+  padding: 16px 18px 0;
+  z-index: 1;
+  pointer-events: none;
+}
+
+.sparkline-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 6px;
+}
+
+.sparkline-title {
+  font-size: 0.65rem;
+  font-weight: 600;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--text-muted);
+}
+
+.sparkline-badge {
+  font-size: 0.62rem;
+  font-weight: 700;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--accent-cyan);
+}
+
+.sparkline-price-wrap {
+  display: flex;
+  align-items: baseline;
+  gap: 4px;
+}
+
+.sparkline-value {
+  font-family: 'Lato', sans-serif;
+  font-size: 2rem;
+  font-weight: 800;
+  background: linear-gradient(135deg, var(--accent-cyan), var(--accent-violet));
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  line-height: 1;
+}
+
+.sparkline-unit {
+  font-size: 0.78rem;
+  color: var(--text-muted);
+  font-weight: 500;
+}
+
 .project-image-preview {
   position: absolute;
   inset: 0;
@@ -931,9 +1035,14 @@ nav {
 .filter-tabs {
   display: flex;
   gap: 8px;
-  flex-wrap: wrap;
+  flex-wrap: nowrap;
+  overflow-x: auto;
+  -webkit-overflow-scrolling: touch;
+  scrollbar-width: none;
   margin: 48px 0 48px;
+  padding-bottom: 4px;
 }
+.filter-tabs::-webkit-scrollbar { display: none; }
 
 .filter-tab {
   padding: 8px 20px;
@@ -946,6 +1055,8 @@ nav {
   cursor: pointer;
   transition: all var(--transition);
   font-family: 'DM Sans', sans-serif;
+  flex-shrink: 0;
+  white-space: nowrap;
 }
 
 .filter-tab:hover {
@@ -1165,6 +1276,8 @@ footer {
     transform: none;
   }
 
+  .timeline-pulse { left: 16px; transform: none; }
+
   .timeline-card {
     text-align: left !important;
     grid-column: unset;
@@ -1194,9 +1307,13 @@ footer {
   .container { padding: 0 20px; }
   .nav-inner { padding: 0 20px; }
   .hero-inner { padding: 0 20px; }
-  .stats-grid { grid-template-columns: 1fr; }
+  .stat-card { padding: 16px; }
+  .stat-number { font-size: 1.7rem; }
+  .stat-label { font-size: 0.75rem; }
   .hero-cta { flex-direction: column; }
-  .btn { justify-content: center; }
+  .btn { justify-content: center; width: 100%; }
+  .hero-typewriter-wrap { flex-wrap: wrap; gap: 8px; min-height: unset; }
+  .hero-scroll-hint { bottom: 20px; }
 }
 </style>
 </head>
@@ -1308,24 +1425,6 @@ footer {
           <!-- Stats injected by JS -->
         </div>
 
-        <div class="skills-section fade-in">
-          <p class="skills-title">Core Skills</p>
-          <div class="skills-tags" role="list">
-            <span class="skill-tag" role="listitem">Virtual Power Plants</span>
-            <span class="skill-tag" role="listitem">Product Strategy</span>
-            <span class="skill-tag" role="listitem">Energy Markets</span>
-            <span class="skill-tag" role="listitem">DERMS</span>
-            <span class="skill-tag" role="listitem">Design Thinking</span>
-            <span class="skill-tag" role="listitem">AI Tools</span>
-            <span class="skill-tag" role="listitem">Consumer Marketing</span>
-            <span class="skill-tag" role="listitem">P&L Ownership</span>
-            <span class="skill-tag" role="listitem">B2B SaaS</span>
-            <span class="skill-tag" role="listitem">Data Analytics</span>
-            <span class="skill-tag" role="listitem">Agile</span>
-            <span class="skill-tag" role="listitem">Distributed Energy</span>
-            <span class="skill-tag" role="listitem">Go-to-Market</span>
-          </div>
-        </div>
       </div>
     </div>
   </div>
@@ -1373,7 +1472,7 @@ footer {
   <div class="container">
     <p class="section-label">Writing</p>
     <h2 class="section-title fade-in">From the<br>Field</h2>
-    <p class="section-subtitle fade-in">Dispatches on virtual power plants, energy markets, leadership, and building things that matter.</p>
+    <p class="section-subtitle fade-in">Dispatches on virtual power plants, energy markets, product management, and building things that matter.</p>
 
     <div class="filter-tabs" role="tablist" aria-label="Filter posts by category">
       <button class="filter-tab active" data-filter="all" role="tab" aria-selected="true">All</button>
@@ -1429,6 +1528,7 @@ const CONTENT_CONFIG = {
     linkedin:  "https://www.linkedin.com/in/brady-manning",
     github:    "https://github.com/bpmanning",
     goodreads: "https://www.goodreads.com/bpmanning",
+    substack:  "https://newsletter.bradymanning.com",
   },
 
   // ============================================================
@@ -1555,6 +1655,7 @@ const CONTENT_CONFIG = {
       name: "Texas Energy Rate Shopper",
       icon: "shopping-cart",
       tags: ["Energy", "Web App"],
+      demoType: 'sparkline',
       desc: "A consumer-facing retail energy rate comparison tool for the Texas deregulated market — making it easy to find the best plan for your home.",
       link: null
     },
@@ -1800,7 +1901,7 @@ renderStats();
 function renderExperience() {
   const timeline = document.getElementById('timeline');
   timeline.innerHTML = '';
-  CONTENT_CONFIG.experience.forEach(job => {
+  CONTENT_CONFIG.experience.forEach((job, index) => {
     const item = document.createElement('div');
     item.className = 'timeline-item fade-in';
     item.setAttribute('role', 'listitem');
@@ -1813,7 +1914,7 @@ function renderExperience() {
           ${job.bullets.map(b => `<li>${b}</li>`).join('')}
         </ul>
       </div>
-      <div class="timeline-dot" aria-hidden="true"></div>
+      <div class="timeline-dot dot-intensity-${index + 1}" aria-hidden="true"></div>
       <div class="timeline-spacer"></div>
     `;
     timeline.appendChild(item);
@@ -1822,6 +1923,11 @@ function renderExperience() {
 }
 
 renderExperience();
+
+const tlPulse = document.createElement('div');
+tlPulse.className = 'timeline-pulse';
+tlPulse.setAttribute('aria-hidden', 'true');
+document.getElementById('timeline').appendChild(tlPulse);
 
 /* ============================================================
    RENDER PROJECTS
@@ -1844,6 +1950,20 @@ function renderProjects() {
           <div class="project-iframe-wrap">
             <iframe class="project-iframe" src="${project.previewUrl}" title="${project.name} preview" loading="lazy" sandbox="allow-scripts allow-same-origin"></iframe>
           </div>
+        </div>`
+      : project.demoType === 'sparkline'
+      ? `<div class="project-demo-zone demo-sparkline" aria-label="Simulated TX electricity rate chart">
+          <div class="sparkline-overlay">
+            <div class="sparkline-header">
+              <span class="sparkline-title">TX Retail Electricity</span>
+              <span class="sparkline-badge">● Simulated</span>
+            </div>
+            <div class="sparkline-price-wrap">
+              <span class="sparkline-value" id="sparklineValue">—</span>
+              <span class="sparkline-unit">$/MWh</span>
+            </div>
+          </div>
+          <canvas class="sparkline-canvas" aria-hidden="true"></canvas>
         </div>`
       : `<div class="project-demo-zone" aria-label="Project demo area">
           <div class="demo-placeholder">
@@ -1883,6 +2003,81 @@ function renderProjects() {
 
 renderProjects();
 
+function initSparkline() {
+  const canvas = document.querySelector('.sparkline-canvas');
+  if (!canvas) return;
+  const ctx = canvas.getContext('2d');
+  const valueEl = document.getElementById('sparklineValue');
+  const POINTS = 28, MIN = 40, MAX = 99;
+
+  let v = 65;
+  let data = [];
+  for (let i = 0; i < POINTS; i++) {
+    v = Math.min(MAX, Math.max(MIN, v + (Math.random() - 0.48) * 18));
+    data.push(v);
+  }
+
+  function resize() {
+    canvas.width  = canvas.offsetWidth;
+    canvas.height = canvas.offsetHeight;
+  }
+
+  function draw() {
+    const w = canvas.width, h = canvas.height;
+    ctx.clearRect(0, 0, w, h);
+    const pad = { l: 12, r: 12, t: 8, b: 12 };
+    const xs = i => pad.l + (i / (data.length - 1)) * (w - pad.l - pad.r);
+    const ys = v => pad.t + (1 - (v - MIN) / (MAX - MIN)) * (h - pad.t - pad.b);
+
+    const grad = ctx.createLinearGradient(0, pad.t, 0, h);
+    grad.addColorStop(0, 'rgba(0,255,136,0.28)');
+    grad.addColorStop(1, 'rgba(0,255,136,0)');
+    ctx.beginPath();
+    ctx.moveTo(xs(0), ys(data[0]));
+    for (let i = 1; i < data.length; i++) {
+      const cpx = (xs(i - 1) + xs(i)) / 2;
+      ctx.bezierCurveTo(cpx, ys(data[i-1]), cpx, ys(data[i]), xs(i), ys(data[i]));
+    }
+    ctx.lineTo(xs(data.length - 1), h);
+    ctx.lineTo(xs(0), h);
+    ctx.closePath();
+    ctx.fillStyle = grad;
+    ctx.fill();
+
+    ctx.beginPath();
+    ctx.moveTo(xs(0), ys(data[0]));
+    for (let i = 1; i < data.length; i++) {
+      const cpx = (xs(i - 1) + xs(i)) / 2;
+      ctx.bezierCurveTo(cpx, ys(data[i-1]), cpx, ys(data[i]), xs(i), ys(data[i]));
+    }
+    ctx.strokeStyle = '#00ff88';
+    ctx.lineWidth = 1.8;
+    ctx.stroke();
+
+    const lx = xs(data.length - 1), ly = ys(data[data.length - 1]);
+    ctx.beginPath();
+    ctx.arc(lx, ly, 3, 0, Math.PI * 2);
+    ctx.fillStyle = '#00ff88';
+    ctx.fill();
+  }
+
+  function tick() {
+    v = Math.min(MAX, Math.max(MIN, v + (Math.random() - 0.48) * 18));
+    data.push(v);
+    if (data.length > POINTS) data.shift();
+    if (valueEl) valueEl.textContent = v.toFixed(2);
+    draw();
+  }
+
+  resize();
+  draw();
+  if (valueEl) valueEl.textContent = data[data.length - 1].toFixed(2);
+  setInterval(tick, 1800);
+  window.addEventListener('resize', () => { resize(); draw(); });
+}
+
+initSparkline();
+
 /* ============================================================
    RENDER SOCIAL LINKS
    ============================================================ */
@@ -1890,10 +2085,13 @@ function renderSocial() {
   const svgLinkedIn = `<svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433c-1.144 0-2.063-.926-2.063-2.065 0-1.138.92-2.063 2.063-2.063 1.14 0 2.064.925 2.064 2.063 0 1.139-.925 2.065-2.064 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"/></svg>`;
   const svgGitHub = `<svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 .297c-6.63 0-12 5.373-12 12 0 5.303 3.438 9.8 8.205 11.385.6.113.82-.258.82-.577 0-.285-.01-1.04-.015-2.04-3.338.724-4.042-1.61-4.042-1.61C4.422 18.07 3.633 17.7 3.633 17.7c-1.087-.744.084-.729.084-.729 1.205.084 1.838 1.236 1.838 1.236 1.07 1.835 2.809 1.305 3.495.998.108-.776.417-1.305.76-1.605-2.665-.3-5.466-1.332-5.466-5.93 0-1.31.465-2.38 1.235-3.22-.135-.303-.54-1.523.105-3.176 0 0 1.005-.322 3.3 1.23.96-.267 1.98-.399 3-.405 1.02.006 2.04.138 3 .405 2.28-1.552 3.285-1.23 3.285-1.23.645 1.653.24 2.873.12 3.176.765.84 1.23 1.91 1.23 3.22 0 4.61-2.805 5.625-5.475 5.92.42.36.81 1.096.81 2.22 0 1.606-.015 2.896-.015 3.286 0 .315.21.69.825.57C20.565 22.092 24 17.592 24 12.297c0-6.627-5.373-12-12-12"/></svg>`;
 
+  const svgSubstack = `<svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M22.539 8.242H1.46V5.406h21.08v2.836zM1.46 10.812V24L12 18.11 22.54 24V10.812H1.46zM22.54 0H1.46v2.836h21.08V0z"/></svg>`;
+
   const links = [
-    { key: 'linkedin',  svg: svgLinkedIn, label: 'LinkedIn'  },
-    { key: 'github',    svg: svgGitHub,   label: 'GitHub'    },
+    { key: 'linkedin',  svg: svgLinkedIn,  label: 'LinkedIn'  },
+    { key: 'github',    svg: svgGitHub,    label: 'GitHub'    },
     { key: 'goodreads', svg: `<i data-lucide="book-open" width="18" height="18"></i>`, label: 'Goodreads' },
+    { key: 'substack',  svg: svgSubstack,  label: 'Substack Newsletter' },
   ];
   const html = links.map(l => `
     <a href="${CONTENT_CONFIG.social[l.key]}" target="_blank" rel="noopener noreferrer" aria-label="${l.label}">
@@ -1925,21 +2123,22 @@ document.querySelectorAll('.filter-tab').forEach(tab => {
    HERO GRID — ENERGY NETWORK VISUALIZATION
    ============================================================ */
 function initHeroGrid() {
-  if (window.innerWidth < 768 || window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
+  if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
 
   const canvas = document.getElementById('hero-grid-canvas');
   const ctx = canvas.getContext('2d');
+  const isMobile = window.innerWidth < 768;
 
   const G = {
-    cellSize: 45,             // px between grid intersections
-    jitter: 0.25,             // positional randomness as fraction of cellSize
-    edgePrune: 0.07,          // fraction of edges removed for organic gaps
-    lineOpacity: 0.05,        // dim grid lines (always visible)
-    lineActiveOpacity: 0.19,  // lit when a pulse is on the segment
-    lineActiveMs: 180,        // ms a segment stays lit after pulse passes
-    pulseRadius: 1.6,
-    targetPulses: 650,        // how many pulses to keep alive at once
-    maxPulses: 850,
+    cellSize: isMobile ? 62 : 45,
+    jitter: 0.25,
+    edgePrune: 0.07,
+    lineOpacity: isMobile ? 0.06 : 0.05,
+    lineActiveOpacity: isMobile ? 0.22 : 0.19,
+    lineActiveMs: 180,
+    pulseRadius: isMobile ? 1.8 : 1.6,
+    targetPulses: isMobile ? 180 : 650,
+    maxPulses: isMobile ? 280 : 850,
     pulseSpeedRange: [0.2, 0.7],
     mouseProximity: 85,
   };
@@ -2054,20 +2253,22 @@ function initHeroGrid() {
 
   const overlay = document.querySelector('.hero-grid-overlay');
 
-  window.addEventListener('mousemove', (e) => {
-    overlay.style.setProperty('--cx', e.clientX + 'px');
-    overlay.style.setProperty('--cy', e.clientY + 'px');
-    const prox2 = G.mouseProximity * G.mouseProximity;
-    nodes.forEach((n, i) => {
-      const dx = n.x - e.clientX, dy = n.y - e.clientY;
-      if (dx * dx + dy * dy < prox2 && Math.random() < 0.15) spawnPulse(i);
+  if (!isMobile) {
+    window.addEventListener('mousemove', (e) => {
+      overlay.style.setProperty('--cx', e.clientX + 'px');
+      overlay.style.setProperty('--cy', e.clientY + 'px');
+      const prox2 = G.mouseProximity * G.mouseProximity;
+      nodes.forEach((n, i) => {
+        const dx = n.x - e.clientX, dy = n.y - e.clientY;
+        if (dx * dx + dy * dy < prox2 && Math.random() < 0.15) spawnPulse(i);
+      });
     });
-  });
 
-  window.addEventListener('mouseleave', () => {
-    overlay.style.setProperty('--cx', '-400px');
-    overlay.style.setProperty('--cy', '-400px');
-  });
+    window.addEventListener('mouseleave', () => {
+      overlay.style.setProperty('--cx', '-400px');
+      overlay.style.setProperty('--cy', '-400px');
+    });
+  }
 
   window.addEventListener('scroll', () => {
     const op = Math.max(0, 1 - window.scrollY / 300);
