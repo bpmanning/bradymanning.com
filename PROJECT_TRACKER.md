@@ -5,6 +5,14 @@ Entries are **newest-first**. Never overwrite — append new entries at the top 
 
 ---
 
+## 2026-05-22 — games.html: "Click here" scroll anchor
+
+**Commit:** `57c45c1`
+
+Added `id="player"` to `.game-area` and updated the "Click here" link `href` from `"/"` to `"#player"`. Smooth-scrolls to the game player on click (leverages existing `scroll-behavior: smooth` on `html`).
+
+---
+
 ## 2026-05-22 — Rename games page to /games; add to nav
 
 **Commit:** `b3230b5`
