@@ -76,9 +76,10 @@ main{
   margin-bottom:16px;
 }
 .headline{
-  font-size:clamp(1rem,2.5vw,1.4rem);
-  color:var(--text2);max-width:600px;
+  font-size:clamp(0.78rem,2vw,1.4rem);
+  color:var(--text2);max-width:none;
   margin:0 auto 10px;line-height:1.45;font-weight:400;
+  white-space:nowrap;
 }
 .headline em{color:var(--cyan);font-style:normal;font-weight:500;}
 .sub{
@@ -87,8 +88,7 @@ main{
 .sub a{color:var(--cyan);border-bottom:1px solid rgba(0,255,136,0.3);padding-bottom:1px;transition:border-color var(--ease);}
 .sub a:hover{border-color:var(--cyan);}
 
-/* GAME SELECTOR */
-.selector{display:flex;gap:10px;flex-wrap:wrap;justify-content:center;margin-bottom:24px;}
+/* GAME BUTTONS */
 .gbtn{
   background:var(--bgcard);border:1px solid var(--border);
   color:var(--text2);font-family:'DM Sans',sans-serif;
@@ -98,6 +98,30 @@ main{
 }
 .gbtn:hover{border-color:var(--cyan);color:var(--cyan);background:var(--cyan-dim);}
 .gbtn.active{border-color:var(--cyan);color:var(--cyan);background:var(--cyan-dim);box-shadow:var(--glow-c);}
+
+/* GAME CARDS */
+.game-cards{display:flex;gap:16px;justify-content:center;margin-bottom:24px;flex-wrap:wrap;}
+.game-card{
+  width:180px;background:var(--bgcard);border:1px solid var(--border);
+  border-radius:14px;overflow:hidden;flex-shrink:0;text-align:left;
+  transition:border-color var(--ease),transform var(--ease),box-shadow var(--ease);
+}
+.game-card:hover{transform:translateY(-2px);}
+.game-card:has(.gbtn.active){border-color:var(--cyan);box-shadow:var(--glow-c);}
+.preview-cv{display:block;width:180px;height:110px;border-bottom:1px solid var(--border);}
+.game-card-body{padding:12px;display:flex;flex-direction:column;gap:8px;}
+.game-card-name{
+  font-family:'Lato',sans-serif;font-weight:900;font-size:0.82rem;
+  color:var(--text);letter-spacing:0.01em;
+}
+.game-card:has(.gbtn.active) .game-card-name{color:var(--cyan);}
+.game-card-desc{font-size:0.72rem;color:var(--muted);line-height:1.5;}
+
+@media(max-width:620px){
+  .game-cards{flex-direction:column;align-items:center;}
+  .game-card{width:100%;max-width:340px;}
+  .preview-cv{width:100%;height:auto;aspect-ratio:360/220;}
+}
 
 /* GAME AREA */
 .game-area{position:relative;width:100%;max-width:560px;}
@@ -192,10 +216,35 @@ canvas{display:block;width:100%;height:auto;}
   <p class="headline">I'm working to keep the grid from going dark, <em>unlike this page.</em></p>
   <p class="sub">While you're here — pick your game. <a href="/">Or head home.</a></p>
 
-  <div class="selector">
-    <button class="gbtn active" data-game="defender">⚡ ERCOT Defender</button>
-    <button class="gbtn" data-game="snake">🔋 Battery Snake</button>
-    <button class="gbtn" data-game="pacman">🌐 VPP Pac-Man</button>
+  <div class="game-cards">
+
+    <div class="game-card">
+      <canvas class="preview-cv" id="prevDefender" width="360" height="220" aria-hidden="true"></canvas>
+      <div class="game-card-body">
+        <div class="game-card-name">⚡ ERCOT Defender</div>
+        <div class="game-card-desc">Demand spikes are invading Texas. Dispatch megawatts before they reach your cities.</div>
+        <button class="gbtn active" data-game="defender">Play Now</button>
+      </div>
+    </div>
+
+    <div class="game-card">
+      <canvas class="preview-cv" id="prevSnake" width="360" height="220" aria-hidden="true"></canvas>
+      <div class="game-card-body">
+        <div class="game-card-name">🔋 Battery Snake</div>
+        <div class="game-card-desc">Aggregate home batteries into your VPP. Grow to 100 MW without crossing yourself.</div>
+        <button class="gbtn" data-game="snake">Play Now</button>
+      </div>
+    </div>
+
+    <div class="game-card">
+      <canvas class="preview-cv" id="prevPacman" width="360" height="220" aria-hidden="true"></canvas>
+      <div class="game-card-body">
+        <div class="game-card-name">🌐 VPP Pac-Man</div>
+        <div class="game-card-desc">Eat every home battery on the grid. Touch a demand spike and you're back to the bench.</div>
+        <button class="gbtn" data-game="pacman">Play Now</button>
+      </div>
+    </div>
+
   </div>
 
   <div class="game-area">
@@ -296,12 +345,19 @@ function syncControls() {
   ['defCtrl','snkCtrl','pacCtrl'].forEach(id => document.getElementById(id).classList.remove('active'));
   const activeCtrl = {defender:'defCtrl', snake:'snkCtrl', pacman:'pacCtrl'}[game];
   document.getElementById(activeCtrl).classList.add('active');
-  const map = {
+  const instrMap = {
     defender:'← → MOVE · SPACE FIRE · P PAUSE',
-    snake:'Arrow keys to steer · Reach 100 MW',
-    pacman:'Arrow keys to move · Power pellets = dispatch events',
+    snake:'Arrow keys to steer · P to pause',
+    pacman:'Arrow keys to move · P to pause',
   };
-  document.getElementById('instr').textContent = map[game];
+  document.getElementById('instr').textContent = instrMap[game];
+  // Reset HUD immediately so score/goal/lives reflect the newly selected game
+  const hudMidMap = {
+    defender:'← → MOVE · SPACE FIRE',
+    snake:'REACH 100 MW',
+    pacman:'EAT ALL BATTERIES',
+  };
+  hud(0, 3, hudMidMap[game]);
 }
 
 function hud(score, lives, mid) {
@@ -1081,11 +1137,290 @@ bind('dF',v=>{if(Defender.state.keys)Defender.state.keys[' ']=v;});
 });
 
 // ─────────────────────────────────────────────
+// PREVIEW CARDS — static mid-game scenes
+// ─────────────────────────────────────────────
+function drawPreviews() {
+  drawDefenderPreview();
+  drawSnakePreview();
+  drawPacManPreview();
+}
+
+function drawDefenderPreview() {
+  const el = document.getElementById('prevDefender');
+  if (!el) return;
+  const pw = 360, ph = 220;
+  const ctx = el.getContext('2d');
+
+  // Background
+  ctx.fillStyle = K.bg;
+  ctx.fillRect(0, 0, pw, ph);
+
+  // Stars
+  ctx.fillStyle = 'rgba(232,234,246,0.5)';
+  const stars = [[28,12],[85,34],[140,8],[200,22],[265,15],[310,40],[345,9],[60,55],[175,48],[230,60],[300,30],[20,70],[130,72],[340,65],[75,90],[200,85]];
+  stars.forEach(([sx,sy]) => { ctx.beginPath(); ctx.arc(sx,sy,0.8,0,Math.PI*2); ctx.fill(); });
+
+  // Ground bar
+  ctx.fillStyle = 'rgba(0,255,136,0.08)';
+  ctx.fillRect(0, ph - 18, pw, 18);
+
+  // Cities (3 cyan rectangles)
+  const cityColors = [K.cyan, 'rgba(0,255,136,0.55)', 'rgba(0,255,136,0.7)'];
+  [[40,ph-18,28,14],[160,ph-18,22,10],[290,ph-18,32,16]].forEach(([cx2,cy,cw,ch],i) => {
+    ctx.fillStyle = cityColors[i];
+    ctx.fillRect(cx2, cy - ch, cw, ch);
+    // windows
+    ctx.fillStyle = 'rgba(7,9,15,0.6)';
+    for (let wx = cx2 + 4; wx < cx2 + cw - 4; wx += 7) {
+      for (let wy = cy - ch + 3; wy < cy - 3; wy += 6) {
+        ctx.fillRect(wx, wy, 3, 3);
+      }
+    }
+  });
+
+  // Invaders — 3 rows × 6 cols
+  const cols = 6, rows = 3;
+  const iw = 44, ih = 32, startX = 30, startY = 22;
+  const invColors = [K.red, K.orange, K.violet];
+  for (let r = 0; r < rows; r++) {
+    for (let c = 0; c < cols; c++) {
+      const ix = startX + c * iw + iw/2;
+      const iy = startY + r * ih + ih/2;
+      ctx.fillStyle = invColors[r];
+      ctx.shadowColor = invColors[r];
+      ctx.shadowBlur = 6;
+      // Simple invader body
+      ctx.fillRect(ix - 8, iy - 5, 16, 10);
+      ctx.fillRect(ix - 5, iy - 9, 10, 5);
+      ctx.fillRect(ix - 11, iy, 4, 5);
+      ctx.fillRect(ix + 7, iy, 4, 5);
+      ctx.shadowBlur = 0;
+    }
+  }
+
+  // Player ship (cyan) at bottom center
+  const px = pw / 2, py = ph - 28;
+  ctx.fillStyle = K.cyan;
+  ctx.shadowColor = K.cyan;
+  ctx.shadowBlur = 12;
+  ctx.beginPath();
+  ctx.moveTo(px, py - 12);
+  ctx.lineTo(px + 16, py + 8);
+  ctx.lineTo(px - 16, py + 8);
+  ctx.closePath();
+  ctx.fill();
+  ctx.shadowBlur = 0;
+
+  // Bullet in flight
+  ctx.fillStyle = K.cyan;
+  ctx.shadowColor = K.cyan;
+  ctx.shadowBlur = 8;
+  ctx.fillRect(px - 2, py - 40, 4, 16);
+  ctx.shadowBlur = 0;
+
+  // Scan line overlay
+  ctx.fillStyle = 'rgba(0,0,0,0.04)';
+  for (let sy = 0; sy < ph; sy += 4) ctx.fillRect(0, sy, pw, 2);
+}
+
+function drawSnakePreview() {
+  const el = document.getElementById('prevSnake');
+  if (!el) return;
+  const pw = 360, ph = 220;
+  const ctx = el.getContext('2d');
+  const CELL = 22;
+
+  ctx.fillStyle = K.bg;
+  ctx.fillRect(0, 0, pw, ph);
+
+  // Grid lines
+  ctx.strokeStyle = 'rgba(0,255,136,0.06)';
+  ctx.lineWidth = 1;
+  for (let x = 0; x <= pw; x += CELL) { ctx.beginPath(); ctx.moveTo(x,0); ctx.lineTo(x,ph); ctx.stroke(); }
+  for (let y = 0; y <= ph; y += CELL) { ctx.beginPath(); ctx.moveTo(0,y); ctx.lineTo(pw,y); ctx.stroke(); }
+
+  // Progress bar at top — ~55 MW
+  const barW = pw - 40, barH = 8;
+  ctx.fillStyle = 'rgba(255,255,255,0.06)';
+  ctx.fillRect(20, 10, barW, barH);
+  ctx.fillStyle = 'rgba(0,255,136,0.15)';
+  ctx.fillRect(20, 10, barW * 0.55, barH);
+  const grad = ctx.createLinearGradient(20, 0, 20 + barW * 0.55, 0);
+  grad.addColorStop(0, 'rgba(0,255,136,0.9)');
+  grad.addColorStop(1, 'rgba(139,92,246,0.9)');
+  ctx.fillStyle = grad;
+  ctx.fillRect(20, 10, barW * 0.55, barH);
+  ctx.fillStyle = 'rgba(0,255,136,0.7)';
+  ctx.font = '9px Courier New';
+  ctx.fillText('55 MW / 100 MW', 20, 8);
+
+  // Snake body — 12 segments in an S-curve
+  const segments = [
+    [13,7],[12,7],[11,7],[10,7],[9,7],
+    [9,6],[9,5],[8,5],[7,5],
+    [7,6],[7,7],[6,7]
+  ];
+  // Draw body segments (tail to head)
+  for (let i = segments.length - 1; i >= 0; i--) {
+    const [gc2, gr] = segments[i];
+    const x = gc2 * CELL, y = gr * CELL;
+    const alpha = 0.45 + 0.55 * (1 - i / segments.length);
+    ctx.fillStyle = i === 0 ? K.cyan : `rgba(0,255,136,${alpha})`;
+    ctx.shadowColor = K.cyan;
+    ctx.shadowBlur = i === 0 ? 14 : 4;
+    ctx.fillRect(x + 2, y + 2, CELL - 4, CELL - 4);
+    ctx.shadowBlur = 0;
+  }
+
+  // Head eyes
+  const [hc, hr] = segments[0];
+  const hx = hc * CELL + CELL/2, hy = hr * CELL + CELL/2;
+  ctx.fillStyle = K.bg;
+  ctx.beginPath(); ctx.arc(hx - 3, hy - 2, 2, 0, Math.PI*2); ctx.fill();
+  ctx.beginPath(); ctx.arc(hx + 3, hy - 2, 2, 0, Math.PI*2); ctx.fill();
+
+  // Battery pickup icon
+  const bx = 4 * CELL + 3, by = 4 * CELL + 3;
+  ctx.strokeStyle = K.violet;
+  ctx.lineWidth = 1.5;
+  ctx.shadowColor = K.violet;
+  ctx.shadowBlur = 10;
+  ctx.strokeRect(bx, by, CELL - 6, CELL - 6);
+  ctx.fillStyle = 'rgba(139,92,246,0.15)';
+  ctx.fillRect(bx, by, CELL - 6, CELL - 6);
+  ctx.fillStyle = K.violet;
+  ctx.font = 'bold 11px sans-serif';
+  ctx.textAlign = 'center';
+  ctx.fillText('🔋', bx + (CELL-6)/2, by + (CELL-6)/2 + 4);
+  ctx.textAlign = 'left';
+  ctx.shadowBlur = 0;
+
+  // Scan lines
+  ctx.fillStyle = 'rgba(0,0,0,0.04)';
+  for (let sy = 0; sy < ph; sy += 4) ctx.fillRect(0, sy, pw, 2);
+}
+
+function drawPacManPreview() {
+  const el = document.getElementById('prevPacman');
+  if (!el) return;
+  const pw = 360, ph = 220;
+  const ctx = el.getContext('2d');
+  const MS = 22; // mini maze cell size
+
+  ctx.fillStyle = K.bg;
+  ctx.fillRect(0, 0, pw, ph);
+
+  // Partial maze — 16 cols × 10 rows, centered
+  const COLS = 16, ROWS = 10;
+  const offX = Math.floor((pw - COLS * MS) / 2);
+  const offY = Math.floor((ph - ROWS * MS) / 2);
+
+  // Wall pattern: 1=wall, 0=dot, 2=power, 3=empty, 4=house
+  const maze = [
+    [1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1],
+    [1,0,0,0,0,0,1,0,0,1,0,0,0,0,0,1],
+    [1,2,1,1,0,1,1,0,0,1,1,0,1,1,2,1],
+    [1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1],
+    [1,0,1,1,0,1,0,1,1,0,1,0,1,1,0,1],
+    [1,0,0,0,0,1,3,3,3,3,1,0,0,0,0,1],
+    [1,1,1,0,0,1,3,4,4,3,1,0,0,1,1,1],
+    [1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1],
+    [1,0,1,1,0,1,1,0,0,1,1,0,1,1,0,1],
+    [1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1],
+  ];
+
+  // Draw maze
+  for (let r = 0; r < ROWS; r++) {
+    for (let c = 0; c < COLS; c++) {
+      const mx = offX + c * MS, my = offY + r * MS;
+      const cell = maze[r][c];
+      if (cell === 1) {
+        ctx.fillStyle = '#0b1428';
+        ctx.fillRect(mx, my, MS, MS);
+        ctx.strokeStyle = 'rgba(139,92,246,0.4)';
+        ctx.lineWidth = 1.5;
+        ctx.beginPath();
+        const n2 = r > 0 && maze[r-1][c] === 1;
+        const s2 = r < ROWS-1 && maze[r+1][c] === 1;
+        const wl = c > 0 && maze[r][c-1] === 1;
+        const wr = c < COLS-1 && maze[r][c+1] === 1;
+        if (!n2) { ctx.moveTo(mx, my); ctx.lineTo(mx+MS, my); }
+        if (!s2) { ctx.moveTo(mx, my+MS); ctx.lineTo(mx+MS, my+MS); }
+        if (!wl) { ctx.moveTo(mx, my); ctx.lineTo(mx, my+MS); }
+        if (!wr) { ctx.moveTo(mx+MS, my); ctx.lineTo(mx+MS, my+MS); }
+        ctx.stroke();
+      } else if (cell === 4) {
+        ctx.fillStyle = 'rgba(139,92,246,0.07)'; ctx.fillRect(mx, my, MS, MS);
+      } else if (cell === 0) {
+        ctx.fillStyle = 'rgba(0,255,136,0.7)';
+        ctx.beginPath(); ctx.arc(mx+MS/2, my+MS/2, 2.5, 0, Math.PI*2); ctx.fill();
+      } else if (cell === 2) {
+        ctx.shadowColor = K.violet; ctx.shadowBlur = 10;
+        ctx.fillStyle = K.violet;
+        ctx.beginPath(); ctx.arc(mx+MS/2, my+MS/2, 5, 0, Math.PI*2); ctx.fill();
+        ctx.shadowBlur = 0;
+      }
+    }
+  }
+
+  // Pac-Man — row 7, col 7, mouth open right
+  const plc = 7, plr = 7;
+  const plx = offX + plc * MS + MS/2, ply = offY + plr * MS + MS/2;
+  ctx.shadowColor = K.cyan; ctx.shadowBlur = 14;
+  ctx.fillStyle = K.cyan;
+  ctx.beginPath();
+  ctx.moveTo(plx, ply);
+  ctx.arc(plx, ply, MS * 0.42, 0.35, (2 - 0.35) * Math.PI);
+  ctx.closePath(); ctx.fill();
+  ctx.shadowBlur = 0;
+
+  // Ghost 1 (red) — row 5, col 4
+  drawPreviewGhost(ctx, offX + 4*MS + MS/2, offY + 5*MS + MS/2, K.red, MS);
+  // Ghost 2 (violet) — row 5, col 11
+  drawPreviewGhost(ctx, offX + 11*MS + MS/2, offY + 5*MS + MS/2, K.violet, MS);
+
+  // Score display
+  ctx.fillStyle = 'rgba(0,255,136,0.5)';
+  ctx.font = '9px Courier New';
+  ctx.textAlign = 'right';
+  ctx.fillText('SCORE: 1450 MW', pw - 8, 14);
+  ctx.textAlign = 'left';
+
+  // Scan lines
+  ctx.fillStyle = 'rgba(0,0,0,0.04)';
+  for (let sy = 0; sy < ph; sy += 4) ctx.fillRect(0, sy, pw, 2);
+}
+
+function drawPreviewGhost(ctx, x, y, col, MS) {
+  const r = MS * 0.42;
+  ctx.shadowColor = col; ctx.shadowBlur = 8;
+  ctx.fillStyle = col;
+  ctx.beginPath();
+  ctx.arc(x, y - r * 0.1, r, Math.PI, 0);
+  ctx.lineTo(x + r, y + r * 0.75);
+  for (let i = 0; i < 3; i++) {
+    const wx1 = x + r - (i * 2 + 1) * (r * 2 / 6);
+    const wx2 = x + r - (i * 2 + 2) * (r * 2 / 6);
+    ctx.quadraticCurveTo(wx1, y + r * 1.1, (wx1 + wx2) / 2, y + r * 0.75);
+  }
+  ctx.lineTo(x - r, y + r * 0.75);
+  ctx.closePath(); ctx.fill();
+  ctx.shadowBlur = 0;
+  ctx.fillStyle = 'white';
+  ctx.beginPath(); ctx.arc(x - r*0.28, y - r*0.2, r*0.26, 0, Math.PI*2); ctx.fill();
+  ctx.beginPath(); ctx.arc(x + r*0.28, y - r*0.2, r*0.26, 0, Math.PI*2); ctx.fill();
+  ctx.fillStyle = '#000088';
+  ctx.beginPath(); ctx.arc(x - r*0.28 + 2, y - r*0.2, r*0.13, 0, Math.PI*2); ctx.fill();
+  ctx.beginPath(); ctx.arc(x + r*0.28 + 2, y - r*0.2, r*0.13, 0, Math.PI*2); ctx.fill();
+}
+
+// ─────────────────────────────────────────────
 // INIT
 // ─────────────────────────────────────────────
 drawIdle();
 showOverlay(false);
 syncControls();
+drawPreviews();
 </script>
 </body>
 </html>
