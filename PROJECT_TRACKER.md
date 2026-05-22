@@ -5,6 +5,14 @@ Entries are **newest-first**. Never overwrite — append new entries at the top 
 
 ---
 
+## 2026-05-22 — Center d-pad on mobile controls (Snake + Pac-Man)
+
+**Commit:** `61bbe31`
+
+The pause button was part of the flex centering calculation, pushing the d-pad left of true center. Fix: `position:relative` on `.mctrl`, then `.mctrl:has(.dpad) .cpause { position:absolute; right:14px; top:50%; transform:translateY(-50%) }` pulls the pause button out of the flex flow so the d-pad centers on its own. Defender controls unchanged (no dpad). Applied to both `404.html` and `games.html`.
+
+---
+
 ## 2026-05-22 — 404.html: update subtitle and add scroll anchor
 
 **Commit:** `6df26cc`
