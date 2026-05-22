@@ -5,6 +5,38 @@ Entries are **newest-first**. Never overwrite — append new entries at the top 
 
 ---
 
+## 2026-05-22 — 404 page: game preview cards, HUD fix, P PAUSE, single-line headline
+
+**Commit:** `e6c74fd`
+
+### Game preview cards
+Replaced the three plain selector buttons with full game cards. Each card contains:
+- A mini canvas (`preview-cv`, 360×220 native / 180×110 displayed) with a static mid-game scene
+- Game title with emoji
+- One-line description
+- "Play Now" button — same `.gbtn` element with existing click/active logic intact
+
+Active card highlighted with cyan border + glow via `CSS :has(.gbtn.active)`.
+Mobile (≤620px): cards stack to single column, max-width 340px.
+
+**Preview scenes drawn by `drawPreviews()` (called once at init):**
+| Game | Scene |
+|---|---|
+| Defender | Star field, 3×6 invader grid (red/orange/violet), cyan player ship, 3 city silhouettes, bullet in flight |
+| Snake | Grid lines, 12-segment S-curve snake, "55 MW / 100 MW" progress bar, battery pickup icon |
+| Pac-Man | 16×10 partial maze, pac-man with open mouth, red + violet ghosts, dots, glowing power pellets |
+
+### HUD reset on game switch
+`syncControls()` was updating the bottom instruction text but not the HUD row (score, lives, goal). Added `hud(0, 3, goalText)` call inside `syncControls()` so score resets to `0 MW`, lives show the correct symbol (◆/🔋/⚡), and goal text (`REACH 100 MW` / `EAT ALL BATTERIES` / `← → MOVE · SPACE FIRE`) updates immediately on game selection without waiting for the play button.
+
+### P PAUSE instruction strings
+Snake and Pac-Man bottom instruction strings were missing pause info. Updated to `Arrow keys to steer · P to pause` and `Arrow keys to move · P to pause`.
+
+### Single-line 404 headline
+Added `white-space:nowrap` and `max-width:none` to `.headline`. Dropped `clamp` floor from `1rem` to `0.78rem` so text scales down gracefully on narrow screens rather than overflowing.
+
+---
+
 ## 2026-05-22 — Restore index.html after accidental overwrite
 
 **Commit:** `8b4a964`
