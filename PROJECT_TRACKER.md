@@ -5,6 +5,16 @@ Entries are **newest-first**. Never overwrite — append new entries at the top 
 
 ---
 
+## 2026-05-22 — Rename games page to /games; add to nav
+
+**Commit:** `b3230b5`
+
+- `git mv vppgames.html games.html` — URL is now `bradymanning.com/games`
+- Added `<li><a href="/games">Games</a></li>` to desktop `.nav-links` (after Contact)
+- Added `<a href="/games" class="mobile-link">Games</a>` to `.mobile-menu` (after Contact)
+
+---
+
 ## 2026-05-22 — New page: vppgames.html (VPP Arcade)
 
 **Commit:** `7316897`
