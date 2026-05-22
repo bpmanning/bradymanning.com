@@ -5,6 +5,36 @@ Entries are **newest-first**. Never overwrite — append new entries at the top 
 
 ---
 
+## 2026-05-22 — New page: vppgames.html (VPP Arcade)
+
+**Commit:** `7316897`
+
+### What was built
+A dedicated games page at `bradymanning.com/vppgames`. Third page on the site alongside `index.html` and `404.html`. Contains all three energy games with a purpose-built hero section and 1.7× larger game cards.
+
+### Hero copy
+- Eyebrow badge (pulsing dot): `⚡ VPP ARCADE ⚡`
+- Title: `Grid Games`
+- Tagline: `Three games for people who think demand spikes sound like a personal challenge. The grid can handle itself for five minutes.`
+- Note: `No utility background required — but it helps.` with link back to main site
+
+### Card sizing (1.7× vs 404.html)
+| Property | 404.html | vppgames.html |
+|---|---|---|
+| Card width | 180px | 306px |
+| Preview height | 110px | 187px |
+| Card-body padding | 12px | 20px |
+| Internal gap | 8px | 14px |
+| Name font | 0.82rem | 1.4rem |
+| Desc font | 0.72rem | 0.9rem |
+| Cards gap | 16px | 28px |
+| Mobile stack breakpoint | ≤620px | ≤1040px |
+
+### Game logic
+All game logic (Defender, Snake, PacMan), HUD, overlay, mobile controls, keyboard input, and preview art are identical to 404.html — no divergence.
+
+---
+
 ## 2026-05-22 — 404 page: game preview cards, HUD fix, P PAUSE, single-line headline
 
 **Commit:** `e6c74fd`
