@@ -286,7 +286,7 @@ canvas{display:block;width:100%;height:auto;}
     <div class="canvas-wrap">
       <canvas id="gc" width="560" height="560"></canvas>
       <div class="overlay" id="ov">
-        <div class="ov-title" id="ovTitle">ERCOT Defender</div>
+        <div class="ov-title" id="ovTitle">ERCOT Invaders</div>
         <div class="ov-desc" id="ovDesc">Demand spikes are descending on Texas. Fire megawatts to stop them before they reach the grid.</div>
         <div class="ov-score" id="ovScore" style="display:none"></div>
         <button class="ov-btn" id="ovBtn">DISPATCH</button>
@@ -414,7 +414,7 @@ function showOverlay(over, score=0) {
   } else {
     ovScore.style.display = 'none';
     const cfg = {
-      defender:{t:'ERCOT Defender',d:'Demand spikes are descending on Texas. Fire megawatts to stop them before they reach your cities.',b:'DISPATCH'},
+      defender:{t:'ERCOT Invaders',d:'Demand spikes are descending on Texas. Fire megawatts to stop them before they reach your cities.',b:'DISPATCH'},
       snake:   {t:'Battery Snake', d:'Aggregate home batteries into your VPP. Grow your chain and reach 100 MW without crossing yourself.',b:'POWER UP'},
       pacman:  {t:'VPP Pac-Man',   d:"Collect all home batteries across the grid. Avoid demand spikes — unless you've dispatched a discharge event.",b:'AGGREGATE'},
     }[game];
