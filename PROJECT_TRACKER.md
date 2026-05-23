@@ -5,6 +5,21 @@ Entries are **newest-first**. Never overwrite — append new entries at the top 
 
 ---
 
+## 2026-05-22 — Social metadata, OG image, and asset reorganization
+
+**Commit:** `f7f2029`
+
+- Added full Open Graph + Twitter Card meta tags to `index.html`, `404.html`, and `games.html`
+- Updated `<title>` on `index.html` to "Brady Manning — Staff PM, VPP Builder"
+- Added `<link rel="canonical">` to all three pages
+- Twitter handles: `twitter:creator` = `@bradymanning16`, `twitter:site` = `@negawatt_news`
+- Added `assets/og-image.png` (1200×630) — generated via `og-image-generator.html` using the site's energy grid canvas and negawatt wave watermark
+- Moved all favicon files from repo root to `assets/` and updated all `<link>` paths accordingly
+- Fixed `site.webmanifest`: name ("Brady Manning"), theme/background color (`#07090f`), and icon paths updated to `/assets/`
+- Added `og-image-generator.html` as a dev-only tool for regenerating the OG image
+
+---
+
 ## 2026-05-22 — Add favicon (negawatt wave) across all pages
 
 **Commit:** `3a04c45`
