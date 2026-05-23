@@ -1,0 +1,321 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>OG Image Generator — Brady Manning</title>
+<link href="https://fonts.googleapis.com/css2?family=Lato:wght@900&family=DM+Sans:opsz,wght@9..40,300;9..40,400;9..40,500&display=swap" rel="stylesheet">
+<style>
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  body {
+    background: #1a1a2e;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    font-family: 'DM Sans', sans-serif;
+  }
+
+  .instructions {
+    color: #888;
+    font-size: 14px;
+    padding: 24px 40px;
+    text-align: left;
+    line-height: 1.8;
+    max-width: 1200px;
+  }
+  .instructions strong { color: #fff; }
+
+  /* ── The actual OG image — exactly 1200×630 ── */
+  #og {
+    width: 1200px;
+    height: 630px;
+    position: relative;
+    background: #07090f;
+    overflow: hidden;
+    flex-shrink: 0;
+  }
+
+  /* Canvas background grid */
+  #bg-canvas {
+    position: absolute;
+    inset: 0;
+    opacity: 0.55;
+  }
+
+  /* Gradient overlay so left side is legible */
+  .overlay {
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(
+      105deg,
+      #07090f 38%,
+      rgba(7,9,15,0.82) 58%,
+      rgba(7,9,15,0.3) 100%
+    );
+    z-index: 1;
+  }
+
+  /* Content */
+  .content {
+    position: absolute;
+    inset: 0;
+    z-index: 2;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    padding: 64px 72px;
+  }
+
+  .eyebrow {
+    font-family: 'DM Sans', sans-serif;
+    font-size: 15px;
+    font-weight: 500;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    color: #00ff88;
+    margin-bottom: 22px;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+  }
+  .eyebrow::before {
+    content: '';
+    display: inline-block;
+    width: 28px;
+    height: 2px;
+    background: #00ff88;
+    border-radius: 2px;
+  }
+
+  .name {
+    font-family: 'Lato', sans-serif;
+    font-weight: 900;
+    font-size: 82px;
+    line-height: 0.95;
+    color: #f0f4ff;
+    letter-spacing: -0.02em;
+    margin-bottom: 20px;
+  }
+
+  .role {
+    font-family: 'DM Sans', sans-serif;
+    font-size: 26px;
+    font-weight: 400;
+    color: rgba(240,244,255,0.65);
+    margin-bottom: 48px;
+    letter-spacing: 0.01em;
+  }
+  .role em {
+    font-style: normal;
+    color: #8b5cf6;
+  }
+
+  .stats {
+    display: flex;
+    gap: 48px;
+  }
+  .stat-item {
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+  }
+  .stat-value {
+    font-family: 'Lato', sans-serif;
+    font-weight: 900;
+    font-size: 28px;
+    background: linear-gradient(135deg, #00ff88, #8b5cf6);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+  }
+  .stat-label {
+    font-size: 12px;
+    font-weight: 400;
+    color: rgba(240,244,255,0.45);
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+  }
+
+  /* Divider */
+  .divider {
+    width: 56px;
+    height: 3px;
+    background: linear-gradient(90deg, #00ff88, #8b5cf6);
+    border-radius: 2px;
+    margin-bottom: 40px;
+  }
+
+  /* URL badge bottom-left */
+  .url {
+    position: absolute;
+    bottom: 44px;
+    left: 72px;
+    z-index: 2;
+    font-size: 15px;
+    color: rgba(240,244,255,0.35);
+    letter-spacing: 0.06em;
+  }
+
+  /* Negawatt wave — bottom right decoration */
+  #wave-canvas {
+    position: absolute;
+    bottom: -40px;
+    right: -40px;
+    width: 380px;
+    height: 380px;
+    z-index: 1;
+    opacity: 0.18;
+  }
+</style>
+</head>
+<body>
+
+<div id="og">
+  <canvas id="bg-canvas"></canvas>
+  <canvas id="wave-canvas"></canvas>
+  <div class="overlay"></div>
+  <div class="content">
+    <div class="eyebrow">bradymanning.com</div>
+    <div class="name">Brady<br>Manning</div>
+    <div class="divider"></div>
+    <div class="role">Staff PM · <em>VPP Builder</em> · Energy Tech</div>
+    <div class="stats">
+      <div class="stat-item">
+        <span class="stat-value">100+ MW</span>
+        <span class="stat-label">Virtual Power Plant</span>
+      </div>
+      <div class="stat-item">
+        <span class="stat-value">15K+</span>
+        <span class="stat-label">Home Batteries</span>
+      </div>
+      <div class="stat-item">
+        <span class="stat-value">10+ Yrs</span>
+        <span class="stat-label">Energy Tech</span>
+      </div>
+    </div>
+  </div>
+  <div class="url">bradymanning.com</div>
+</div>
+
+<script>
+/* ── Energy grid background ── */
+(function() {
+  const canvas = document.getElementById('bg-canvas');
+  const og = document.getElementById('og');
+  canvas.width = 1200;
+  canvas.height = 630;
+  const cx = canvas.getContext('2d');
+
+  const CYAN   = '#00ff88';
+  const VIOLET = '#8b5cf6';
+  const W = 1200, H = 630;
+
+  // Generate nodes
+  const cols = 14, rows = 8;
+  const nodes = [];
+  for (let r = 0; r < rows; r++) {
+    for (let c = 0; c < cols; c++) {
+      nodes.push({
+        x: (c / (cols-1)) * W + (Math.random()-0.5) * 40,
+        y: (r / (rows-1)) * H + (Math.random()-0.5) * 30,
+        r: Math.random() < 0.42 ? CYAN : VIOLET
+      });
+    }
+  }
+
+  // Draw edges
+  cx.lineWidth = 0.8;
+  for (let i = 0; i < nodes.length; i++) {
+    for (let j = i+1; j < nodes.length; j++) {
+      const dx = nodes[i].x - nodes[j].x;
+      const dy = nodes[i].y - nodes[j].y;
+      const d = Math.sqrt(dx*dx + dy*dy);
+      if (d < 160) {
+        cx.strokeStyle = nodes[i].r === CYAN
+          ? `rgba(0,255,136,${0.12 * (1 - d/160)})`
+          : `rgba(139,92,246,${0.12 * (1 - d/160)})`;
+        cx.beginPath();
+        cx.moveTo(nodes[i].x, nodes[i].y);
+        cx.lineTo(nodes[j].x, nodes[j].y);
+        cx.stroke();
+      }
+    }
+  }
+
+  // Draw pulses along edges (static snapshot)
+  const pulseCount = 80;
+  for (let p = 0; p < pulseCount; p++) {
+    const i = Math.floor(Math.random() * nodes.length);
+    const j = Math.floor(Math.random() * nodes.length);
+    if (i === j) continue;
+    const dx = nodes[i].x - nodes[j].x;
+    const dy = nodes[i].y - nodes[j].y;
+    const d = Math.sqrt(dx*dx + dy*dy);
+    if (d > 160) continue;
+    const t = Math.random();
+    const px = nodes[i].x + (nodes[j].x - nodes[i].x) * t;
+    const py = nodes[i].y + (nodes[j].y - nodes[i].y) * t;
+    const color = Math.random() < 0.42 ? CYAN : VIOLET;
+    const grad = cx.createRadialGradient(px, py, 0, px, py, 5);
+    grad.addColorStop(0, color);
+    grad.addColorStop(1, 'rgba(0,0,0,0)');
+    cx.fillStyle = grad;
+    cx.beginPath();
+    cx.arc(px, py, 5, 0, Math.PI*2);
+    cx.fill();
+  }
+
+  // Draw nodes
+  for (const n of nodes) {
+    cx.beginPath();
+    cx.arc(n.x, n.y, 2, 0, Math.PI*2);
+    cx.fillStyle = n.r === CYAN ? 'rgba(0,255,136,0.5)' : 'rgba(139,92,246,0.5)';
+    cx.fill();
+  }
+})();
+
+/* ── Negawatt wave watermark (bottom-right) ── */
+(function() {
+  const canvas = document.getElementById('wave-canvas');
+  canvas.width = 380;
+  canvas.height = 380;
+  const cx = canvas.getContext('2d');
+
+  const W = 380, H = 380;
+  const lineCount = 14;
+
+  for (let i = 0; i < lineCount; i++) {
+    const t = i / (lineCount - 1);           // 0 → 1, back to front
+    const alpha = 0.3 + t * 0.7;
+    const yShift = (i - lineCount/2) * 7;
+
+    cx.beginPath();
+    cx.lineWidth = 1.5 + t * 1.2;
+    cx.strokeStyle = `rgba(0,255,136,${alpha})`;
+
+    // Duck-curve / negawatt wave shape
+    for (let x = 0; x <= W; x += 2) {
+      const xn = x / W;                       // 0→1
+      // valley around 0.15, big peak around 0.55, tail down
+      const y = H * 0.72
+        - Math.exp(-Math.pow((xn - 0.55) / 0.18, 2)) * H * 0.52
+        + Math.exp(-Math.pow((xn - 0.15) / 0.09, 2)) * H * 0.18
+        + yShift;
+
+      if (x === 0) cx.moveTo(x, y);
+      else cx.lineTo(x, y);
+    }
+    cx.stroke();
+  }
+})();
+</script>
+
+<div class="instructions">
+  <strong>How to capture:</strong> Set DevTools viewport to <strong>1200 × 630</strong> (already set above) →
+  F12 → Ctrl+Shift+P → type <strong>"Capture screenshot"</strong> → Enter.<br>
+  The OG div sits flush at the top — the screenshot will capture exactly 1200×630 of the image.<br>
+  Save as <strong>assets/og-image.png</strong> in the repo root.
+</div>
+
+</body>
+</html>
