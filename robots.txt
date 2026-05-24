@@ -1,0 +1,6 @@
+User-agent: *
+Allow: /
+
+Disallow: /og-image-generator.html
+
+Sitemap: https://bradymanning.com/sitemap.xml
