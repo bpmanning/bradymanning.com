@@ -20,6 +20,14 @@ Entries are **newest-first**. Never overwrite — append new entries at the top 
 
 ---
 
+## 2026-05-24 — Pause canvas animations when tab is hidden
+
+**Commit:** `a25512e`
+
+Implemented Page Visibility API for the hero grid canvas and sparkline. Hero loop: replaced anonymous IIFE `(function loop(){...})()` with named `heroLoop()` function, storing the rAF ID in `heroRafId` — `visibilitychange` calls `cancelAnimationFrame` on hide and restarts on return. Sparkline: stored `setInterval` return value in `sparklineIntervalId` — `visibilitychange` calls `clearInterval` on hide and restarts the 1800ms interval on return. Prevents unnecessary CPU and battery drain when the tab is backgrounded, particularly on mobile.
+
+---
+
 ## 2026-05-24 — Self-host Lucide icons, pin to v1.16.0
 
 **Commit:** `439b693`
