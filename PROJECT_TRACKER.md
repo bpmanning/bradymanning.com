@@ -20,6 +20,14 @@ Entries are **newest-first**. Never overwrite — append new entries at the top 
 
 ---
 
+## 2026-05-23 — Add robots.txt and sitemap.xml
+
+**Commit:** `bc44e65`
+
+Added `robots.txt` (allows all crawlers, blocks `og-image-generator.html`, references sitemap) and `sitemap.xml` (two public URLs: `/` at priority 1.0 and `/games` at priority 0.8, both with 2026-05-23 lastmod). 404.html and og-image-generator.html intentionally excluded from sitemap. Submit sitemap in Google Search Console to trigger immediate crawl.
+
+---
+
 ## 2026-05-23 — Fix light mode CSS bugs and improve contrast
 
 **Commit:** `7fc8793`
