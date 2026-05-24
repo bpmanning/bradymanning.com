@@ -20,6 +20,14 @@ Entries are **newest-first**. Never overwrite — append new entries at the top 
 
 ---
 
+## 2026-05-24 — Add Cloudflare Web Analytics
+
+**Commit:** `05117c2`
+
+Added Cloudflare Web Analytics beacon script to `index.html`, `404.html`, and `games.html`. Privacy-first analytics — no cookies, no consent banner required under GDPR/CCPA. Tracks page views, referrers, countries, browsers, and devices. Free with no event caps. Dashboard accessible via Cloudflare account (same account used for negawatt.news).
+
+---
+
 ## 2026-05-23 — Add robots.txt and sitemap.xml
 
 **Commit:** `bc44e65`
