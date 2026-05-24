@@ -2094,7 +2094,14 @@ function initSparkline() {
   resize();
   draw();
   if (valueEl) valueEl.textContent = data[data.length - 1].toFixed(2);
-  setInterval(tick, 1800);
+  let sparklineIntervalId = setInterval(tick, 1800);
+  document.addEventListener('visibilitychange', () => {
+    if (document.hidden) {
+      clearInterval(sparklineIntervalId);
+    } else {
+      sparklineIntervalId = setInterval(tick, 1800);
+    }
+  });
   window.addEventListener('resize', () => { resize(); draw(); });
 }
 
@@ -2309,7 +2316,17 @@ function initHeroGrid() {
   canvas.width = window.innerWidth;
   canvas.height = window.innerHeight;
   buildGrid();
-  (function loop() { updatePulses(); draw(); requestAnimationFrame(loop); })();
+  let heroRafId;
+  function heroLoop() { updatePulses(); draw(); heroRafId = requestAnimationFrame(heroLoop); }
+  heroRafId = requestAnimationFrame(heroLoop);
+
+  document.addEventListener('visibilitychange', () => {
+    if (document.hidden) {
+      cancelAnimationFrame(heroRafId);
+    } else {
+      heroRafId = requestAnimationFrame(heroLoop);
+    }
+  });
 
   setTimeout(() => {
     const label = document.getElementById('heroStatusLabel');
