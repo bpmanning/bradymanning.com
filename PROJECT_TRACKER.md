@@ -20,6 +20,14 @@ Entries are **newest-first**. Never overwrite — append new entries at the top 
 
 ---
 
+## 2026-05-24 — Self-host Lucide icons, pin to v1.16.0
+
+**Commit:** `439b693`
+
+Downloaded `lucide.min.js` (v1.16.0, 392KB) to `assets/` and updated `index.html` script tag from `unpkg.com/lucide@latest` to `/assets/lucide.min.js`. Eliminates CDN dependency, unpinned `@latest` version risk, and the need for an SRI hash. `defer` intentionally omitted — `lucide.createIcons()` is called 6 times synchronously throughout the inline script. 12 icons in use: sun, moon, menu, x, chevron-down, linkedin, zap, bar-chart-2, shopping-cart, book-open, arrow-right, clock.
+
+---
+
 ## 2026-05-24 — Add Cloudflare Web Analytics
 
 **Commit:** `05117c2`
