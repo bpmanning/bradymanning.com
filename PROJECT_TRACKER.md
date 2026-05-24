@@ -20,6 +20,19 @@ Entries are **newest-first**. Never overwrite — append new entries at the top 
 
 ---
 
+## 2026-05-23 — Fix light mode CSS bugs and improve contrast
+
+**Commit:** `7fc8793`
+
+Three fixes to `[data-theme="light"]`:
+- **CSS bug:** `rgba(#00cc6a, 0.35)` → `rgba(0, 204, 106, 0.35)` — invalid syntax was silently failing since launch; accent borders never rendered in light mode
+- **Contrast:** `--text-muted` `#8892b0` → `#5d6680` — improves contrast ratio from ~3.2:1 to ~5.1:1 on the #f0f2fa background, passing WCAG AA (4.5:1 required)
+- **Border visibility:** `--border` opacity `0.08` → `0.12` — 8% black was nearly invisible on light backgrounds
+
+Also updated typewriter prefix to "I'm an" (index.html hero).
+
+---
+
 ## 2026-05-23 — Fix typo and standardize game card descriptions
 
 **Commit:** `e1a3554`
