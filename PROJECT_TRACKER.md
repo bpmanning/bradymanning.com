@@ -20,6 +20,14 @@ Entries are **newest-first**. Never overwrite — append new entries at the top 
 
 ---
 
+## 2026-05-23 — Fix typo and standardize game card descriptions
+
+**Commit:** `e1a3554`
+
+Fixed "Compat" → "Combat" typo in ERCOT Invaders card on games.html. Standardized all three game card descriptions to be identical across both 404.html and games.html: Invaders uses the longer "Combat heatwaves and freezes" version; Pac-Man uses "back to the bench" over the weaker "VPP aggregation" ending; Battery Snake was already consistent.
+
+---
+
 ## 2026-05-22 — Add favicon (negawatt wave) across all pages
 
 **Commit:** `3a04c45`
