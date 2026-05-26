@@ -1903,16 +1903,48 @@ function renderPosts(filter = 'all') {
 renderPosts();
 
 /* ============================================================
-   RENDER STATS
+   RENDER STATS + COUNT-UP ANIMATION
    ============================================================ */
 function renderStats() {
   const grid = document.getElementById('statsGrid');
-  grid.innerHTML = CONTENT_CONFIG.stats.map(s => `
-    <div class="stat-card">
-      <div class="stat-number">${s.number}</div>
-      <div class="stat-label">${s.label}</div>
-    </div>
-  `).join('');
+  grid.innerHTML = CONTENT_CONFIG.stats.map(s => {
+    const m = s.number.match(/^(\D*)(\d+)(.*)$/);
+    const pre  = m ? m[1] : '';
+    const num  = m ? parseInt(m[2]) : 0;
+    const suf  = m ? m[3] : s.number;
+    return `
+      <div class="stat-card">
+        <div class="stat-number" data-pre="${pre}" data-target="${num}" data-suf="${suf}">${s.number}</div>
+        <div class="stat-label">${s.label}</div>
+      </div>
+    `;
+  }).join('');
+
+  const reduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  if (reduced) return;
+
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+      if (!entry.isIntersecting) return;
+      observer.unobserve(entry.target);
+      const els = grid.querySelectorAll('.stat-number[data-target]');
+      const duration = 1800;
+      const start = performance.now();
+      const easeOut = t => 1 - Math.pow(1 - t, 3);
+      function tick(now) {
+        const p = Math.min((now - start) / duration, 1);
+        const e = easeOut(p);
+        els.forEach(el => {
+          const v = Math.round(parseInt(el.dataset.target) * e);
+          el.textContent = el.dataset.pre + v + el.dataset.suf;
+        });
+        if (p < 1) requestAnimationFrame(tick);
+      }
+      requestAnimationFrame(tick);
+    });
+  }, { threshold: 0.4 });
+
+  observer.observe(grid);
 }
 
 renderStats();
