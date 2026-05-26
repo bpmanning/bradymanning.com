@@ -20,6 +20,14 @@ Entries are **newest-first**. Never overwrite — append new entries at the top 
 
 ---
 
+## 2026-05-24 — Add count-up animation to stats cards
+
+**Commit:** `56f1397`
+
+Refactored `renderStats()` to parse each stat string (e.g. `"100+ MW"`) into prefix, integer target, and suffix via regex, stored as `data-pre`, `data-target`, `data-suf` attributes. `IntersectionObserver` fires once when the stats grid hits 40% viewport visibility, triggering a 1.8s cubic ease-out count-up loop via `requestAnimationFrame`. Respects `prefers-reduced-motion` — skips animation and shows final values instantly if set. Fires once per page load; stays at final value on subsequent scroll.
+
+---
+
 ## 2026-05-24 — Fix typewriter prefix and resume button label
 
 **Commit:** `9d7bfb7`
