@@ -20,6 +20,14 @@ Entries are **newest-first**. Never overwrite — append new entries at the top 
 
 ---
 
+## 2026-05-24 — Fix typewriter prefix and resume button label
+
+**Commit:** `9d7bfb7`
+
+Reverted typewriter prefix from "I'm an" back to "I'm a" (keeping "Energy Innovator" phrase as-is). Changed "Request Full Resume" button label to "Connect on LinkedIn" — the button links to LinkedIn, not a resume request form, so the label now matches the actual destination. Updated `aria-label` to match.
+
+---
+
 ## 2026-05-24 — Pause canvas animations when tab is hidden
 
 **Commit:** `a25512e`
