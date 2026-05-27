@@ -26,7 +26,6 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Lato:wght@900&family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;0,9..40,500;1,9..40,300&display=swap" rel="stylesheet">
-<script src="/assets/lucide.min.js"></script>
 <style>
 /* ============================================================
    CONTENT_CONFIG — Edit your site content here 
@@ -78,6 +77,7 @@
    RESET & BASE
    ============================================================ */
 *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+svg.icon { flex-shrink: 0; vertical-align: middle; }
 
 html { scroll-behavior: smooth; font-size: 16px; }
 
@@ -1361,10 +1361,10 @@ footer {
 
     <div class="nav-controls">
       <button class="theme-toggle" id="themeToggle" aria-label="Toggle light/dark mode">
-        <i data-lucide="sun" width="16" height="16"></i>
+        <svg class="icon" xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="4"/><path d="M12 2v2"/><path d="M12 20v2"/><path d="m4.93 4.93 1.41 1.41"/><path d="m17.66 17.66 1.41 1.41"/><path d="M2 12h2"/><path d="M20 12h2"/><path d="m6.34 17.66-1.41 1.41"/><path d="m19.07 4.93-1.41 1.41"/></svg>
       </button>
       <button class="hamburger" id="hamburger" aria-label="Open menu" aria-expanded="false">
-        <i data-lucide="menu" width="18" height="18"></i>
+        <svg class="icon" xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 5h16"/><path d="M4 12h16"/><path d="M4 19h16"/></svg>
       </button>
     </div>
   </div>
@@ -1397,11 +1397,11 @@ footer {
 
     <div class="hero-cta">
       <a id="ctaPrimary" href="#projects" class="btn btn-primary">
-        <i data-lucide="zap" width="16" height="16"></i>
+        <svg class="icon" xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 14a1 1 0 0 1-.78-1.63l9.9-10.2a.5.5 0 0 1 .86.46l-1.92 6.02A1 1 0 0 0 13 10h7a1 1 0 0 1 .78 1.63l-9.9 10.2a.5.5 0 0 1-.86-.46l1.92-6.02A1 1 0 0 0 11 14z"/></svg>
         <span id="ctaPrimaryLabel">See My Work</span>
       </a>
       <a id="ctaSecondary" href="#writing" class="btn btn-outline">
-        <i data-lucide="book-open" width="16" height="16"></i>
+        <svg class="icon" xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 7v14"/><path d="M3 18a1 1 0 0 1-1-1V4a1 1 0 0 1 1-1h5a4 4 0 0 1 4 4 4 4 0 0 1 4-4h5a1 1 0 0 1 1 1v13a1 1 0 0 1-1 1h-6a3 3 0 0 0-3 3 3 3 0 0 0-3-3z"/></svg>
         <span id="ctaSecondaryLabel">Read My Writing</span>
       </a>
     </div>
@@ -1413,7 +1413,7 @@ footer {
 
   <div class="hero-scroll-hint">
     <span>Scroll</span>
-    <i data-lucide="chevron-down" width="16" height="16"></i>
+    <svg class="icon" xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m6 9 6 6 6-6"/></svg>
   </div>
 </section>
 
@@ -1466,7 +1466,7 @@ footer {
 
     <div class="resume-cta fade-in">
       <a href="https://www.linkedin.com/in/brady-manning/" target="_blank" rel="noopener noreferrer" class="btn btn-primary" aria-label="Connect with Brady on LinkedIn">
-        Connect on LinkedIn <i data-lucide="linkedin" width="16" height="16"></i>
+        Connect on LinkedIn <svg class="icon" xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z"/><rect width="4" height="12" x="2" y="9"/><circle cx="4" cy="4" r="2"/></svg>
       </a>
     </div>
   </div>
@@ -1524,7 +1524,7 @@ footer {
     <h2 class="contact-title fade-in">Let's<br><span>Connect</span></h2>
     <p class="contact-sub fade-in">I'm easy to find and genuinely enjoy good conversations. If you're working on something in energy, VPPs, or if you just want to talk product, running, or books. Please reach out.</p>
     <a href="https://www.linkedin.com/in/brady-manning" target="_blank" rel="noopener noreferrer" class="btn btn-primary fade-in" aria-label="Message Brady on LinkedIn">
-      <i data-lucide="linkedin" width="18" height="18"></i>
+      <svg class="icon" xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z"/><rect width="4" height="12" x="2" y="9"/><circle cx="4" cy="4" r="2"/></svg>
       Message on LinkedIn
     </a>
   </div>
@@ -1791,6 +1791,28 @@ document.getElementById('ctaSecondary').href = CONTENT_CONFIG.hero.ctaSecondary.
 type();
 
 /* ============================================================
+   INLINE SVG ICON HELPER
+   ============================================================ */
+const ICONS = {
+  sun:         `<circle cx="12" cy="12" r="4"/><path d="M12 2v2"/><path d="M12 20v2"/><path d="m4.93 4.93 1.41 1.41"/><path d="m17.66 17.66 1.41 1.41"/><path d="M2 12h2"/><path d="M20 12h2"/><path d="m6.34 17.66-1.41 1.41"/><path d="m19.07 4.93-1.41 1.41"/>`,
+  moon:        `<path d="M20.985 12.486a9 9 0 1 1-9.473-9.472c.405-.022.617.46.402.803a6 6 0 0 0 8.268 8.268c.344-.215.825-.004.803.401"/>`,
+  menu:        `<path d="M4 5h16"/><path d="M4 12h16"/><path d="M4 19h16"/>`,
+  x:           `<path d="M18 6 6 18"/><path d="m6 6 12 12"/>`,
+  'chevron-down': `<path d="m6 9 6 6 6-6"/>`,
+  linkedin:    `<path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z"/><rect width="4" height="12" x="2" y="9"/><circle cx="4" cy="4" r="2"/>`,
+  zap:         `<path d="M4 14a1 1 0 0 1-.78-1.63l9.9-10.2a.5.5 0 0 1 .86.46l-1.92 6.02A1 1 0 0 0 13 10h7a1 1 0 0 1 .78 1.63l-9.9 10.2a.5.5 0 0 1-.86-.46l1.92-6.02A1 1 0 0 0 11 14z"/>`,
+  'bar-chart-2': `<path d="M5 21v-6"/><path d="M12 21V3"/><path d="M19 21V9"/>`,
+  'shopping-cart': `<circle cx="8" cy="21" r="1"/><circle cx="19" cy="21" r="1"/><path d="M2.05 2.05h2l2.66 12.42a2 2 0 0 0 2 1.58h9.78a2 2 0 0 0 1.95-1.57l1.65-7.43H5.12"/>`,
+  'book-open': `<path d="M12 7v14"/><path d="M3 18a1 1 0 0 1-1-1V4a1 1 0 0 1 1-1h5a4 4 0 0 1 4 4 4 4 0 0 1 4-4h5a1 1 0 0 1 1 1v13a1 1 0 0 1-1 1h-6a3 3 0 0 0-3 3 3 3 0 0 0-3-3z"/>`,
+  'arrow-right': `<path d="M5 12h14"/><path d="m12 5 7 7-7 7"/>`,
+  clock:       `<circle cx="12" cy="12" r="10"/><path d="M12 6v6l4 2"/>`,
+};
+function icon(name, size) {
+  const paths = ICONS[name] || '';
+  return `<svg class="icon" xmlns="http://www.w3.org/2000/svg" width="${size}" height="${size}" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">${paths}</svg>`;
+}
+
+/* ============================================================
    THEME TOGGLE
    ============================================================ */
 const html = document.documentElement;
@@ -1799,9 +1821,8 @@ const themeBtn = document.getElementById('themeToggle');
 function setTheme(theme) {
   html.dataset.theme = theme;
   localStorage.setItem('bm-theme', theme);
-  const icon = theme === 'dark' ? 'sun' : 'moon';
-  themeBtn.innerHTML = `<i data-lucide="${icon}" width="16" height="16"></i>`;
-  lucide.createIcons();
+  const iconName = theme === 'dark' ? 'sun' : 'moon';
+  themeBtn.innerHTML = icon(iconName, 16);
 }
 
 const savedTheme = localStorage.getItem('bm-theme') || 'dark';
@@ -1819,18 +1840,14 @@ const mobileMenu = document.getElementById('mobileMenu');
 hamburger.addEventListener('click', () => {
   const open = mobileMenu.classList.toggle('open');
   hamburger.setAttribute('aria-expanded', open);
-  hamburger.innerHTML = open
-    ? `<i data-lucide="x" width="18" height="18"></i>`
-    : `<i data-lucide="menu" width="18" height="18"></i>`;
-  lucide.createIcons();
+  hamburger.innerHTML = open ? icon('x', 18) : icon('menu', 18);
 });
 
 document.querySelectorAll('.mobile-link').forEach(link => {
   link.addEventListener('click', () => {
     mobileMenu.classList.remove('open');
     hamburger.setAttribute('aria-expanded', false);
-    hamburger.innerHTML = `<i data-lucide="menu" width="18" height="18"></i>`;
-    lucide.createIcons();
+    hamburger.innerHTML = icon('menu', 18);
   });
 });
 
@@ -1890,13 +1907,12 @@ function renderPosts(filter = 'all') {
          rel="${post.rel || ''}" 
          class="post-read" 
          aria-label="Read ${post.title}">
-         Read <i data-lucide="arrow-right" width="13" height="13"></i>
+         Read ${icon('arrow-right', 13)}
         </a>
       </div>
     `;
     postsGrid.appendChild(card);
   });
-  lucide.createIcons();
   postsGrid.querySelectorAll('.fade-in').forEach(el => fadeObserver.observe(el));
 }
 
@@ -1993,8 +2009,8 @@ function renderProjects() {
     const card = document.createElement('div');
     card.className = 'project-card fade-in';
     const linkHtml = project.link
-      ? `<a href="${project.link}" target="${project.target || '_self'}" rel="${project.rel || ''}" class="project-link" aria-label="Explore ${project.name}">Explore <i data-lucide="arrow-right" width="14" height="14"></i></a>`
-      : `<span class="project-coming-soon"><i data-lucide="clock" width="13" height="13"></i> Coming soon</span>`;
+      ? `<a href="${project.link}" target="${project.target || '_self'}" rel="${project.rel || ''}" class="project-link" aria-label="Explore ${project.name}">Explore ${icon('arrow-right', 14)}</a>`
+      : `<span class="project-coming-soon">${icon('clock', 13)} Coming soon</span>`;
     const demoZoneHtml = project.imageUrl
       ? `<div class="project-demo-zone" aria-label="${project.name} preview">
           <img class="project-image-preview" src="${project.imageUrl}" alt="${project.name} hero screenshot" loading="lazy">
@@ -2021,7 +2037,7 @@ function renderProjects() {
         </div>`
       : `<div class="project-demo-zone" aria-label="Project demo area">
           <div class="demo-placeholder">
-            <div class="demo-icon"><i data-lucide="${project.icon}" width="22" height="22"></i></div>
+            <div class="demo-icon">${icon(project.icon, 22)}</div>
             <div class="demo-label">[ Embed Demo Here ]</div>
           </div>
         </div>`;
@@ -2051,7 +2067,6 @@ function renderProjects() {
       window.addEventListener('resize', scaleIframe);
     }
   });
-  lucide.createIcons();
   grid.querySelectorAll('.fade-in').forEach(el => fadeObserver.observe(el));
 }
 
@@ -2151,7 +2166,7 @@ function renderSocial() {
   const links = [
     { key: 'linkedin',  svg: svgLinkedIn,  label: 'LinkedIn'  },
     { key: 'github',    svg: svgGitHub,    label: 'GitHub'    },
-    { key: 'goodreads', svg: `<i data-lucide="book-open" width="18" height="18"></i>`, label: 'Goodreads' },
+    { key: 'goodreads', svg: icon('book-open', 18), label: 'Goodreads' },
     { key: 'substack',  svg: svgSubstack,  label: 'Substack Newsletter' },
   ];
   const html = links.map(l => `
@@ -2160,7 +2175,6 @@ function renderSocial() {
     </a>`).join('');
   document.getElementById('heroSocial').innerHTML = html;
   document.getElementById('footerSocial').innerHTML = html;
-  lucide.createIcons();
 }
 
 renderSocial();
@@ -2368,10 +2382,7 @@ function initHeroGrid() {
 
 initHeroGrid();
 
-/* ============================================================
-   INIT LUCIDE ICONS
-   ============================================================ */
-lucide.createIcons();
+
 </script>
 </body>
 </html>

@@ -5,6 +5,14 @@ Entries are **newest-first**. Never overwrite — append new entries at the top 
 
 ---
 
+## 2026-05-27 — Replace Lucide script with inline SVGs
+
+**Commit:** _(pending)_
+
+Eliminated `lucide.min.js` (392KB) from `<head>`, which was synchronously blocking rendering on every page load. Replaced with an `ICONS` map and `icon(name, size)` helper function that returns SVG strings directly. All 12 icons (sun, moon, menu, x, chevron-down, linkedin, zap, bar-chart-2, shopping-cart, book-open, arrow-right, clock) are now hardcoded paths — zero network requests, zero parse overhead, zero render block. LinkedIn was never in Lucide v1.16.0 and was silently rendering nothing; now works correctly using a stroke-based path. Removed all 7 `lucide.createIcons()` calls and replaced every `<i data-lucide>` tag in both HTML and JS.
+
+---
+
 ## 2026-05-22 — Social metadata, OG image, and asset reorganization
 
 **Commit:** `f7f2029`
