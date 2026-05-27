@@ -5,6 +5,19 @@ Entries are **newest-first**. Never overwrite — append new entries at the top 
 
 ---
 
+## 2026-05-27 — Footer redesign: tagline, 3-column layout, Negawatt CTA
+
+**Commit:** _(pending)_
+
+Replaced the bare copyright-bar footer with a structured three-part layout:
+- **Tagline row:** "Building tomorrow's grid with today's homeowners." — full-width, bold gradient text
+- **Three-column grid:** (1) Brady Manning brand/identity, (2) Site nav with all 6 links stacked vertically (About → Games), (3) Negawatt Weekly description + subscribe link + social icons
+- **Bottom bar:** Copyright only
+
+Responsive: collapses to 2-column at ≤900px, single column at ≤600px.
+
+---
+
 ## 2026-05-27 — Optimization batch: UX, SEO, accessibility, hygiene
 
 **Commit:** `3b575ed`

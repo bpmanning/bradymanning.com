@@ -1262,16 +1262,105 @@ footer {
   position: relative;
   z-index: 1;
   border-top: 1px solid var(--border);
-  padding: 32px 0;
 }
 
-.footer-inner {
+.footer-tagline-row {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 48px 32px 40px;
+  border-bottom: 1px solid var(--border);
+}
+
+.footer-tagline {
+  font-family: 'Lato', sans-serif;
+  font-weight: 800;
+  font-size: clamp(1.4rem, 3vw, 2.2rem);
+  letter-spacing: -0.02em;
+  background: linear-gradient(135deg, var(--text-primary) 0%, var(--text-secondary) 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+.footer-grid {
+  display: grid;
+  grid-template-columns: 1.6fr 1fr 1.6fr;
+  gap: 48px;
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 40px 32px;
+}
+
+.footer-brand-name {
+  font-family: 'Lato', sans-serif;
+  font-weight: 800;
+  font-size: 1.05rem;
+  color: var(--text-primary);
+  margin-bottom: 8px;
+}
+
+.footer-brand-meta {
+  font-size: 0.84rem;
+  color: var(--text-muted);
+  line-height: 1.7;
+}
+
+.footer-col-label {
+  font-size: 0.7rem;
+  font-weight: 700;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--accent-cyan);
+  margin-bottom: 16px;
+}
+
+.footer-nav {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.footer-nav a {
+  font-size: 0.88rem;
+  color: var(--text-secondary);
+  transition: color var(--transition);
+}
+
+.footer-nav a:hover { color: var(--accent-cyan); }
+
+.footer-newsletter-desc {
+  font-size: 0.88rem;
+  color: var(--text-secondary);
+  line-height: 1.65;
+  font-weight: 300;
+  margin-bottom: 16px;
+}
+
+.footer-newsletter-link {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  font-family: 'Lato', sans-serif;
+  font-size: 0.85rem;
+  font-weight: 700;
+  color: var(--accent-cyan);
+  margin-bottom: 24px;
+  transition: gap var(--transition);
+}
+
+.footer-newsletter-link:hover { gap: 10px; }
+
+.footer-bottom {
+  border-top: 1px solid var(--border);
+  padding: 20px 32px;
+}
+
+.footer-bottom-inner {
   display: flex;
   align-items: center;
   justify-content: space-between;
   max-width: 1200px;
   margin: 0 auto;
-  padding: 0 32px;
 }
 
 .footer-copy {
@@ -1279,14 +1368,22 @@ footer {
   color: var(--text-muted);
 }
 
-.footer-link {
-  color: var(--text-muted);
-  transition: color var(--transition);
-  display: flex;
-  align-items: center;
+@media (max-width: 900px) {
+  .footer-grid {
+    grid-template-columns: 1fr 1fr;
+    gap: 36px;
+  }
 }
 
-.footer-link:hover { color: var(--accent-cyan); }
+@media (max-width: 600px) {
+  .footer-tagline-row { padding: 36px 20px 28px; }
+  .footer-grid {
+    grid-template-columns: 1fr;
+    gap: 32px;
+    padding: 32px 20px;
+  }
+  .footer-bottom { padding: 20px; }
+}
 
 /* ============================================================
    RESPONSIVE
@@ -1556,10 +1653,47 @@ footer {
      FOOTER
      ============================================================ -->
 <footer role="contentinfo">
-  <div class="footer-inner">
-    <p class="footer-copy">© 2026 Brady Manning</p>
-    <div class="footer-social" id="footerSocial"></div>
+
+  <div class="footer-tagline-row">
+    <p class="footer-tagline">Building tomorrow's grid with today's homeowners.</p>
   </div>
+
+  <div class="footer-grid">
+
+    <div class="footer-col">
+      <p class="footer-brand-name">Brady Manning</p>
+      <p class="footer-brand-meta">Staff PM, VPP Builder<br>GoodGrid · GoodLeap</p>
+    </div>
+
+    <div class="footer-col">
+      <p class="footer-col-label">Site</p>
+      <nav class="footer-nav" aria-label="Footer navigation">
+        <a href="#about">About</a>
+        <a href="#experience">Experience</a>
+        <a href="#projects">Projects</a>
+        <a href="#writing">Writing</a>
+        <a href="#contact">Contact</a>
+        <a href="/games">Games</a>
+      </nav>
+    </div>
+
+    <div class="footer-col">
+      <p class="footer-col-label">Negawatt Weekly</p>
+      <p class="footer-newsletter-desc">Practitioner's newsletter on virtual power plants and distributed energy markets.</p>
+      <a href="https://newsletter.bradymanning.com" target="_blank" rel="noopener noreferrer" class="footer-newsletter-link">
+        Subscribe → newsletter.bradymanning.com
+      </a>
+      <div class="footer-social" id="footerSocial"></div>
+    </div>
+
+  </div>
+
+  <div class="footer-bottom">
+    <div class="footer-bottom-inner">
+      <p class="footer-copy">© 2026 Brady Manning</p>
+    </div>
+  </div>
+
 </footer>
 
 <script>
