@@ -1345,12 +1345,20 @@ footer {
   font-family: 'Lato', sans-serif;
   font-size: 0.85rem;
   font-weight: 700;
-  color: var(--accent-cyan);
   margin-bottom: 24px;
   transition: gap var(--transition);
 }
 
 .footer-newsletter-link:hover { gap: 10px; }
+
+.footer-newsletter-cta { color: var(--accent-cyan); }
+
+.footer-newsletter-url {
+  color: var(--text-secondary);
+  text-decoration: underline;
+  text-underline-offset: 3px;
+  font-weight: 400;
+}
 
 .footer-bottom {
   border-top: 1px solid var(--border);
@@ -1683,7 +1691,8 @@ footer {
       <p class="footer-col-label">Negawatt Weekly</p>
       <p class="footer-newsletter-desc">Practitioner's newsletter on virtual power plants and distributed energy markets.</p>
       <a href="https://newsletter.bradymanning.com" target="_blank" rel="noopener noreferrer" class="footer-newsletter-link">
-        Subscribe → newsletter.bradymanning.com
+        <span class="footer-newsletter-cta">Subscribe →</span>
+        <span class="footer-newsletter-url">newsletter.bradymanning.com</span>
       </a>
       <div class="footer-social" id="footerSocial"></div>
     </div>
