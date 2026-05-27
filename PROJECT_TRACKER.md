@@ -5,6 +5,22 @@ Entries are **newest-first**. Never overwrite — append new entries at the top 
 
 ---
 
+## 2026-05-27 — Optimization batch: UX, SEO, accessibility, hygiene
+
+**Commit:** _(pending)_
+
+Seven fixes from a fresh audit scan:
+
+1. **Dead Writing links (#1):** `renderPosts()` now detects `link === "#"` and renders a "Coming soon" span (clock icon, same pattern as project cards) instead of a "Read →" link that silently scrolled to page top.
+2. **meta theme-color (#2):** Added two `<meta name="theme-color">` tags — `#07090f` for dark preference, `#f0f2fa` for light. Mobile browsers use this to color the address bar.
+3. **OG image dimensions (#4):** Added `og:image:width` (1200) and `og:image:height` (630) — improves rendering in Slack, Discord, and some LinkedIn preview scrapers.
+4. **Sitemap lastmod (#3):** Updated both URLs from `2026-05-23` to `2026-05-27`.
+5. **Skip link (#5):** Added `<a href="#about" class="skip-link">Skip to content</a>` at top of body with CSS that hides off-screen until focused — WCAG 2.1 AA keyboard accessibility requirement.
+6. **Post card clickability (#6):** Click handler added to each `.post-card` — delegates to the inner `.post-read` anchor when the user clicks anywhere on the card outside of an `<a>` tag.
+7. **Code hygiene (#7–9):** Renamed `html` → `socialHtml` in `renderSocial()` to eliminate variable shadowing; updated stale Lucide comment in CONTENT_CONFIG to reference the ICONS map; removed trailing slash from LinkedIn URL in Experience CTA to match Contact section.
+
+---
+
 ## 2026-05-27 — Replace Lucide script with inline SVGs
 
 **Commit:** `ac6422a`

@@ -8,6 +8,8 @@
 <meta property="og:title" content="Brady Manning — Staff PM, VPP Builder">
 <meta property="og:description" content="Product leader building the future of distributed energy. Leading a 100+ MW VPP aggregating 15,000+ home batteries across the US.">
 <meta property="og:image" content="https://bradymanning.com/assets/og-image.png">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
 <meta property="og:url" content="https://bradymanning.com">
 <meta property="og:type" content="website">
 <meta property="og:site_name" content="Brady Manning">
@@ -18,6 +20,8 @@
 <meta name="twitter:description" content="Product leader building the future of distributed energy. Leading a 100+ MW VPP aggregating 15,000+ home batteries.">
 <meta name="twitter:image" content="https://bradymanning.com/assets/og-image.png">
 <link rel="canonical" href="https://bradymanning.com">
+<meta name="theme-color" content="#07090f" media="(prefers-color-scheme: dark)">
+<meta name="theme-color" content="#f0f2fa" media="(prefers-color-scheme: light)">
 <link rel="icon" type="image/png" href="/assets/favicon-96x96.png" sizes="96x96" />
 <link rel="icon" type="image/svg+xml" href="/assets/favicon.svg" />
 <link rel="shortcut icon" href="/assets/favicon.ico" />
@@ -78,6 +82,22 @@
    ============================================================ */
 *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
 svg.icon { flex-shrink: 0; vertical-align: middle; }
+
+.skip-link {
+  position: absolute;
+  top: -100px;
+  left: 16px;
+  padding: 10px 20px;
+  background: var(--accent-cyan);
+  color: #07090f;
+  font-family: 'Lato', sans-serif;
+  font-weight: 700;
+  font-size: 0.875rem;
+  border-radius: 0 0 8px 8px;
+  z-index: 9999;
+  transition: top 0.2s;
+}
+.skip-link:focus { top: 0; }
 
 html { scroll-behavior: smooth; font-size: 16px; }
 
@@ -1339,6 +1359,8 @@ footer {
 </head>
 <body>
 
+<a href="#about" class="skip-link">Skip to content</a>
+
 <!-- Hero grid canvas -->
 <canvas id="hero-grid-canvas" aria-hidden="true"></canvas>
 <div class="hero-grid-overlay" aria-hidden="true"></div>
@@ -1465,7 +1487,7 @@ footer {
     </div>
 
     <div class="resume-cta fade-in">
-      <a href="https://www.linkedin.com/in/brady-manning/" target="_blank" rel="noopener noreferrer" class="btn btn-primary" aria-label="Connect with Brady on LinkedIn">
+      <a href="https://www.linkedin.com/in/brady-manning" target="_blank" rel="noopener noreferrer" class="btn btn-primary" aria-label="Connect with Brady on LinkedIn">
         Connect on LinkedIn <svg class="icon" xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z"/><rect width="4" height="12" x="2" y="9"/><circle cx="4" cy="4" r="2"/></svg>
       </a>
     </div>
@@ -1650,7 +1672,7 @@ const CONTENT_CONFIG = {
   // ============================================================
   // PROJECTS
   // Set link: null for projects that aren't live yet.
-  // icon: any Lucide icon name (https://lucide.dev/icons)
+  // icon: must be a key in the ICONS map defined in the JS below (zap, bar-chart-2, shopping-cart, book-open, etc.)
   // ============================================================
   projects: [
     {
@@ -1902,15 +1924,18 @@ function renderPosts(filter = 'all') {
       <p class="post-summary">${post.summary}</p>
       <div class="post-footer">
         <span class="post-date">${post.date}</span>
-        <a href="${post.link}" 
-         target="${post.target || '_self'}" 
-         rel="${post.rel || ''}" 
-         class="post-read" 
-         aria-label="Read ${post.title}">
-         Read ${icon('arrow-right', 13)}
-        </a>
+        ${post.link && post.link !== '#'
+          ? `<a href="${post.link}" target="${post.target || '_self'}" rel="${post.rel || ''}" class="post-read" aria-label="Read ${post.title}">Read ${icon('arrow-right', 13)}</a>`
+          : `<span class="project-coming-soon">${icon('clock', 13)} Coming soon</span>`
+        }
       </div>
     `;
+    const link = card.querySelector('.post-read');
+    if (link) {
+      card.addEventListener('click', (e) => {
+        if (!e.target.closest('a')) link.click();
+      });
+    }
     postsGrid.appendChild(card);
   });
   postsGrid.querySelectorAll('.fade-in').forEach(el => fadeObserver.observe(el));
@@ -2169,12 +2194,12 @@ function renderSocial() {
     { key: 'goodreads', svg: icon('book-open', 18), label: 'Goodreads' },
     { key: 'substack',  svg: svgSubstack,  label: 'Substack Newsletter' },
   ];
-  const html = links.map(l => `
+  const socialHtml = links.map(l => `
     <a href="${CONTENT_CONFIG.social[l.key]}" target="_blank" rel="noopener noreferrer" aria-label="${l.label}">
       ${l.svg}
     </a>`).join('');
-  document.getElementById('heroSocial').innerHTML = html;
-  document.getElementById('footerSocial').innerHTML = html;
+  document.getElementById('heroSocial').innerHTML = socialHtml;
+  document.getElementById('footerSocial').innerHTML = socialHtml;
 }
 
 renderSocial();
