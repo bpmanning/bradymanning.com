@@ -7,7 +7,7 @@ Entries are **newest-first**. Never overwrite — append new entries at the top 
 
 ## 2026-05-27 — Optimization batch: UX, SEO, accessibility, hygiene
 
-**Commit:** _(pending)_
+**Commit:** `3b575ed`
 
 Seven fixes from a fresh audit scan:
 
