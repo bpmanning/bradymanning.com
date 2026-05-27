@@ -131,60 +131,60 @@ All colors are defined as CSS custom properties on `:root` (dark theme) and `[da
 
 ### Dark Theme (Primary)
 
-| Token | Hex / Value | Usage |
-|---|---|---|
-| `--bg-primary` | `#07090f` | Page background, canvas backdrop |
-| `--bg-secondary` | `#0d1120` | Section backgrounds (experience, writing) |
-| `--bg-card` | `#0f1525` | Card surfaces |
-| `--bg-card-hover` | `#141a2e` | Card hover state |
-| `--text-primary` | `#e8eaf6` | Headlines, high-emphasis text |
-| `--text-secondary` | `#8892b0` | Body copy, descriptions |
-| `--text-muted` | `#4a5578` | Labels, dates, metadata |
-| `--accent-cyan` | `#00ff88` | Primary accent — CTAs, active states, highlights |
-| `--accent-violet` | `#8b5cf6` | Secondary accent — gradient partner to cyan |
-| `--accent-cyan-dim` | `rgba(0,255,136,0.12)` | Subtle backgrounds behind cyan elements |
-| `--accent-violet-dim` | `rgba(139,92,246,0.12)` | Subtle backgrounds behind violet elements |
-| `--border` | `rgba(255,255,255,0.06)` | Default card/component borders |
-| `--border-accent` | `rgba(0,255,136,0.30)` | Hover/active border on cards |
-| `--nav-bg` | `rgba(7,9,15,0.85)` | Frosted nav backdrop |
-| `--glow-cyan` | `0 0 30px rgba(0,255,136,0.25), 0 0 60px rgba(0,255,136,0.1)` | Cyan glow on hover |
-| `--glow-violet` | `0 0 30px rgba(139,92,246,0.25), 0 0 60px rgba(139,92,246,0.1)` | Violet glow on hover |
+| Token | Hex / Value | Swatch | Usage |
+|---|---|---|---|
+| `--bg-primary` | `#07090f` | ![](https://placehold.co/20x14/07090f/07090f.png) | Page background, canvas backdrop |
+| `--bg-secondary` | `#0d1120` | ![](https://placehold.co/20x14/0d1120/0d1120.png) | Section backgrounds (experience, writing) |
+| `--bg-card` | `#0f1525` | ![](https://placehold.co/20x14/0f1525/0f1525.png) | Card surfaces |
+| `--bg-card-hover` | `#141a2e` | ![](https://placehold.co/20x14/141a2e/141a2e.png) | Card hover state |
+| `--text-primary` | `#e8eaf6` | ![](https://placehold.co/20x14/e8eaf6/e8eaf6.png) | Headlines, high-emphasis text |
+| `--text-secondary` | `#8892b0` | ![](https://placehold.co/20x14/8892b0/8892b0.png) | Body copy, descriptions |
+| `--text-muted` | `#4a5578` | ![](https://placehold.co/20x14/4a5578/4a5578.png) | Labels, dates, metadata |
+| `--accent-cyan` | `#00ff88` | ![](https://placehold.co/20x14/00ff88/00ff88.png) | Primary accent — CTAs, active states, highlights |
+| `--accent-violet` | `#8b5cf6` | ![](https://placehold.co/20x14/8b5cf6/8b5cf6.png) | Secondary accent — gradient partner to cyan |
+| `--accent-cyan-dim` | `rgba(0,255,136,0.12)` | ![](https://placehold.co/20x14/00ff88/00ff88.png) α | Subtle backgrounds behind cyan elements |
+| `--accent-violet-dim` | `rgba(139,92,246,0.12)` | ![](https://placehold.co/20x14/8b5cf6/8b5cf6.png) α | Subtle backgrounds behind violet elements |
+| `--border` | `rgba(255,255,255,0.06)` | ![](https://placehold.co/20x14/ffffff/ffffff.png) α | Default card/component borders |
+| `--border-accent` | `rgba(0,255,136,0.30)` | ![](https://placehold.co/20x14/00ff88/00ff88.png) α | Hover/active border on cards |
+| `--nav-bg` | `rgba(7,9,15,0.85)` | ![](https://placehold.co/20x14/07090f/07090f.png) α | Frosted nav backdrop |
+| `--glow-cyan` | `0 0 30px rgba(0,255,136,0.25)…` | — | Cyan box-shadow glow on hover |
+| `--glow-violet` | `0 0 30px rgba(139,92,246,0.25)…` | — | Violet box-shadow glow on hover |
 
 ### Light Theme
 
-| Token | Hex / Value | Notes |
-|---|---|---|
-| `--bg-primary` | `#f0f2fa` | |
-| `--bg-secondary` | `#e8eaf5` | |
-| `--bg-card` | `#ffffff` | |
-| `--bg-card-hover` | `#f5f7ff` | |
-| `--text-primary` | `#0a0f2e` | |
-| `--text-secondary` | `#3d4466` | |
-| `--text-muted` | `#5d6680` | WCAG AA compliant (5.1:1 on `#f0f2fa`) |
-| `--accent-cyan` | `#00cc6a` | Darker green for light-bg contrast |
-| `--accent-violet` | `#6d28d9` | |
-| `--border` | `rgba(0,0,0,0.12)` | |
-| `--border-accent` | `rgba(0,204,106,0.35)` | |
+| Token | Hex / Value | Swatch | Notes |
+|---|---|---|---|
+| `--bg-primary` | `#f0f2fa` | ![](https://placehold.co/20x14/f0f2fa/f0f2fa.png) | |
+| `--bg-secondary` | `#e8eaf5` | ![](https://placehold.co/20x14/e8eaf5/e8eaf5.png) | |
+| `--bg-card` | `#ffffff` | ![](https://placehold.co/20x14/ffffff/cccccc.png) | |
+| `--bg-card-hover` | `#f5f7ff` | ![](https://placehold.co/20x14/f5f7ff/f5f7ff.png) | |
+| `--text-primary` | `#0a0f2e` | ![](https://placehold.co/20x14/0a0f2e/0a0f2e.png) | |
+| `--text-secondary` | `#3d4466` | ![](https://placehold.co/20x14/3d4466/3d4466.png) | |
+| `--text-muted` | `#5d6680` | ![](https://placehold.co/20x14/5d6680/5d6680.png) | WCAG AA compliant (5.1:1 on `#f0f2fa`) |
+| `--accent-cyan` | `#00cc6a` | ![](https://placehold.co/20x14/00cc6a/00cc6a.png) | Darker green for light-bg contrast |
+| `--accent-violet` | `#6d28d9` | ![](https://placehold.co/20x14/6d28d9/6d28d9.png) | |
+| `--border` | `rgba(0,0,0,0.12)` | ![](https://placehold.co/20x14/000000/000000.png) α | |
+| `--border-accent` | `rgba(0,204,106,0.35)` | ![](https://placehold.co/20x14/00cc6a/00cc6a.png) α | |
 
 ### Gradients
 
-| Name | Value | Usage |
-|---|---|---|
-| Brand gradient | `linear-gradient(135deg, #00ff88, #8b5cf6)` | BM wordmark, buttons, stat numbers, section title accents |
-| Hero name | `linear-gradient(160deg, #e8eaf6 0%, #8892b0 100%)` | Hero `<h1>` text fill |
-| Footer tagline | `linear-gradient(135deg, var(--text-primary), var(--text-secondary))` | Footer tagline text |
-| Timeline connector | `linear-gradient(to bottom, transparent, #00ff88, #8b5cf6, transparent)` | Vertical timeline line |
+| Name | Value | Swatches | Usage |
+|---|---|---|---|
+| Brand gradient | `linear-gradient(135deg, #00ff88, #8b5cf6)` | ![](https://placehold.co/20x14/00ff88/00ff88.png) → ![](https://placehold.co/20x14/8b5cf6/8b5cf6.png) | BM wordmark, buttons, stat numbers, section title accents |
+| Hero name | `linear-gradient(160deg, #e8eaf6 0%, #8892b0 100%)` | ![](https://placehold.co/20x14/e8eaf6/e8eaf6.png) → ![](https://placehold.co/20x14/8892b0/8892b0.png) | Hero `<h1>` text fill |
+| Footer tagline | `linear-gradient(135deg, var(--text-primary), var(--text-secondary))` | ![](https://placehold.co/20x14/e8eaf6/e8eaf6.png) → ![](https://placehold.co/20x14/8892b0/8892b0.png) | Footer tagline text |
+| Timeline connector | `linear-gradient(to bottom, transparent, #00ff88, #8b5cf6, transparent)` | ![](https://placehold.co/20x14/00ff88/00ff88.png) → ![](https://placehold.co/20x14/8b5cf6/8b5cf6.png) | Vertical timeline line |
 
 ### Timeline Dot Colors
 Each experience entry has a distinct dot color, receding from most recent (brightest) to oldest (deepest violet):
 
-| Position | Company | Color |
-|---|---|---|
-| 1 | GoodLeap | `#00ff88` |
-| 2 | Fluence Energy | `#00d4aa` |
-| 3 | GM Energy | `#5b7cf6` |
-| 4 | NRG Energy | `#7464ee` |
-| 5 | Entergy | `#8b5cf6` |
+| Position | Company | Color | Swatch |
+|---|---|---|---|
+| 1 | GoodLeap | `#00ff88` | ![](https://placehold.co/20x14/00ff88/00ff88.png) |
+| 2 | Fluence Energy | `#00d4aa` | ![](https://placehold.co/20x14/00d4aa/00d4aa.png) |
+| 3 | GM Energy | `#5b7cf6` | ![](https://placehold.co/20x14/5b7cf6/5b7cf6.png) |
+| 4 | NRG Energy | `#7464ee` | ![](https://placehold.co/20x14/7464ee/7464ee.png) |
+| 5 | Entergy | `#8b5cf6` | ![](https://placehold.co/20x14/8b5cf6/8b5cf6.png) |
 
 ---
 
