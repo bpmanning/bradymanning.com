@@ -7,7 +7,7 @@ Entries are **newest-first**. Never overwrite — append new entries at the top 
 
 ## 2026-05-27 — Footer redesign: tagline, 3-column layout, Negawatt CTA
 
-**Commit:** _(pending)_
+**Commit:** `a152566`
 
 Replaced the bare copyright-bar footer with a structured three-part layout:
 - **Tagline row:** "Building tomorrow's grid with today's homeowners." — full-width, bold gradient text
