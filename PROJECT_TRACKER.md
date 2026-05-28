@@ -5,6 +5,19 @@ Entries are **newest-first**. Never overwrite — append new entries at the top 
 
 ---
 
+## 2026-05-28 — Scroll-driven line-draw animations (About + Experience)
+
+**Commit:** `9388766`
+
+Added scroll-driven reveal animations to the vertical lines in the About and Experience sections:
+
+- **Experience timeline:** `.timeline::before` converted to a faint `var(--border)` ghost track. A `.timeline-line-fill` DOM element (cyan→violet gradient) starts fully clipped and reveals top-to-bottom as you scroll through the section.
+- **About section:** `.about-line-fill` div centered between the two about-grid columns (text vs. stats). Same clip-path reveal on scroll. Hidden on mobile where the grid is single-column.
+- Both driven by one `requestAnimationFrame`-throttled scroll listener using `clip-path: inset(0 0 X% 0)` — no layout reflow, smooth at 60fps.
+- `prefers-reduced-motion` users see both lines fully drawn immediately.
+
+---
+
 ## 2026-05-27 — Footer redesign: tagline, 3-column layout, Negawatt CTA
 
 **Commit:** `a152566`
