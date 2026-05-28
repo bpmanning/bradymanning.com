@@ -178,6 +178,7 @@ section { padding: 120px 0; }
 
 @media (prefers-reduced-motion: reduce) {
   #hero-grid-canvas { display: none; }
+  .timeline-line-fill, .about-line-fill { clip-path: none !important; }
 }
 
 @media (max-width: 767px) {
@@ -562,6 +563,18 @@ nav {
   grid-template-columns: 1fr 1fr;
   gap: 80px;
   align-items: start;
+  position: relative;
+}
+
+.about-line-fill {
+  position: absolute;
+  left: calc(50% - 0.5px);
+  top: 0;
+  width: 1px;
+  height: 100%;
+  background: linear-gradient(to bottom, var(--accent-cyan), var(--accent-violet));
+  clip-path: inset(0 0 100% 0);
+  pointer-events: none;
 }
 
 .about-text p {
@@ -661,8 +674,21 @@ nav {
   left: 50%;
   top: 0; bottom: 0;
   width: 1px;
+  background: var(--border);
+  transform: translateX(-50%);
+}
+
+.timeline-line-fill {
+  position: absolute;
+  left: 50%;
+  top: 0;
+  width: 1px;
+  height: 100%;
   background: linear-gradient(to bottom, transparent, var(--accent-cyan), var(--accent-violet), transparent);
   transform: translateX(-50%);
+  clip-path: inset(0 0 100% 0);
+  pointer-events: none;
+  z-index: 0;
 }
 
 .timeline-item {
@@ -1407,6 +1433,8 @@ footer {
   .about-grid { grid-template-columns: 1fr; gap: 48px; }
 
   .timeline::before { left: 20px; }
+  .timeline-line-fill { left: 20px; transform: none; }
+  .about-line-fill { display: none; }
 
   .timeline-item {
     display: block;
@@ -1552,6 +1580,7 @@ footer {
 <section id="about" aria-label="About Brady Manning">
   <div class="container">
     <div class="about-grid">
+      <div class="about-line-fill" aria-hidden="true"></div>
       <div>
         <p class="section-label">About</p>
         <h2 class="section-title fade-in">Builder.<br>Leader.<br>Learner.</h2>
@@ -2164,6 +2193,11 @@ function renderExperience() {
 
 renderExperience();
 
+const tlLineFill = document.createElement('div');
+tlLineFill.className = 'timeline-line-fill';
+tlLineFill.setAttribute('aria-hidden', 'true');
+document.getElementById('timeline').prepend(tlLineFill);
+
 const tlPulse = document.createElement('div');
 tlPulse.className = 'timeline-pulse';
 tlPulse.setAttribute('aria-hidden', 'true');
@@ -2549,6 +2583,49 @@ function initHeroGrid() {
     if (label) label.classList.add('visible');
   }, 1200);
 }
+
+/* ============================================================
+   LINE-DRAW SCROLL ANIMATIONS
+   ============================================================ */
+(function initLineDrawAnimations() {
+  const aboutGrid = document.querySelector('.about-grid');
+  const timelineEl = document.getElementById('timeline');
+  let rafPending = false;
+
+  function updateLines() {
+    const wh = window.innerHeight;
+
+    if (aboutGrid) {
+      const fill = aboutGrid.querySelector('.about-line-fill');
+      if (fill) {
+        const rect = aboutGrid.getBoundingClientRect();
+        const progress = Math.min(1, Math.max(0, (wh * 0.85 - rect.top) / rect.height));
+        fill.style.clipPath = `inset(0 0 ${(1 - progress) * 100}% 0)`;
+      }
+    }
+
+    if (timelineEl) {
+      const fill = timelineEl.querySelector('.timeline-line-fill');
+      if (fill) {
+        const rect = timelineEl.getBoundingClientRect();
+        const progress = Math.min(1, Math.max(0, (wh * 0.85 - rect.top) / rect.height));
+        fill.style.clipPath = `inset(0 0 ${(1 - progress) * 100}% 0)`;
+      }
+    }
+
+    rafPending = false;
+  }
+
+  function onScroll() {
+    if (!rafPending) {
+      rafPending = true;
+      requestAnimationFrame(updateLines);
+    }
+  }
+
+  window.addEventListener('scroll', onScroll, { passive: true });
+  updateLines();
+})();
 
 initHeroGrid();
 
