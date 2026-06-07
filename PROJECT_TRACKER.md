@@ -5,6 +5,18 @@ Entries are **newest-first**. Never overwrite — append new entries at the top 
 
 ---
 
+## 2026-06-07 — Past-tense corrections for GoodLeap role
+
+**Commit:** `431a0e2`
+
+Fixed present-tense copy that implied Brady was still at GoodLeap:
+
+- **About para 1:** "I'm a Staff Product Manager at GoodLeap, where I lead..." → "Most recently, I was Staff Product Manager at GoodLeap, where I led..."
+- **About para 2:** Added GoodLeap to the company list (it was missing entirely); reordered to most-recent-first: GoodLeap, Fluence, GM Energy, NRG, Entergy.
+- **Experience bullets (GoodLeap):** "Leading / Building / Driving" → "Led / Built / Drove"
+
+---
+
 ## 2026-06-07 — Hide placeholder blog posts
 
 **Commit:** `49362a8`
