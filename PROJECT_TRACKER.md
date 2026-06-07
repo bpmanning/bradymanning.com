@@ -5,6 +5,14 @@ Entries are **newest-first**. Never overwrite — append new entries at the top 
 
 ---
 
+## 2026-06-07 — Hide placeholder blog posts
+
+**Commit:** `49362a8`
+
+Writing section now only renders posts with a live link. `renderPosts()` filters `CONTENT_CONFIG.posts` to exclude any entry where `link` is `null` or `'#'` before building the grid. The five placeholder posts remain in config and will surface automatically once published. One live article ("The VPP Arms Race") now displays cleanly on its own.
+
+---
+
 ## 2026-06-07 — Job search refresh: availability signals, resume download, copy updates
 
 **Commit:** `fc4b8a4`
