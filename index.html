@@ -3,9 +3,9 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Brady Manning — Staff PM, VPP Builder</title>
-<meta name="description" content="Brady Manning is a Staff Product Manager leading GoodGrid, a 150+ MW Virtual Power Plant aggregating 20,000+ home batteries. 10 years in energy tech across GoodLeap, Fluence, GM Energy, and NRG.">
-<meta property="og:title" content="Brady Manning — Staff PM, VPP Builder">
+<title>Brady Manning — Energy Product Leader | VPPs & Distributed Energy</title>
+<meta name="description" content="Brady Manning is a product leader with 10 years building distributed energy systems — virtual power plants, BESS platforms, and grid-edge products across GoodLeap, Fluence, GM Energy, and NRG. Open to new opportunities.">
+<meta property="og:title" content="Brady Manning — Product Leader, Energy Innovator">
 <meta property="og:description" content="Product leader building the future of distributed energy. Leading a 150+ MW VPP aggregating 20,000+ home batteries across the US.">
 <meta property="og:image" content="https://bradymanning.com/assets/og-image.png">
 <meta property="og:image:width" content="1200">
@@ -16,7 +16,7 @@
 <meta name="twitter:card" content="summary_large_image">
 <meta name="twitter:site" content="@negawatt_news">
 <meta name="twitter:creator" content="@bradymanning16">
-<meta name="twitter:title" content="Brady Manning — Staff PM, VPP Builder">
+<meta name="twitter:title" content="Brady Manning — Product Leader, Energy Innovator">
 <meta name="twitter:description" content="Product leader building the future of distributed energy. Leading a 150+ MW VPP aggregating 20,000+ home batteries.">
 <meta name="twitter:image" content="https://bradymanning.com/assets/og-image.png">
 <link rel="canonical" href="https://bradymanning.com">
@@ -394,6 +394,40 @@ nav {
 }
 
 @keyframes blink { 0%, 100% { opacity: 1; } 50% { opacity: 0; } }
+
+.hero-availability {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 6px 14px;
+  border-radius: 100px;
+  border: 1px solid rgba(0, 255, 136, 0.25);
+  background: rgba(0, 255, 136, 0.07);
+  color: var(--accent-cyan);
+  font-size: 0.8rem;
+  font-weight: 500;
+  letter-spacing: 0.02em;
+  margin-bottom: 20px;
+}
+
+[data-theme="light"] .hero-availability {
+  border-color: rgba(0, 204, 106, 0.3);
+  background: rgba(0, 204, 106, 0.08);
+}
+
+.availability-dot {
+  width: 7px;
+  height: 7px;
+  border-radius: 50%;
+  background: var(--accent-cyan);
+  flex-shrink: 0;
+  animation: pulse-dot 2.4s ease-in-out infinite;
+}
+
+@keyframes pulse-dot {
+  0%, 100% { opacity: 1; transform: scale(1); }
+  50% { opacity: 0.5; transform: scale(0.85); }
+}
 
 .hero-bio {
   font-size: clamp(1rem, 1.8vw, 1.2rem);
@@ -1550,16 +1584,17 @@ footer {
       <span class="hero-typewriter" id="typewriter" aria-live="polite"></span><span class="cursor"></span>
     </div>
 
-    <p class="hero-bio" id="heroBio">Product leader and energy nerd building the future of distributed energy. I work on virtual power plants by day and enjoy tinkering, reading, and writing by night.</p>
+    <div class="hero-availability">
+      <span class="availability-dot" aria-hidden="true"></span>
+      <span>Open to new opportunities</span>
+    </div>
+
+    <p class="hero-bio" id="heroBio">Product leader and energy nerd building the future of distributed energy. I work on virtual power plants by day and enjoy tinkering, reading, and writing by night. I'm exploring my next chapter and looking to do the most consequential work of my career.</p>
 
     <div class="hero-cta">
-      <a id="ctaPrimary" href="#projects" class="btn btn-primary">
-        <svg class="icon" xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 14a1 1 0 0 1-.78-1.63l9.9-10.2a.5.5 0 0 1 .86.46l-1.92 6.02A1 1 0 0 0 13 10h7a1 1 0 0 1 .78 1.63l-9.9 10.2a.5.5 0 0 1-.86-.46l1.92-6.02A1 1 0 0 0 11 14z"/></svg>
-        <span id="ctaPrimaryLabel">See My Work</span>
-      </a>
-      <a id="ctaSecondary" href="#writing" class="btn btn-outline">
-        <svg class="icon" xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 7v14"/><path d="M3 18a1 1 0 0 1-1-1V4a1 1 0 0 1 1-1h5a4 4 0 0 1 4 4 4 4 0 0 1 4-4h5a1 1 0 0 1 1 1v13a1 1 0 0 1-1 1h-6a3 3 0 0 0-3 3 3 3 0 0 0-3-3z"/></svg>
-        <span id="ctaSecondaryLabel">Read My Writing</span>
+      <a href="/assets/Brady_Manning_Resume.pdf" download class="btn btn-primary" aria-label="Download Brady Manning's resume">
+        <svg class="icon" xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
+        Download Resume
       </a>
     </div>
 
@@ -1680,7 +1715,7 @@ footer {
 
   <div class="container contact-inner">
     <h2 class="contact-title fade-in">Let's<br><span>Connect</span></h2>
-    <p class="contact-sub fade-in">I'm easy to find and genuinely enjoy good conversations. If you're working on something in energy, VPPs, or if you just want to talk product, running, or books. Please reach out.</p>
+    <p class="contact-sub fade-in">I'm currently exploring my next role in energy and product — ideally somewhere building at the grid edge, whether that's VPPs, data centers, DERMS, distributed energy resources, or the broader energy transition. If you're working on something ambitious, or you just want to trade notes on energy markets, product, running, or books, I want to hear from you.</p>
     <a href="https://www.linkedin.com/in/brady-manning" target="_blank" rel="noopener noreferrer" class="btn btn-primary fade-in" aria-label="Message Brady on LinkedIn">
       <svg class="icon" xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z"/><rect width="4" height="12" x="2" y="9"/><circle cx="4" cy="4" r="2"/></svg>
       Message on LinkedIn
@@ -1701,7 +1736,7 @@ footer {
 
     <div class="footer-col">
       <p class="footer-brand-name">Brady Manning</p>
-      <p class="footer-brand-meta">Staff PM, VPP Builder<br>GoodGrid · GoodLeap</p>
+      <p class="footer-brand-meta">Product Leader · Energy & VPPs</p>
     </div>
 
     <div class="footer-col">
@@ -1768,11 +1803,7 @@ const CONTENT_CONFIG = {
     ],
 
     // The short bio paragraph under the typewriter.
-    bio: "Product leader and energy nerd building the future of distributed energy. I work on virtual power plants by day and enjoy tinkering, reading, and writing by night.",
-
-    // The two call-to-action buttons. Change label or href as needed.
-    ctaPrimary:  { label: "See My Work",     href: "#projects" },
-    ctaSecondary:{ label: "Read My Writing", href: "#writing"  },
+    bio: "Product leader and energy nerd building the future of distributed energy. I work on virtual power plants by day and enjoy tinkering, reading, and writing by night. I'm exploring my next chapter and looking to do the most consequential work of my career.",
   },
 
   // ============================================================
@@ -1795,7 +1826,7 @@ const CONTENT_CONFIG = {
     {
       company: "GoodLeap",
       role: "Staff Product Manager, VPPs",
-      date: "2025 – Present",
+      date: "Mar 2025 – Jun 2026",
       bullets: [
         "Leading product strategy for a 150+ MW VPP aggregating 20,000+ home battery systems across the United States",
         "Building a Distributed Energy Management System (DERMS), homeowner-facing energy management tools, and OEM/utility market integrations",
@@ -1979,10 +2010,7 @@ function type() {
 // Hero
 document.getElementById('heroName').textContent = CONTENT_CONFIG.hero.name;
 document.getElementById('heroBio').textContent  = CONTENT_CONFIG.hero.bio;
-document.getElementById('ctaPrimaryLabel').textContent  = CONTENT_CONFIG.hero.ctaPrimary.label;
-document.getElementById('ctaSecondaryLabel').textContent = CONTENT_CONFIG.hero.ctaSecondary.label;
-document.getElementById('ctaPrimary').href  = CONTENT_CONFIG.hero.ctaPrimary.href;
-document.getElementById('ctaSecondary').href = CONTENT_CONFIG.hero.ctaSecondary.href;
+// CTA is now static HTML (Download Resume button)
 
 type();
 
