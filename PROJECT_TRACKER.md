@@ -5,6 +5,24 @@ Entries are **newest-first**. Never overwrite — append new entries at the top 
 
 ---
 
+## 2026-06-07 — Job search refresh: availability signals, resume download, copy updates
+
+**Commit:** `fc4b8a4`
+
+Overhauled the site to signal active job availability after Brady entered the job market:
+
+- **Availability badge:** New pulsing green pill ("Open to new opportunities") added to the hero above the bio. Subdued styling — green dot with a `pulse-dot` keyframe animation, cyan-tinted border and background. Light mode variant included.
+- **Hero bio:** Added third sentence — "I'm exploring my next chapter and looking to do the most consequential work of my career." — to signal intent without abandoning the existing personal voice.
+- **Hero CTA:** Replaced two-button layout ("See My Work" + "Read My Writing") with a single "Download Resume" button (primary style, download icon) linking to `/assets/Brady_Manning_Resume.pdf`. Resume PDF added to repo.
+- **Contact copy:** Replaced passive, generic copy with explicit job-search framing naming target areas: VPPs, data centers, DERMS, distributed energy resources, energy transition.
+- **Page title:** `Brady Manning — Staff PM, VPP Builder` → `Brady Manning — Energy Product Leader | VPPs & Distributed Energy`
+- **Meta description:** Rewritten in past tense; ends with "Open to new opportunities."
+- **OG + Twitter title:** → `Brady Manning — Product Leader, Energy Innovator`
+- **GoodLeap date:** `2025 – Present` → `Mar 2025 – Jun 2026`
+- **Footer brand meta:** Removed `Staff PM, VPP Builder | GoodGrid · GoodLeap`; replaced with `Product Leader · Energy & VPPs`
+
+---
+
 ## 2026-05-28 — Scroll-driven line-draw animations (About + Experience)
 
 **Commit:** `9388766`
