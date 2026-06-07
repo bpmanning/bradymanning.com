@@ -5,6 +5,18 @@ Entries are **newest-first**. Never overwrite — append new entries at the top 
 
 ---
 
+## 2026-06-07 — JSON-LD Person schema and sitemap update
+
+**Commit:** `3a2d6e9`
+
+SEO improvements targeting name+qualifier search queries rather than competing on bare "Brady Manning" (dominated by NFL content):
+
+- **JSON-LD Person schema** added to `<head>` — tells Google who Brady is via structured data: name, jobTitle, description, TX address, sameAs links (LinkedIn, GitHub, newsletter, Medium), knowsAbout topics (VPPs, DERMS, BESS, demand response, ERCOT, product management, grid-edge technology), alumniOf (HEC Paris, Texas A&M).
+- Target queries: "Brady Manning energy", "Brady Manning product manager", "Brady Manning VPP", "Brady Manning GoodLeap" — winnable niches vs. unwinnable bare-name NFL results.
+- **sitemap.xml** lastmod updated from 2026-05-27 → 2026-06-07 on both URLs to prompt re-crawl.
+
+---
+
 ## 2026-06-07 — Past-tense corrections for GoodLeap role
 
 **Commit:** `431a0e2`
