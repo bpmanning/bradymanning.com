@@ -2115,7 +2115,8 @@ const postsGrid = document.getElementById('postsGrid');
 
 function renderPosts(filter = 'all') {
   postsGrid.innerHTML = '';
-  CONTENT_CONFIG.posts.forEach(post => {
+  const livePosts = CONTENT_CONFIG.posts.filter(p => p.link && p.link !== '#');
+  livePosts.forEach(post => {
     const hidden = filter !== 'all' && post.tag !== filter;
     const card = document.createElement('article');
     card.className = 'post-card fade-in';
