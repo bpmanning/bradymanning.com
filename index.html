@@ -2702,7 +2702,7 @@ function initHeroGrid() {
     if (!aboutTitle) return;
     const rect = aboutTitle.getBoundingClientRect();
     // Bottom of the heading + a little breathing room, measured from document top
-    canvasFadeEnd = rect.bottom + window.scrollY + 60;
+    canvasFadeEnd = rect.bottom + window.scrollY + 10;
   }
   calcCanvasFadeEnd();
 
