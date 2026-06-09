@@ -642,9 +642,45 @@ nav {
 .about-grid {
   display: grid;
   grid-template-columns: 1fr 1fr;
-  gap: 80px;
+  grid-template-rows: auto auto;
+  gap: 40px 80px;
   align-items: start;
   position: relative;
+}
+
+.about-col-left {
+  grid-column: 1;
+  grid-row: 1 / span 2;
+}
+
+.about-photo-wrap {
+  grid-column: 2;
+  grid-row: 1;
+}
+
+.about-photo {
+  width: 100%;
+  border-radius: 12px;
+  display: block;
+  box-shadow: 0 0 0 1px rgba(0, 255, 136, 0.15), 0 8px 40px rgba(0, 0, 0, 0.4), 0 0 60px rgba(0, 255, 136, 0.06);
+  transition: box-shadow 0.3s ease;
+}
+
+.about-photo:hover {
+  box-shadow: 0 0 0 1px rgba(0, 255, 136, 0.3), 0 8px 40px rgba(0, 0, 0, 0.5), 0 0 80px rgba(0, 255, 136, 0.12);
+}
+
+[data-theme="light"] .about-photo {
+  box-shadow: 0 0 0 1px rgba(0, 204, 106, 0.2), 0 8px 32px rgba(0, 0, 0, 0.12);
+}
+
+[data-theme="light"] .about-photo:hover {
+  box-shadow: 0 0 0 1px rgba(0, 204, 106, 0.4), 0 8px 32px rgba(0, 0, 0, 0.18);
+}
+
+.about-stats-wrap {
+  grid-column: 2;
+  grid-row: 2;
 }
 
 .about-line-fill {
@@ -1511,7 +1547,10 @@ footer {
   .nav-links { display: none; }
   .hamburger { display: flex; }
 
-  .about-grid { grid-template-columns: 1fr; gap: 48px; }
+  .about-grid { grid-template-columns: 1fr; grid-template-rows: auto; gap: 40px; }
+  .about-col-left  { grid-column: 1; grid-row: 2; }
+  .about-photo-wrap { grid-column: 1; grid-row: 1; }
+  .about-stats-wrap { grid-column: 1; grid-row: 3; }
 
   .timeline::before { left: 20px; }
   .timeline-line-fill { left: 20px; transform: none; }
@@ -1663,7 +1702,8 @@ footer {
   <div class="container">
     <div class="about-grid">
       <div class="about-line-fill" aria-hidden="true"></div>
-      <div>
+
+      <div class="about-col-left">
         <p class="section-label">About</p>
         <h2 class="section-title fade-in">Builder.<br>Leader.<br>Learner.</h2>
         <div class="about-text fade-in">
@@ -1677,17 +1717,27 @@ footer {
             <li><strong>Utility-Scale BESS</strong> global deployments at Fluence Energy</li>
             <li><strong>Residential batteries</strong> and expanding DER types at GoodLeap</li>
           </ul>
-            <p>I hold an MSc in Innovation & Entrepreneurship from <strong>HEC Paris</strong>, a BS in Economics from <strong>Texas A&M University</strong>, and am a proud Clean Energy Leadership Institute <strong>(CELI) Fellow</strong>.</p>
+          <p>I hold an MSc in Innovation & Entrepreneurship from <strong>HEC Paris</strong>, a BS in Economics from <strong>Texas A&M University</strong>, and am a proud Clean Energy Leadership Institute <strong>(CELI) Fellow</strong>.</p>
           <p>Outside the office: Marathoner, Father, Book Collector & Reader of 50+ books a year for the last decade, and a tinkerer across AI tools and side projects.</p>
         </div>
       </div>
 
-      <div>
+      <div class="about-photo-wrap fade-in">
+        <img
+          src="/assets/Brady_Manning_Photo.png"
+          alt="Brady Manning — Product Leader, Energy & VPPs"
+          class="about-photo"
+          width="600"
+          loading="lazy"
+        >
+      </div>
+
+      <div class="about-stats-wrap">
         <div class="stats-grid fade-in" id="statsGrid">
           <!-- Stats injected by JS -->
         </div>
-
       </div>
+
     </div>
   </div>
 </section>
