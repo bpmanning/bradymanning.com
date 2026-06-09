@@ -5,6 +5,14 @@ Entries are **newest-first**. Never overwrite — append new entries at the top 
 
 ---
 
+## 2026-06-07 — Tighten canvas fade endpoint
+
+**Commit:** `5b18bec`
+
+Adjusted `canvasFadeEnd` offset from +60px to +10px below the bottom of the "Builder. Leader. Learner." heading — canvas now fully fades out closer to the heading.
+
+---
+
 ## 2026-06-07 — Canvas scroll-fade to About section title
 
 **Commit:** `9f137de`
