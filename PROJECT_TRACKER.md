@@ -5,6 +5,14 @@ Entries are **newest-first**. Never overwrite — append new entries at the top 
 
 ---
 
+## 2026-06-07 — Grammar fix in About section
+
+**Commit:** `ce97e64`
+
+Added missing "a" before "Staff Product Manager" — "Most recently, I was a Staff Product Manager at GoodLeap."
+
+---
+
 ## 2026-06-07 — Add headshot to About section
 
 **Commit:** `fb90484`
