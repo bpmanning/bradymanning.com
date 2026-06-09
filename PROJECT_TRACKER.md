@@ -5,6 +5,16 @@ Entries are **newest-first**. Never overwrite — append new entries at the top 
 
 ---
 
+## 2026-06-07 — Grammar fixes and hero bio width sync
+
+**Commit:** `e844765`
+
+- **About education paragraph:** Fixed subject mismatch — "I hold... and am a proud CELI Fellow" split into two clean sentences: "I hold an MSc... and a BS..." / "I'm a proud Clean Energy Leadership Institute (CELI) Fellow."
+- **GoodLeap experience bullet:** Restructured ambiguous "Drove expansion of... and retail energy provider" → "Drove GoodGrid VPP expansion nationwide and established GoodLeap as a retail energy provider in Texas."
+- **Hero bio width:** JS measures `heroName.offsetWidth` after `document.fonts.ready` and applies it as `heroBio` `max-width` on desktop (≥768px). Resets to default on mobile. Re-runs on window resize to handle viewport changes.
+
+---
+
 ## 2026-06-07 — Increase about photo border-radius to 20px
 
 **Commit:** `aa5a204`
