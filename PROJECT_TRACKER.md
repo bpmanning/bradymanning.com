@@ -5,6 +5,19 @@ Entries are **newest-first**. Never overwrite — append new entries at the top 
 
 ---
 
+## 2026-06-07 — Canvas scroll-fade to About section title
+
+**Commit:** `9f137de`
+
+Replaced the blunt `1 - scrollY/300` canvas fade (fully gone at 300px scroll) with a position-aware fade that ends just below the "Builder. Leader. Learner." heading in the About section:
+
+- `fadeStart`: 35% through the hero section height — smooth onset as user begins scrolling
+- `fadeEnd`: `aboutTitle.getBoundingClientRect().bottom + scrollY + 60` — measured from the actual DOM position of `#about .section-title`, recalculated on resize
+- Fades both `canvas` and `overlay` together (overlay only in dark mode, preserving existing light-mode behavior)
+- `updateCanvasFade()` is called on scroll (passive) and after resize recalculation
+
+---
+
 ## 2026-06-07 — Grammar fixes and hero bio width sync
 
 **Commit:** `e844765`
