@@ -5,6 +5,14 @@ Entries are **newest-first**. Never overwrite — append new entries at the top 
 
 ---
 
+## 2026-06-07 — Fix canvas reset on mobile scroll
+
+**Commit:** `261aa09`
+
+Mobile browsers (Safari/Chrome iOS & Android) fire a `resize` event on scroll when the address bar hides/shows — a height-only change that was triggering `buildGrid()` and resetting the entire animation. Fixed by tracking `lastCanvasWidth` and only calling `buildGrid()` when `window.innerWidth` actually changes. Height-only resizes update `canvas.height` only. Desktop width resizes still rebuild correctly.
+
+---
+
 ## 2026-06-07 — Tighten canvas fade endpoint
 
 **Commit:** `5b18bec`
