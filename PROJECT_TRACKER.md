@@ -5,6 +5,19 @@ Entries are **newest-first**. Never overwrite — append new entries at the top 
 
 ---
 
+## 2026-06-07 — Add headshot to About section
+
+**Commit:** `fb90484`
+
+Added Brady's headshot to the About section right column, above the stat cards:
+
+- **Layout:** Restructured about-grid from two `<div>` children to three explicit siblings — `about-col-left` (text), `about-photo-wrap` (photo), `about-stats-wrap` (stats). Desktop uses `grid-column`/`grid-row` to place photo top-right and stats below it, with text spanning full left column height.
+- **Mobile:** Photo moves to `grid-row: 1` (top of About section), bio text to row 2, stats to row 3 — face first, then story, then numbers. Main responsive media query handles all three placements.
+- **Styling:** `border-radius: 12px`, subtle cyan glow border (`box-shadow`), hover intensify effect, light mode variant. `loading="lazy"` for performance.
+- `Brady_Manning_Photo.png` added to assets.
+
+---
+
 ## 2026-06-07 — JSON-LD Person schema and sitemap update
 
 **Commit:** `3a2d6e9`
