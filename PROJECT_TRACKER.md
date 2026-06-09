@@ -5,6 +5,14 @@ Entries are **newest-first**. Never overwrite — append new entries at the top 
 
 ---
 
+## 2026-06-07 — Add second article to Writing section
+
+**Commit:** `5229d53`
+
+Added "50,000 Homes Operating as a Power Plant" (April 2026, Virtual Power Plants) to `CONTENT_CONFIG.posts`. Links to `newsletter.bradymanning.com`. Writing section now shows two live articles.
+
+---
+
 ## 2026-06-07 — Fix canvas reset on mobile scroll
 
 **Commit:** `261aa09`
