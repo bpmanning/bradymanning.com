@@ -1717,7 +1717,7 @@ footer {
             <li><strong>Utility-Scale BESS</strong> global deployments at Fluence Energy</li>
             <li><strong>Residential batteries</strong> and expanding DER types at GoodLeap</li>
           </ul>
-          <p>I hold an MSc in Innovation & Entrepreneurship from <strong>HEC Paris</strong>, a BS in Economics from <strong>Texas A&M University</strong>, and am a proud Clean Energy Leadership Institute <strong>(CELI) Fellow</strong>.</p>
+          <p>I hold an MSc in Innovation & Entrepreneurship from <strong>HEC Paris</strong> and a BS in Economics from <strong>Texas A&M University</strong>. I'm a proud Clean Energy Leadership Institute <strong>(CELI) Fellow</strong>.</p>
           <p>Outside the office: Marathoner, Father, Book Collector & Reader of 50+ books a year for the last decade, and a tinkerer across AI tools and side projects.</p>
         </div>
       </div>
@@ -1927,7 +1927,7 @@ const CONTENT_CONFIG = {
       bullets: [
         "Led product strategy for a 150+ MW VPP aggregating 20,000+ home battery systems across the United States",
         "Built a Distributed Energy Management System (DERMS), homeowner-facing energy management tools, and OEM/utility market integrations",
-        "Drove expansion of GoodLeap's GoodGrid VPP nationwide and retail energy provider in Texas"
+        "Drove GoodGrid VPP expansion nationwide and established GoodLeap as a retail energy provider in Texas"
       ]
     },
     {
@@ -2110,6 +2110,25 @@ document.getElementById('heroBio').textContent  = CONTENT_CONFIG.hero.bio;
 // CTA is now static HTML (Download Resume button)
 
 type();
+
+/* ============================================================
+   HERO BIO WIDTH — match rendered width of hero name on desktop
+   ============================================================ */
+function syncBioWidth() {
+  const name = document.getElementById('heroName');
+  const bio  = document.getElementById('heroBio');
+  if (!name || !bio) return;
+  if (window.innerWidth >= 768) {
+    bio.style.maxWidth = name.offsetWidth + 'px';
+  } else {
+    bio.style.removeProperty('max-width');
+  }
+}
+
+document.fonts.ready.then(() => {
+  syncBioWidth();
+  window.addEventListener('resize', syncBioWidth);
+});
 
 /* ============================================================
    INLINE SVG ICON HELPER
