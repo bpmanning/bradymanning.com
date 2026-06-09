@@ -5,6 +5,14 @@ Entries are **newest-first**. Never overwrite — append new entries at the top 
 
 ---
 
+## 2026-06-07 — Increase about photo border-radius to 20px
+
+**Commit:** `aa5a204`
+
+Updated `.about-photo` border-radius from 12px to 20px.
+
+---
+
 ## 2026-06-07 — Grammar fix in About section
 
 **Commit:** `ce97e64`
