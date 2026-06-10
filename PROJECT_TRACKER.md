@@ -5,6 +5,14 @@ Entries are **newest-first**. Never overwrite — append new entries at the top 
 
 ---
 
+## 2026-06-07 — Add Lenny's Library to Projects section
+
+**Commit:** `9a41319`
+
+Added Lenny's Library as the third project card (after GoodGrid and GM Energy Portal), pushing Book Analytics to row 3. Lenny's Library is a live web app — searchable database of book recommendations from Lenny's Podcast/Newsletter, links to `bpmanning.github.io/lennys-books/`. Tagged: Product, Books, Web App.
+
+---
+
 ## 2026-06-07 — Add second article to Writing section
 
 **Commit:** `5229d53`
