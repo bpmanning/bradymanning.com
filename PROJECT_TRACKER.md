@@ -5,6 +5,14 @@ Entries are **newest-first**. Never overwrite — append new entries at the top 
 
 ---
 
+## 2026-06-10 — Add Lenny's Library dashboard preview image
+
+**Commits:** `282ca12`, `40c8ec2`
+
+Added preview image to Lenny's Library project card. Initially used hero screenshot (`282ca12`), then replaced with dashboard screenshot showing "Insights from the shelf" data visualization (`40c8ec2`). Project card now displays the analytics dashboard as the preview.
+
+---
+
 ## 2026-06-07 — Add Lenny's Library to Projects section
 
 **Commit:** `9a41319`
