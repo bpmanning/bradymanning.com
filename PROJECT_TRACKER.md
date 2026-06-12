@@ -7,7 +7,7 @@ Entries are **newest-first**. Never overwrite — append new entries at the top 
 
 ## 2026-06-11 — Update OG image stats and title
 
-**Commit:** `TBD`
+**Commit:** `51db65a`
 
 Updated `og-image-generator.html` and regenerated `assets/og-image.png` with corrected stats: "Staff PM" → "Product Leader", "100+ MW" → "150+ MW", "15K+" → "20K+". Keeps the same visual style.
 
