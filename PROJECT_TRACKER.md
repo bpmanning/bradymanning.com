@@ -5,6 +5,14 @@ Entries are **newest-first**. Never overwrite — append new entries at the top 
 
 ---
 
+## 2026-06-11 — Update OG image stats and title
+
+**Commit:** `TBD`
+
+Updated `og-image-generator.html` and regenerated `assets/og-image.png` with corrected stats: "Staff PM" → "Product Leader", "100+ MW" → "150+ MW", "15K+" → "20K+". Keeps the same visual style.
+
+---
+
 ## 2026-06-10 — Add Lenny's Library dashboard preview image
 
 **Commits:** `282ca12`, `40c8ec2`
