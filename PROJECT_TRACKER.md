@@ -5,6 +5,14 @@ Entries are **newest-first**. Never overwrite — append new entries at the top 
 
 ---
 
+## 2026-07-02 — Add third article to Writing section
+
+**Commit:** `a44dfd1`
+
+Added "VPPs as the Solution to Data Center Speed to Power" (July 2026, Virtual Power Plants) to `CONTENT_CONFIG.posts`, placed at the top as the newest entry. Covers the Renew Home/Sunrun/Tesla 16.8 GW Capacity-as-a-Solution offer to data centers and utilities. Links to `newsletter.bradymanning.com`.
+
+---
+
 ## 2026-06-11 — Update OG image stats and title
 
 **Commit:** `51db65a`
