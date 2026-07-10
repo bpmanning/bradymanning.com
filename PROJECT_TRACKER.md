@@ -5,6 +5,14 @@ Entries are **newest-first**. Never overwrite — append new entries at the top 
 
 ---
 
+## 2026-07-09 — Add newsletter subscribe CTA to Writing section
+
+**Commit:** `d125db5`
+
+Added a `.writing-subscribe-cta` pill under the section subtitle in `#writing`, above the filter tabs — a second, more contextual touchpoint for `newsletter.bradymanning.com` beyond the existing footer link. Reuses the `.btn.btn-outline` button pattern with an inline mail SVG (matching how other static buttons like Download Resume inline their icons). Styled with the bright-green outline treatment (`--accent-cyan` text/icon/border, transparent background, `--glow-cyan` hover) to stay secondary to the primary Download Resume CTA. Container and button sizing kept compact (small padding, ~41px button height) to avoid dominating the section. Stacks to a full-width button on mobile (≤900px).
+
+---
+
 ## 2026-07-02 — Add third article to Writing section
 
 **Commit:** `a44dfd1`
