@@ -5,6 +5,14 @@ Entries are **newest-first**. Never overwrite — append new entries at the top 
 
 ---
 
+## 2026-07-10 — Add "The Power of Delight" to Writing section
+
+**Commit:** `849dd15`
+
+Added "The Power of Delight" (July 2026, Product Management) to `CONTENT_CONFIG.posts` as the newest entry. Covers delight as a high-ROI retention/growth strategy (Duolingo, Mailchimp, Chewy examples). Links to `newsletter.bradymanning.com/p/the-power-of-delight`. Writing section now shows four live articles.
+
+---
+
 ## 2026-07-09 — Add newsletter subscribe CTA to Writing section
 
 **Commit:** `d125db5`
