@@ -1214,6 +1214,38 @@ nav {
   z-index: 1;
 }
 
+.writing-subscribe-cta {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 24px;
+  margin-top: 40px;
+  padding: 12px 14px 12px 24px;
+  background: var(--bg-card);
+  border: 1px solid var(--border);
+  border-radius: 100px;
+}
+
+.writing-subscribe-text {
+  font-size: 0.95rem;
+  color: var(--text-secondary);
+  font-weight: 300;
+}
+
+.writing-subscribe-btn {
+  flex-shrink: 0;
+  padding: 9px 20px;
+  font-size: 0.82rem;
+  color: var(--accent-cyan);
+  border-color: var(--border-accent);
+}
+
+.writing-subscribe-btn:hover {
+  border-color: var(--accent-cyan);
+  color: var(--accent-cyan);
+  box-shadow: var(--glow-cyan);
+}
+
 .filter-tabs {
   display: flex;
   gap: 8px;
@@ -1595,6 +1627,15 @@ footer {
   .posts-grid { grid-template-columns: 1fr; }
 
   .stats-grid { grid-template-columns: 1fr 1fr; }
+
+  .writing-subscribe-cta {
+    flex-direction: column;
+    align-items: flex-start;
+    border-radius: 20px;
+    text-align: left;
+  }
+
+  .writing-subscribe-btn { width: 100%; justify-content: center; }
 }
 
 @media (max-width: 600px) {
@@ -1785,6 +1826,14 @@ footer {
     <p class="section-label">Writing</p>
     <h2 class="section-title fade-in">From the<br>Field</h2>
     <p class="section-subtitle fade-in">Dispatches on virtual power plants, energy markets, product management, and building things that matter.</p>
+
+    <div class="writing-subscribe-cta fade-in">
+      <span class="writing-subscribe-text">Get new dispatches on VPPs and energy markets in your inbox</span>
+      <a href="https://newsletter.bradymanning.com" target="_blank" rel="noopener noreferrer" class="btn btn-outline writing-subscribe-btn" aria-label="Subscribe to the Negawatt Weekly newsletter">
+        <svg class="icon" xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect width="20" height="16" x="2" y="4" rx="2"/><path d="m22 7-8.97 5.7a1.94 1.94 0 0 1-2.06 0L2 7"/></svg>
+        Subscribe
+      </a>
+    </div>
 
     <div class="filter-tabs" role="tablist" aria-label="Filter posts by category">
       <button class="filter-tab active" data-filter="all" role="tab" aria-selected="true">All</button>
