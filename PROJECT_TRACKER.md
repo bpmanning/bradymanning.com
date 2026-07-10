@@ -5,6 +5,14 @@ Entries are **newest-first**. Never overwrite — append new entries at the top 
 
 ---
 
+## 2026-07-10 — Update Power of Delight article description
+
+**Commit:** `56e4216`
+
+Swapped the Mailchimp example for Octopus Energy in the "The Power of Delight" post summary, per Brady's edit.
+
+---
+
 ## 2026-07-10 — Add "The Power of Delight" to Writing section
 
 **Commit:** `849dd15`
