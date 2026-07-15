@@ -5,6 +5,14 @@ Entries are **newest-first**. Never overwrite — append new entries at the top 
 
 ---
 
+## 2026-07-10 — Expand About section title to include Retail Energy
+
+**Commit:** `fb9c889`
+
+About section title updated from "Head of Product" to "Head of Product, VPP & Retail Energy" to match the full title already used in the Experience timeline card.
+
+---
+
 ## 2026-07-10 — Update GoodLeap title to Head of Product
 
 **Commit:** `715eb77`
