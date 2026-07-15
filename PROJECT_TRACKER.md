@@ -5,6 +5,14 @@ Entries are **newest-first**. Never overwrite — append new entries at the top 
 
 ---
 
+## 2026-07-10 — Update GoodLeap title to Head of Product
+
+**Commit:** `715eb77`
+
+Updated Brady's GoodLeap title site-wide to reflect his promotion. About section: "Staff Product Manager" → "Head of Product". Experience timeline card: "Staff Product Manager, VPPs" → "Head of Product, VPP & Retail Energy | Staff Product Manager".
+
+---
+
 ## 2026-07-10 — Update Power of Delight article description
 
 **Commit:** `56e4216`
